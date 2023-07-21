@@ -4,8 +4,7 @@ import {Register} from './pages/Auth/Register';
 import {Verify} from './pages/Auth/Verify';
 import { io } from 'socket.io-client';
 import Home from './pages/Home';
-import { Layout } from './components/Layout';
-import ProtectedRoute from "./pages/Auth/ProtectedRoute";
+// import ProtectedRoute from "./pages/Auth/ProtectedRoute";
 export const socket = io("http://localhost:8080");
 function App() {
  

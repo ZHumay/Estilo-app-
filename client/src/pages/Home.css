@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .slider {
+    width: 100%;
+    height: 1200px;
+    overflow: hidden;
+    margin-top: 30px;
+    
+  }
+  
+  figure {
+    position: relative;
+    left: 0;
+    width: 200%; /* Change width to 200% (two slides) */
+    animation: 10s slide infinite;
+  }
+  
+  .slide {
+    position: relative;
+    width: 50%; /* Change width to 50% (half of the slide) */
+    float: left;
+  }
+
+  .slide-text {
+    position: absolute;
+    top: 50%; /* textin ve butonun dikey ortalaması */
+    left: 60px; /* textin ve butonun sol kenardan uzaklığı */
+    transform: translateY(-50%); /* dikey ortalamayı ayarlamak için */
+    color: rgb(66, 64, 64); /* text ve buton rengi */
+    z-index: 1; /* resmin üzerinde olması için z-index'i artırın */
+  }
+  h1{
+    font-size: 50px;
+    font-weight: bold;
+  }
+  .slidebtn {
+    color: white; /* Butonun metin rengi */
+    transform: translateY(29px);
+  }
+  
+  .slide img {
+    width: 100%;
+    height: 700px;
+  }
+  
+  @keyframes slide {
+    0% {
+      left: 0;
+    }
+    25% {
+      left: 0;
+    }
+    50% {
+      left: -100%; /* Slide 1 moves out */
+    }
+    75% {
+      left: -100%; /* Slide 2 moves out */
+    }
+    100% {
+      left: 0; /* Animation completes, back to the first slide */
+    }
+  }
+  
