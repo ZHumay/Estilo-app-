@@ -4,22 +4,20 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./pages/Auth/AuthContext";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import dataReducer from "./store/dataSlice"
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import store from "./store/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient();
 
-const store = configureStore({
-  reducer: {
-   dataReducer:dataReducer,
-  },
-});
 root.render(
   <Provider store={store}>
   <React.StrictMode>
     <Router>
       <AuthProvider>
+      <QueryClientProvider client={queryClient}> 
         <App />
+        </QueryClientProvider>
       </AuthProvider>
     </Router>
   </React.StrictMode>
