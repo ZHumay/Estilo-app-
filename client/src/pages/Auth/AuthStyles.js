@@ -1,7 +1,8 @@
 export const paperStyle = {
     padding: " 40px",
     width: "350px",
-    margin: "80px auto",
+    margin: "100px auto",
+    transform:"translateY(40px)",
     background: "linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(169,45,185,0.2778361344537815) 100%)"
 
    
@@ -9,7 +10,7 @@ export const paperStyle = {
   export const loginStyle = {
     padding: "40px",
     width: "350px",
-    margin: "80px auto",
+    margin: "133px auto",
     height: "400px",
     background: "linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(169,45,185,0.2778361344537815) 100%)"
   };

@@ -17,6 +17,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import NoEncryptionIcon from '@mui/icons-material/NoEncryption';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import CheckIcon from '@mui/icons-material/Check';
+import Navbar from "../../components/Navbar/Navbar";
 export const Register = () => {
   const navigate = useNavigate();
 
@@ -54,9 +55,12 @@ export const Register = () => {
   });
 
   return (
-    <Grid>
+
+    <>
+    <Navbar/>
+     <Grid>
       <Paper elevation={20} style={paperStyle}>
-        <Grid textAlign="center" marginBottom={3}>
+        <Grid style={{ textAlign: 'center' }} marginBottom={3}>
           <Typography className="typography" variant="h5" fontWeight="bold">
             Register
           </Typography>
@@ -176,5 +180,7 @@ export const Register = () => {
         </form>
       </Paper>
     </Grid>
+    </>
+   
   );
 };

@@ -43,7 +43,7 @@ import { buttonSubmit, paperStyle } from "./AuthStyles";
     return state ? (
       <Grid>
         <Paper elevation={20} style={paperStyle}>
-          <Grid textAlign="center" marginBottom={2}>
+          <Grid style={{ textAlign: 'center' }} marginBottom={2}>
             <Typography variant="h5" fontWeight="bold">
               Verify
             </Typography>

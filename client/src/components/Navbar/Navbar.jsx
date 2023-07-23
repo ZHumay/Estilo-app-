@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,210 +15,226 @@ import AdbIcon from '@mui/icons-material/Adb';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import SearchIcon from '@mui/icons-material/Search';
-import "./Navbar.css"
-const pages = ['Home', 'Shop', 'Woman','Man','Contact'];
-const settings = ['Logout']; 
+import './Navbar.css';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../pages/Auth/AuthContext';
 
+const pages = ['Home', 'Shop', 'Woman', 'Man', 'Contact'];
+const settings = ['Logout'];
 
 function Navbar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [searchValue, setSearchValue] = useState();
-    const [searchResultContainerStyle, setSearchResultContainerStyle] = useState("hideSearch");
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [searchValue, setSearchValue] = useState();
+  const [searchResultContainerStyle, setSearchResultContainerStyle] = useState('hideSearch');
+  const {loggedIn,setLoggedIn} = useContext(AuthContext)
 
-    const handleOpenNavMenu = (event) => {
-      setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-    };
-  
-    const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
-    };
-  
-    const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
-    };
-    const handleSearch = () => {
-        if (searchResultContainerStyle === "hideSearch") {
-          setSearchResultContainerStyle("showSearch");
-        } else {
-          setSearchResultContainerStyle("hideSearch");
-        }
-      };
-    
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+    const logoutClicked = settings.includes('Logout');
+    if (logoutClicked) {
+      setLoggedIn(false);
+  };
+  }
+  const handleSearch = () => {
+    if (searchResultContainerStyle === 'hideSearch') {
+      setSearchResultContainerStyle('showSearch');
+    } else {
+      setSearchResultContainerStyle('hideSearch');
+    }
+  };
+
   return (
-   <>
-    <AppBar className='appbar' position="fixed" style={{backgroundColor:"white"}}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'rgb(66, 64, 64)',
-              textDecoration: 'none',
-            }}
-          >
-            ESTILO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="rgb(66, 64, 64)"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+    <>
+      <AppBar className="appbar" position="fixed" style={{ backgroundColor: 'white' }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
               sx={{
-                display: { xs: 'block', md: 'none' },
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'rgb(66, 64, 64)',
+                textDecoration: 'none',
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'rgb(66, 64, 64)',
-              textDecoration: 'none',
-            }}
-          >
-            ESTILO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+              ESTILO
+            </Typography>
 
-          <div className="center">
-          <div className="search_wrapper">
-            <input
-              type="text"
-              placeholder="Search"
-              onChange={(e) => {
-                setSearchValue(e.target.value.toLowerCase());
-              }}
-              onFocus={handleSearch}
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="rgb(66, 64, 64)"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography style={{ textAlign: 'center' }}>{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+
+            <AdbIcon
+              sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
             />
-             
-          </div>
-        </div>
-        <SearchIcon style={{color:"rgb(66, 64, 64)",transform: 'translateX(-50px)'}}/>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'rgb(66, 64, 64)',
+                textDecoration: 'none',
+              }}
+            >
+              ESTILO
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  component={Link}
+                  to={`/${page.toLowerCase()}`}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Box>
 
-          <Box style={{marginTop:"8px"}} sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+            <div className="center">
+              <div className="search_wrapper">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  onChange={(e) => {
+                    setSearchValue(e.target.value.toLowerCase());
+                  }}
+                  onFocus={handleSearch}
+                />
+              </div>
+            </div>
+            <SearchIcon style={{ color: 'rgb(66, 64, 64)', transform: 'translateX(-50px)' }} />
+
+            <Box style={{ marginTop: '8px' }} sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
               >
-                <FavoriteBorderIcon style={{color:"rgb(66, 64, 64)"}}/>
+                <FavoriteBorderIcon style={{ color: 'rgb(66, 64, 64)' }} />
               </Button>
-          </Box> 
+            </Box>
 
-          <Box style={{marginTop:"8px"}} sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+            <Box style={{ marginTop: '8px' }} sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               <Button
                 onClick={handleCloseNavMenu}
+                component={Link}
+                to="/basket" 
                 sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
               >
-                <ShoppingCartCheckoutIcon  style={{color:"rgb(66, 64, 64)"}}/>
+                <ShoppingCartCheckoutIcon style={{ color: 'rgb(66, 64, 64)' }} />
               </Button>
-          </Box> 
+            </Box>
 
-          <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}>
               <Button
                 onClick={handleCloseNavMenu}
+                component={Link}
+                to="/signin" 
                 sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
               >
                 Login
               </Button>
-          </Box>
-            
-         {/* profil sekli olan hisse */}
-          <Box sx={{ flexGrow: 0 }}>
+            </Box>
+             
+            <Box sx={{ flexGrow: 0 }}>
+            {loggedIn ? ( // Conditionally render based on the loggedIn state
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, display: 'block' }}>
+                <Avatar alt="user" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-
-        </Toolbar>
-      </Container>
-    </AppBar>
-   </>
-  )
+          ) : (
+            <></> // Render nothing when loggedIn is false
+          )}
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography style={{ textAlign: 'center' }}>{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
+  );
 }
 
-export default Navbar
+export default Navbar;
