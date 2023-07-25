@@ -38,7 +38,7 @@ export const Register = () => {
     onSubmit: async ({ username, email, password }, bag) => {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/webuser/register",
+          "http://localhost:8000/api/webuser/register",
           {
             email,
             password,

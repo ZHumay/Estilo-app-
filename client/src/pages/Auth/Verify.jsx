@@ -25,7 +25,7 @@ import { buttonSubmit, paperStyle } from "./AuthStyles";
       onSubmit: async ({ code }, bag) => {
         try {
           const res = await axios.post(
-            "http://localhost:8080/api/webuser/confirm",
+            "http://localhost:8000/api/webuser/confirm",
             {
               code,
               email: state,

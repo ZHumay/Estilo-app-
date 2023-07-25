@@ -16,7 +16,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import SearchIcon from '@mui/icons-material/Search';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../pages/Auth/AuthContext';
 
 const pages = ['Home', 'Shop', 'Woman', 'Man', 'Contact'];
@@ -27,8 +27,7 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [searchValue, setSearchValue] = useState();
   const [searchResultContainerStyle, setSearchResultContainerStyle] = useState('hideSearch');
-  const {loggedIn,setLoggedIn} = useContext(AuthContext)
-
+  const { loggedIn, setLoggedIn,handlerLogInOut } = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,11 +42,8 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    const logoutClicked = settings.includes('Logout');
-    if (logoutClicked) {
-      setLoggedIn(false);
   };
-  }
+
   const handleSearch = () => {
     if (searchResultContainerStyle === 'hideSearch') {
       setSearchResultContainerStyle('showSearch');
@@ -55,6 +51,7 @@ function Navbar() {
       setSearchResultContainerStyle('hideSearch');
     }
   };
+  const navigate=useNavigate()
 
   return (
     <>
@@ -179,7 +176,7 @@ function Navbar() {
               <Button
                 onClick={handleCloseNavMenu}
                 component={Link}
-                to="/basket" 
+                to="/basket"
                 sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
               >
                 <ShoppingCartCheckoutIcon style={{ color: 'rgb(66, 64, 64)' }} />
@@ -190,46 +187,46 @@ function Navbar() {
               <Button
                 onClick={handleCloseNavMenu}
                 component={Link}
-                to="/signin" 
+                to="/signin"
                 sx={{ my: 2, color: 'rgb(66, 64, 64)', display: 'block' }}
               >
                 Login
               </Button>
             </Box>
-             
+
             <Box sx={{ flexGrow: 0 }}>
-            {loggedIn ? ( // Conditionally render based on the loggedIn state
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, display: 'block' }}>
-                <Avatar alt="user" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <></> // Render nothing when loggedIn is false
-          )}
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography style={{ textAlign: 'center' }}>{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
+              {loggedIn ? (
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, display: 'block' }}>
+                    <Avatar alt="user" src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <></>
+              )}
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={()=>{handlerLogInOut(false,()=>{navigate('/home')})}}>
+                    <Typography style={{ textAlign: 'center' }}>{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>

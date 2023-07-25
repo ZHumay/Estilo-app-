@@ -16,6 +16,8 @@ const initialState = {
           ...state,
           items: state.items.filter((item) => item.id !== action.payload),
         };
+        case "SET_CART_ITEMS":
+          return { ...state, items: action.payload };
       default:
         return state;
     }

@@ -11,7 +11,7 @@ import Fav from "./pages/Fav/Fav";
 import Basket from "./pages/Basket/Basket";
 import Contact from "./pages/Contact/Contact";
 // import ProtectedRoute from "./pages/Auth/ProtectedRoute";
-export const socket = io("http://localhost:8080");
+export const socket = io("http://localhost:8000");
 function App() {
   return (
     <Routes>

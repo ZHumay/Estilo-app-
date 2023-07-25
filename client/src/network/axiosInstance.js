@@ -5,5 +5,5 @@ import { BASE_API_URL } from "../env/api";
 
 export const axiosInstance = axios.create({
     baseURL: BASE_API_URL,
-    timeout:10000
+    timeout:100000
 })

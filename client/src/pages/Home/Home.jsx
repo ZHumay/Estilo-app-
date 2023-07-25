@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Home/Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,7 +7,6 @@ import CachedIcon from "@mui/icons-material/Cached";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import PaymentIcon from "@mui/icons-material/Payment";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
 import {
   Grid,
   Card,
@@ -23,10 +22,12 @@ import { useQuery } from "react-query";
 import { axiosInstance } from "../../network/axiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { AuthContext } from "../Auth/AuthContext";
 function Home() {
 
   const [productCounts, setProductCounts] = useState([]);
   const cartItems = useSelector((state) => state.cartReducer.items);
+  const{loggedIn}=useContext(AuthContext)
 
   const { data, isLoading, error } = useQuery("productsData", () =>
     axiosInstance.get("products")
@@ -38,25 +39,43 @@ function Home() {
   const dispatch = useDispatch();
   const navigate=useNavigate()
 
+
+
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-    const updatedCartItems = [...cartItems, product];
-    setProductCounts((prevState) => ({
-      ...prevState,
-      [product.id]: (prevState[product.id] || 0) + 1,
-    }));
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    if (loggedIn) {
+      dispatch(addToCart(product));
+      const updatedCartItems = [...cartItems, product];
+      setProductCounts((prevState) => ({
+        ...prevState,
+        [product.id]: (prevState[product.id] || 0) + 1,
+      }));
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    } else {
+      alert("You must be logged in to add items to the cart.");
+      navigate('/signin');
+    }
   };
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      dispatch({ type: "SET_CART_ITEMS", payload: JSON.parse(cartItems) });
+    }
+  }, [loggedIn]);
   
   const handleRemoveFromCart = (productId) => {
-    dispatch(removeFromCart(productId));
-    const updatedCartItems = cartItems.filter((item) => item.id !== productId);
-    setProductCounts((prevState) => {
-      const updatedCounts = { ...prevState };
-      delete updatedCounts[productId];
-      return updatedCounts;
-    });
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    if(loggedIn){
+      dispatch(removeFromCart(productId));
+      const updatedCartItems = cartItems.filter((item) => item.id !== productId);
+      setProductCounts((prevState) => {
+        const updatedCounts = { ...prevState };
+        delete updatedCounts[productId];
+        return updatedCounts;
+      });
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    }
+  else{
+    localStorage.removeItem("cartItems")
+  }
   };
 
   if (isLoading) {
@@ -73,6 +92,8 @@ function Home() {
   const clickshopman=()=>{
     navigate("/man")
   }
+
+
 
   return (
     <>
@@ -223,6 +244,7 @@ function Home() {
                     Category: {product.category}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
+
                     <Button
                       style={{
                         color: "#A569BD",
@@ -234,6 +256,7 @@ function Home() {
                     >
                       <AddShoppingCartIcon style={{ marginLeft: "-35px" }} />
                     </Button>
+
                   </Typography>
                 </CardContent>
               </Card>
@@ -273,18 +296,31 @@ function Home() {
                   </Typography>
 
                   <Typography variant="body2" color="text.secondary">
-                    <Button
+                  
+                  {loggedIn ? (
+    <Button
+      style={{
+        color: "#A569BD",
+        marginTop: "20px",
+        border: "none"
+      }}
+      variant="outlined"
+      onClick={() => handleRemoveFromCart(product.id)}
+    >
+      <RemoveShoppingCartIcon style={{ marginLeft: "-35px" }} />
+    </Button>
+  ) :    <Button
                       style={{
                         color: "#A569BD",
+                        border: "none",
                         marginTop: "20px",
-                        border:"none"
                       }}
                       variant="outlined"
-                      onClick={() => handleRemoveFromCart(product.id)}
+                      onClick={() => handleAddToCart(product)}
                     >
-                    
-                      <RemoveShoppingCartIcon style={{ marginLeft: "-35px" }} />
-                    </Button>
+                      <AddShoppingCartIcon style={{ marginLeft: "-35px" }} />
+                    </Button>}
+                
                   </Typography>
                 </CardContent>
               </Card>

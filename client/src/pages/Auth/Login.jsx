@@ -40,7 +40,7 @@ export const Login = () => {
       };
 
       axios
-        .post("http://localhost:8080/api/webuser/login", data)
+        .post("http://localhost:8000/api/webuser/login", data)
         .then((res) => {
           console.log(res);
           if (res.status == 200) {

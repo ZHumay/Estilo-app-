@@ -13,11 +13,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true)
     getData()
-  }, [token]);
+  }, [token,loggedIn]);
 
   const getData=()=>{
     axios
-    .post("http://localhost:8080/api/webuser/token", {
+    .post("http://localhost:8000/api/webuser/token", {
       token,
     })
     .then((response) => {
@@ -39,8 +39,15 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(status);
     if (status) {
       localStorage.setItem("access-token", JSON.stringify(token));
+console.log(status);
+     
     } else {
       localStorage.removeItem("access-token");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("user");
+      setUser(null)
+      console.log(status);
+   
     }
     redirect();
   };
