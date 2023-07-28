@@ -1,0 +1,159 @@
+
+.blog-post-card-home{
+    width: 370px;
+    min-height: 200px;
+    max-height: 450px;
+    margin: 20px;
+    background-color: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.432);
+    border-radius: 2px;
+    padding: 10px 15px;
+    overflow: hidden;
+    color: rgb(119, 118, 118);
+}
+
+a{
+    text-decoration: none;
+}
+.left{
+    transform: translateX(1px);
+}
+.right{
+    margin-top: 16px;
+}
+.blog-post-home-image_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-post-home-image_wrapper img{
+    width: 400px;
+    height: 200px;
+    transform: translateY(-10px);
+    object-fit: fill;
+}
+
+.post_home_title p{
+    font-weight: 600;
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.post_home_description p{
+    min-height: 15px;
+    max-height: 101px;
+    overflow: hidden;
+}
+
+.post_home_bottom_wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post_home_bottom_wrapper .left{
+    display: flex;
+    align-items: center;
+}
+
+.post_home_bottom_wrapper .right{
+    display: flex;
+    align-items: center;
+}
+
+.post_home_bottom_wrapper .like{
+    margin-right: 15px;
+}
+
+.like_icon{
+  cursor: pointer;
+}
+
+.post_home_bottom_wrapper {
+    border: none;
+    background-color: none;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.post_home_bottom_wrapper .view_post_home{
+    display: block;
+    padding: 3px 20px;
+    transform: translateY(3px);
+    background-color: #A569BD;
+    color: white;
+    font-weight: 600;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.303);
+    border-radius: 5px;
+}
+.view_post_home{
+   margin-top: 10px;
+}
+.post_icon_wrapper{
+    padding: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.216);
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.post_icon_wrapper a{
+    display: block;
+}
+
+ .post_icon{
+    border-radius: 50%;
+ color: rgb(95, 94, 94);
+}
+
+.delete_post_icon_home{
+    color: rgb(224, 46, 46);
+}
+.like{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+    margin-right: 10px;
+}
+/* Add this to override the default color for the star icon */
+.fa-regular.fa-star {
+    color: rgb(95, 94, 94);
+  }
+  
+  .fa-solid.fa-star.liked {
+    color: rgb(255, 187, 0);
+  }
+  
+
+.liked{
+    color: rgb(255, 187, 0);
+}
+
+.like_count{
+    font-weight: 600;
+    padding: 0 10px;
+}
+.like_actual_icon{
+    padding-top: 15px;
+    width: 50px;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+i{
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+i:hover{
+    transform: scale(1.1);
+}
+
+.red{
+    color: red;
+}

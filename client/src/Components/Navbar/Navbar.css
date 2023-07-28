@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');.navbar{
+    margin:0;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 33px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.115);
+    background-color: white ;}
+
+.navbar a{
+    text-decoration: none;
+}
+
+.logo a{
+    font-size: 24px;
+    font-weight: 700;
+}
+.center{
+    transform: translateY(3px);
+}
+
+.center .search_wrapper{
+    width: 280px;
+    position: relative;
+    margin-left: 100px;
+}
+.logo-text{
+    letter-spacing: 0.6rem;
+    font-family: monospace;    
+    font-weight: 700;
+    color: rgb(66,64,64);
+}
+.rightt{
+    margin-top: -7px;
+   
+}
+.rightt .menu-link{
+    margin-top: -10px;
+}
+.right .menu-link{
+    transform: translateY(8px);
+}
+.rightt{
+    margin-top: 3px;
+}
+.left{
+    transform: translateX(84px);
+}
+.center .search_wrapper input{
+    width: 100%;
+    border-radius: 20px;
+    padding: 7px 0px;
+    padding-left: 15px;
+    padding-right: 35px;
+    border: 2px solid transparent;
+    outline : none;
+    background-color: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.484);
+    transition: .2s ease;
+}
+
+
+.center .search_wrapper input:focus{
+    border: 2px solid #A569BD;
+}
+
+.search-icon-nav{
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.navbar .menu-link a{
+    margin-left: 58px;
+    font-size: 16px;
+    transform: translateY(-9px);
+    padding: 2px 5px;
+    font-weight: 500;
+    letter-spacing: .1px;
+    transition: .2s ease;
+}
+.left .menu-link{
+    transform: translateX(75px);
+}
+.left .right{
+    margin-top: -23px;
+}
+
+.navbar .menu-link .ml:hover{
+    border-bottom: 2px solid #A569BD;}
+
+.hideSearch{
+    display: none;
+}
+
+.showSearch{
+    display: block;
+}
+
+.nav_profile_image{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 0.5px solid gray;
+    padding: 2px;
+    transform: translateY(10px);
+    object-fit: cover;
+    margin-left: 10px;
+}
+
+.nav_profile_img{
+    text-decoration: none;
+}
+
+.nav_profile_img:hover{
+    border: none;
+    border-bottom: transparent;
+}
+

@@ -1,0 +1,246 @@
+
+.home{
+    /* width: 98vw;
+    height: 91.5vh;
+    margin: 0;
+    padding: 10px 200px;
+    box-sizing: border-box; */
+    width: 100%;
+    height: 101.5vh;
+    margin: 0;
+    padding: 10px 200px;
+    box-sizing: border-box;
+    background-color: white ;
+}
+
+.home_wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.home_wrapper .leftHome{
+  display: flex;
+  flex-wrap: wrap;
+    flex: 7;
+    height: 90vh;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+    transform: translateX(-147px);
+}
+
+.home_wrapper .leftHome::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .home_wrapper .leftHome::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px; 
+    border-radius: 10px;
+
+  }
+   
+  .home_wrapper .leftHome::-webkit-scrollbar-thumb {
+    background:  #dddcdc; 
+    border-radius: 10px;
+
+  }
+  
+  /* .home_wrapper .leftHome::-webkit-scrollbar-thumb:hover {
+    background-color: #dddcdc;
+  } */
+
+.home_wrapper .rightHome{
+    flex: 2;
+    margin-left: 10px;
+}
+
+.categories_wrapper span{
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(70, 161, 194, 0.103);
+    background-color: #f3f2ee;
+    margin-bottom: 2px;
+    transition: all .1s ease;
+}
+
+.categories_wrapper span:hover{
+    background-color: rgba(251, 245, 245, 0.238);
+    transform: scale(1.08);
+    margin-left: 4px;
+    color: #A569BD
+    ;
+}
+
+.catogory_heading{
+    text-align: center;
+    font-size: 22px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.238);
+}
+
+.posts_not_found{
+  font-size: 40px;
+  font-weight: 500;
+  margin-top: 100px;
+  text-align: center;
+  padding: 10px 50px;
+  color: #A569BD;
+  transform: translateX(-23px);
+}
+
+.slider {
+  width: 100%;
+  height: 950px;
+  overflow: hidden;
+  
+}
+
+figure {
+  position: relative;
+  left: 0;
+  width: 200%; /* Change width to 200% (two slides) */
+  animation: 10s slide infinite;
+}
+
+.slide {
+  position: relative;
+  width: 50%; /* Change width to 50% (half of the slide) */
+  float: left;
+}
+
+.slide-text {
+  position: absolute;
+  top: 50%; /* textin ve butonun dikey ortalaması */
+  left: 60px; /* textin ve butonun sol kenardan uzaklığı */
+  transform: translateY(-50%); /* dikey ortalamayı ayarlamak için */
+  color: rgb(66, 64, 64); /* text ve buton rengi */
+  z-index: 1; /* resmin üzerinde olması için z-index'i artırın */
+}
+h1{
+  font-size: 50px;
+  font-weight: bold;
+}
+.slidebtn {
+  color: white; /* Butonun metin rengi */
+  transform: translateY(29px);
+}
+
+.slide img {
+  width: 100%;
+  height: 700px;
+}
+
+@keyframes slide {
+  0% {
+    left: 0;
+  }
+  25% {
+    left: 0;
+  }
+  50% {
+    left: -100%; /* Slide 1 moves out */
+  }
+  75% {
+    left: -100%; /* Slide 2 moves out */
+  }
+  100% {
+    left: 0; /* Animation completes, back to the first slide */
+  }
+}
+
+.about{
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100px);
+  color: rgb(66, 64, 64);
+}
+.about-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1300px;
+  flex-direction: row;
+  padding: 20px 50px 0px 50px;
+  font-size: 20px;
+
+}
+.delivery{
+  padding-right: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.return-policy{
+  padding-right: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.support{
+  padding-right: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+.secure-payment{
+  padding-right: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+h3{
+line-height: 40px;
+}
+.freeshipping{
+font-size: 15px;
+}
+.icon{
+width: 40px;
+height: 40px;
+color: black;
+}
+
+.separator {
+border-top: 1px solid #d3d0d0; /* Üstten çizgi oluşturma */
+width: 80px;
+rotate: 90deg;
+transform: translateY(40px);
+}
+
+.overview{
+transform: translateX(70px);
+margin-top: 30px;
+font-size: 20px;
+width: 600px;
+}
+.overview_link{
+margin-right: 80px;
+color: rgb(66, 64, 64);
+text-decoration: none; /* Altçizgiyi gizler */
+
+}
+
+.overview_link:hover {
+text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi gösterir */
+}
+
+.filterbtn{
+width: 100px;
+height: 40px;
+background-color: white;
+border: 1px solid rgb(209, 207, 207);
+color: rgb(70, 70, 70);
+cursor: pointer;
+}
