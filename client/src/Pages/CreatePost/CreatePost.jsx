@@ -13,7 +13,6 @@ const CreatePost = () => {
   const { dispatch } = usePostsContext();
   const { activeUser } = useActiveUserContext();
   const navigate = new useNavigate();
-
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [description, setDescription] = useState("");
