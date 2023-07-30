@@ -5,7 +5,6 @@ export const ActiveUserContext = createContext();
 export const activeUserReducer = (state, action) =>{
 
     switch(action.type){
-
         case "GET_ACTIVE_USER":
             return{
                 activeUser : action.payload
