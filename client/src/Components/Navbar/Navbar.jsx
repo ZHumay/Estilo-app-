@@ -8,6 +8,7 @@ import SearchResult from "../SearchResult/SearchResult";
 import Overlay from "../Overlay/Overlay";
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 const Navbar = () => {
   const { activeUser } = useActiveUserContext();
   const navigate = useNavigate();
@@ -103,7 +104,14 @@ const Navbar = () => {
         <div className="menu-link">
           {activeUser ? (
             <>
-              
+               <Link
+                to="/basket"
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",marginRight:"-50px"}}
+                className="ml"
+              >
+                <ShoppingBagOutlinedIcon style={{width:"30px",height:"24px",transform:"translateY(5.2px)"}}/>
+              </Link>
+
               <Link
                 to="/"
                 onClick={handleLogout}

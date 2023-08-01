@@ -6,21 +6,22 @@ import "./CreatePost.css";
 import SendingLoader from "../../Components/SendingLoader/SendingLoader";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
-import Footer from "../../Components/Footer/Footer";
 
 const CreatePost = () => {
+  const [selectedSizes, setSelectedSizes] = useState([]);
+
+
 
   const { dispatch } = usePostsContext();
   const { activeUser } = useActiveUserContext();
   const navigate = new useNavigate();
   const [title, setTitle] = useState("");
-  const [ingredients, setIngredients] = useState("");
   const [description, setDescription] = useState("");
-  const [preparationWork, setPreparationWork] = useState("");
-  const [preparation, setPreparation] = useState("");
-  const [cooking, setCooking] = useState("");
-  const [category, setCategory] = useState("maindishes");
-  const [person, setPerson] = useState("1");
+  const [size, setsize] = useState("");
+  const [price, setprice] = useState("");
+  const [gender, setgender] = useState("woman");
+  const [category, setcategory] = useState("tshirt");
+  const [color, setcolor] = useState("white");
   let [blogImage, setBlogImage] = useState([]);
   const [prevImage, setPrevImage] = useState([]);
   const [imageSelected, setImageSelected] = useState(false)
@@ -35,12 +36,11 @@ const CreatePost = () => {
 
     formdata.append("title", title);
     formdata.append("description", description);
-    formdata.append("ingredients", ingredients);
-    formdata.append("preparationWork", preparationWork);
-    formdata.append("preparation", preparation);
-    formdata.append("cooking", cooking);
+    formdata.append("price", price);
+    formdata.append("gender", gender);
     formdata.append("category", category);
-    formdata.append("person", person);
+    formdata.append("size", selectedSizes.join(","));
+    formdata.append("color", color);
     formdata.append("blogImage", blogImage);
     formdata.append("activeUserId", activeUser._id);
 
@@ -72,7 +72,13 @@ const CreatePost = () => {
       });
   };
 
-  const handlePostingLoading = () => {
+  const handlePostingLoading = (e) => {
+    if (activeUser) {
+      handleFormSubmit(e);
+    } else {
+      // User is not logged in, navigate to login page
+      navigate("/login");
+    }
   };
 
   return (
@@ -80,24 +86,24 @@ const CreatePost = () => {
     <div className="create_post_container">
       <form encType="multipart/form-data" className="createPostForm" onSubmit={handleFormSubmit}>
         <div className="create_post_heading_wrapper">
-          <h2 className="create_post_heading">Create New Recipe</h2>
+          <h2 className="create_post_heading">Create New Product</h2>
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Enter post title : </label>
+          <label htmlFor="#">Title: </label>
           <input
             type="text"
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="Enter the title"
+            placeholder="Title"
             required
           />
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Enter post description : </label>
+          <label htmlFor="#">Description: </label>
           <textarea
             type="text"
             rows={5}
@@ -105,104 +111,189 @@ const CreatePost = () => {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
-            placeholder="Enter the description"
+            placeholder="Description"
             required
           />
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Select post category : </label>
+          <label htmlFor="#">Select gender: </label>
+          <select
+            name="gender"
+            onChange={(e) => {
+              const selectedgender = e.target.value;
+              setgender(selectedgender);
+            }}
+          >
+            <option value="woman">Woman</option>
+            <option value="man">Man</option>
+          
+          </select>
+        </div>
+
+        <div className="input_field">
+          <label htmlFor="#">Select category : </label>
           <select
             name="category"
             onChange={(e) => {
-              const selectedCategory = e.target.value;
-              setCategory(selectedCategory);
+              const selectedcategory = e.target.value;
+              setcategory(selectedcategory);
             }}
           >
-            <option value="maindishes">Main Dishes</option>
-            <option value="desserts">Desserts</option>
-            <option value="soups">Soups</option>
-            <option value="salads">Salads</option>
-            <option value="snacks">Snacks</option>
-            <option value="beverages">Beverages</option>
-            <option value="cookie">Cookie</option>
-            <option value="cake">Cake</option>
-            <option value="icecream">Ice Cream</option>
+            <option value="tshirt">tshirt</option>
+            <option value="jean">jean</option>
+            <option value="dress">dress</option>
+            <option value="blazer">blazer</option>
+            <option value="coat">coat</option>
+            <option value="short">short</option>
+            <option value="skirt">skirt</option>
+            <option value="sweater">sweater</option>
+            <option value="shoes">shoes</option>
+            <option value="bag">bag</option>
+
+
+
+          
           </select>
         </div>
 
+      
+    <div className="input_field">
+      <label>Size: </label>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            name="size"
+            value="XS"
+            onChange={(e) => {
+              const selectedSize = e.target.value;
+              setSelectedSizes((prevSelectedSizes) => {
+                if (e.target.checked) {
+                  return [...prevSelectedSizes, selectedSize];
+                } else {
+                  return prevSelectedSizes.filter((size) => size !== selectedSize);
+                }
+              });
+            }}
+          />
+          XS
+        </label>
+       
+        <label>
+          <input
+            type="checkbox"
+            name="size"
+            value="S"
+            onChange={(e) => {
+              const selectedSize = e.target.value;
+              setSelectedSizes((prevSelectedSizes) => {
+                if (e.target.checked) {
+                  return [...prevSelectedSizes, selectedSize];
+                } else {
+                  return prevSelectedSizes.filter((size) => size !== selectedSize);
+                }
+              });
+            }}
+          />
+          S
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="size"
+            value="M"
+            onChange={(e) => {
+              const selectedSize = e.target.value;
+              setSelectedSizes((prevSelectedSizes) => {
+                if (e.target.checked) {
+                  return [...prevSelectedSizes, selectedSize];
+                } else {
+                  return prevSelectedSizes.filter((size) => size !== selectedSize);
+                }
+              });
+            }}
+          />
+          M
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="size"
+            value="L"
+            onChange={(e) => {
+              const selectedSize = e.target.value;
+              setSelectedSizes((prevSelectedSizes) => {
+                if (e.target.checked) {
+                  return [...prevSelectedSizes, selectedSize];
+                } else {
+                  return prevSelectedSizes.filter((size) => size !== selectedSize);
+                }
+              });
+            }}
+          />
+          L
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            name="size"
+            value="XL"
+            onChange={(e) => {
+              const selectedSize = e.target.value;
+              setSelectedSizes((prevSelectedSizes) => {
+                if (e.target.checked) {
+                  return [...prevSelectedSizes, selectedSize];
+                } else {
+                  return prevSelectedSizes.filter((size) => size !== selectedSize);
+                }
+              });
+            }}
+          />
+          XL
+        </label>
+
+      </div>
+    </div>
+
         <div className="input_field">
-          <label htmlFor="#">Person : </label>
+          <label htmlFor="#">Color: </label>
           <select
-            name="person"
+            name="color"
             onChange={(e) => {
-              const selectedPerson = e.target.value;
-              setPerson(selectedPerson);
+              const selectedcolor = e.target.value;
+              setcolor(selectedcolor);
             }}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-            <option value="10">10</option>
-            <option value="12">12</option>
-            <option value="16">16</option>
+            <option value="white">white</option>
+            <option value="black">black</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="yellow">yellow</option>
+            <option value="pink">pink</option>
+            <option value="blue">blue</option>
+            <option value="gray">gray</option>
+            <option value="orange">orange</option>
+            <option value="beige">beige</option>
+            <option value="purple">purple</option>
+            <option value="brown">brown</option>
+
           </select>
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Preparation time : </label>
+          <label htmlFor="#">Price: </label>
           <input
             type="number"
             rows={5}
-            value={preparation}
+            value={price}
             onChange={(e) => {
-              setPreparation(e.target.value);
+              setprice(e.target.value);
             }}
-            placeholder="Enter the preparation time"
-            required
-          />
-        </div>
-        <div className="input_field">
-          <label htmlFor="#">Cooking time : </label>
-          <input
-            type="number"
-            rows={5}
-            value={cooking}
-            onChange={(e) => {
-              setCooking(e.target.value);
-            }}
-            placeholder="Enter the cooking time"
-            required
-          />
-        </div>
-
-        <div className="input_field">
-          <label htmlFor="#">Enter post preparation process : </label>
-          <textarea
-            type="text"
-            rows={5}
-            value={preparationWork}
-            onChange={(e) => {
-              setPreparationWork(e.target.value);
-            }}
-            placeholder="Enter the preparation"
-            required
-          />
-        </div>
-
-        <div className="input_field">
-          <label htmlFor="#">Enter post ingredients : </label>
-          <input
-            type="text"
-            value={ingredients}
-            onChange={(e) => {
-              setIngredients(e.target.value);
-            }}
-            placeholder="Enter the ingredients"
+            placeholder="Price"
             required
           />
         </div>
@@ -230,7 +321,6 @@ const CreatePost = () => {
         </div>
       </form>
     </div>
-    <Footer/>
    </>
   );
 };

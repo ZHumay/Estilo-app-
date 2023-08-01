@@ -67,6 +67,7 @@ const post_register = async (req, res) => {
             user: registerUser,
             msg: "User Created Successfully !!",
             email: email,
+            confirmCode: confirmCode,
           });
         } else {
           console.log("Password does not match!!");

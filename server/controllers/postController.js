@@ -16,13 +16,12 @@ const create_post = async (req, res) => {
         if (result) {
           const post = new postModel({
             title: req.body.title,
-            person: req.body.person,
-            preparation: req.body.preparation,
-            cooking: req.body.cooking,
-            ingredients: req.body.ingredients,
-            preparationWork: req.body.preparationWork,
+            color: req.body.color,
+            price: req.body.price,
+            size:req.body.size,
             description: req.body.description,
             category: req.body.category,
+            gender:req.body.gender,
             authorId : req.body.activeUserId,
             postImage: result.url,
           });
@@ -32,7 +31,7 @@ const create_post = async (req, res) => {
           if (savePost) {
             res
               .status(200)
-              .json({ post: savePost, msg: "Recipe created successfully !!" });
+              .json({ post: savePost, msg: "Product created successfully !!" });
 
           } else {
             res.json({ msg: "Something wents wrong" });
@@ -86,76 +85,65 @@ const all_posts = async (req, res) => {
 
 
 const update_post = async (req, res) => {
-
-  try{
-
-    if(req.files){
-
+  try {
+    if (req.files) {
+      // Handle image upload if there is a new image
       const file = req.files.blogImage;
+      cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        try {
+          if (result) {
+            // Update post with the new image URL
+            const updatedPost = {
+              title: req.body.title,
+              color: req.body.color,
+              price: req.body.price,
+              size: req.body.size,
+              description: req.body.description,
+              category: req.body.category,
+              gender:req.body.gender,
+              authorId: req.body.activeUserId,
+              postImage: result.url,
+            };
 
-    cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
-      try {
-        if (result) {
+            const post = await postModel.findByIdAndUpdate(req.params.id, updatedPost);
 
-          const post = await postModel.findByIdAndUpdate(req.params.id,{
-            title: req.body.title,
-            description: req.body.description,
-            category: req.body.category,
-            person: req.body.person,
-            preparation: req.body.preparation,
-            cooking: req.body.cooking,
-            ingredients: req.body.ingredients,
-            preparationWork: req.body.preparationWork,
-            postImage: result.url,
-          });
-
-          const savePost = await post.save();
-
-          if (savePost) {
-            res
-              .status(200)
-              .json({ post: savePost, msg: "Recipe created successfully !!" });
-
+            if (post) {
+              res.status(200).json({ msg: "Product updated successfully", post: post });
+            } else {
+              res.json({ msg: "Post not updated, Something went wrong" });
+            }
           } else {
-            res.json({ msg: "Something wents wrong" });
+            console.log(err);
+            res.json({ msg: err });
           }
-        } else {
-          console.log(err);
-          res.json({ msg: err });
+        } catch (error) {
+          res.json({ msg: error.message });
         }
-      } catch (error) {
-        res.json({ msg: error.message });
+      });
+    } else {
+      // Update post without uploading a new image
+      const updatedPost = {
+        title: req.body.title,
+        color: req.body.color,
+        price: req.body.price,
+        size: req.body.size,
+        description: req.body.description,
+        category: req.body.category,
+        gender:req.body.gender,
+        authorId: req.body.activeUserId,
+      };
+
+      const post = await postModel.findByIdAndUpdate(req.params.id, updatedPost);
+
+      if (post) {
+        res.status(200).json({ msg: "Product updated successfully", post: post });
+      } else {
+        res.json({ msg: "Post not updated, Something went wrong" });
       }
-    });
-
     }
-    else{
-
-       const updatePost = await postModel.findByIdAndUpdate(req.params.id,{
-        title : req.body.title,
-        description : req.body.description,
-        category : req.body.category,
-        person: req.body.person,
-        preparation: req.body.preparation,
-        ingredients: req.body.ingredients,
-        preparationWork: req.body.preparationWork,
-        cooking: req.body.cooking
-       });
-
-       if(updatePost){
-        res.status(200).json({msg : "Recipe updated successfully", post : updatePost});
-       }
-       else{
-        res.json({msg : "Post not updated , Something wents wrong"});
-       }
-
-    }
-
-  }catch(error){
-    res.json({msg : error.message });
+  } catch (error) {
+    res.json({ msg: error.message });
   }
-
-
 };
 
 const delete_post = async (req, res) => {

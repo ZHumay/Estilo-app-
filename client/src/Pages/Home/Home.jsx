@@ -251,19 +251,19 @@ const Home = () => {
         <div className="rightHome">
            <h2 className='catogory_heading'>Categories</h2>
            <div className="categories_wrapper">
-                <span className='category_item' onClick={()=> filterCategory("maindishes")}>Main Dishes</span>
-                <span className='category_item' onClick={()=> filterCategory("desserts")}>Desserts</span>
-                <span className='category_item' onClick={()=> filterCategory("soups")}>Soups</span>
-                <span className='category_item' onClick={()=> filterCategory("salads")}>Salads</span>
-                <span className='category_item' onClick={()=> filterCategory("snacks")}>Snacks</span>
-                <span className='category_item' onClick={()=> filterCategory("beverages")}>Beverages</span>
-                <span className='category_item' onClick={()=> filterCategory("cookie")}>Cookie</span>
-                <span className='category_item' onClick={()=> filterCategory("cake")}>Cake</span>
-                <span className='category_item' onClick={()=> filterCategory("icecream")}>Ice Cream</span>
+                <span className='category_item' onClick={()=> filterCategory("tshirt")}>Tshirts</span>
+                <span className='category_item' onClick={()=> filterCategory("dress")}>Dresses</span>
+                <span className='category_item' onClick={()=> filterCategory("blazer")}>Blazers</span>
+                <span className='category_item' onClick={()=> filterCategory("jean")}>Jeans</span>
+                <span className='category_item' onClick={()=> filterCategory("coat")}>Coats</span>
+                <span className='category_item' onClick={()=> filterCategory("short")}>Shorts</span>
+                <span className='category_item' onClick={()=> filterCategory("skirt")}>Skirts</span>
+                <span className='category_item' onClick={()=> filterCategory("sweater")}>Sweaters</span>
+                <span className='category_item' onClick={()=> filterCategory("shoes")}>Shoes</span>
+                <span className='category_item' onClick={()=> filterCategory("bag")}>Bags</span>
                 <span className='category_item' onClick={()=> filterCategory("all")}>All</span>
            </div>
       </div>
-   
       
       
     </div>

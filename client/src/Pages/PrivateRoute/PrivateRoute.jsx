@@ -28,7 +28,7 @@ const PrivateRoute = () => {
 
   return (
     <div>
-      {userVerified ? <Outlet /> : navigate("/login", { replace: true })}
+      {userVerified ? navigate("/verify") : navigate("/register", { replace: true })}
     </div>
   );
 };

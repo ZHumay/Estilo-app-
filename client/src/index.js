@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
-
-
 import { PostsContextProvider } from './context/PostContext';
 import { ActiveUserContextProvider } from './context/activeUserContext';
 import { UsersContextProvider } from './context/UserContext';
 import { SearchResultContextProvider } from './context/SearchResultContext';
 import { CommentsContextProvider } from './context/CommentContext';
-import store from './redux/store';
+import store from './store/rootReducer';
 import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

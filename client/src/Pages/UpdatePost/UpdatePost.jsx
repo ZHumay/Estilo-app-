@@ -5,9 +5,11 @@ import Swal from "sweetalert2";
 import "./UpdatePost.css";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import Footer from "../../Components/Footer/Footer";
+import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 
 const UpdatePost = () => {
   const {posts, dispatch} = usePostsContext();
+  const { activeUser } = useActiveUserContext();
 
   const { id } = useParams();
 
@@ -16,13 +18,12 @@ const UpdatePost = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("maindishes");
+  const [gender, setgender] = useState("woman");
+  const [size, setsize] = useState("");
   let [blogImage, setBlogImage] = useState([]);
-  const [ingredients, setIngredients] = useState("");
-  const [preparationWork, setPreparationWork] = useState("");
-  const [preparation, setPreparation] = useState("");
-  const [cooking, setCooking] = useState("");
-  const [person, setPerson] = useState("1");
+  const [price, setprice] = useState("");
+  const [category, setcategory] = useState("tshirt");
+  const [color, setcolor] = useState("white");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -31,13 +32,12 @@ const UpdatePost = () => {
 
     formdata.append("title", title);
     formdata.append("description", description);
+    formdata.append("gender", gender);
+    formdata.append("size", size);
     formdata.append("category", category);
     formdata.append("blogImage", blogImage);
-    formdata.append("ingredients", ingredients);
-    formdata.append("preparationWork", preparationWork);
-    formdata.append("preparation", preparation);
-    formdata.append("cooking", cooking);
-    formdata.append("person", person);
+    formdata.append("price", price);
+    formdata.append("color", color);
 
     axios.patch(`/api/posts/update-post/${id}`, formdata, {
         headers: {
@@ -61,7 +61,13 @@ const UpdatePost = () => {
       });
   };
 
-  const handlePostingLoading = () => {
+  const handlePostingLoading = (e) => {
+    if (activeUser) {
+      handleFormSubmit(e);
+    } else {
+      // User is not logged in, navigate to login page
+      navigate("/login");
+    }
 
   };
 
@@ -72,12 +78,9 @@ const UpdatePost = () => {
        if(res.status === 200){
           setTitle(res.data.post.title);
           setDescription(res.data.post.description);
-          setCategory(res.data.post.category);
-          setPerson(res.data.post.person)
-          setPreparation(res.data.post.preparation)
-          setCooking(res.data.post.cooking)
-          setPreparationWork(res.data.post.preparationWork)
-          setIngredients(res.data.post.ingredients)
+          setgender(res.data.post.gender);
+          setcolor(res.data.post.color)
+          setprice(res.data.post.price)
        }
        else{
         console.log("Something wents wrong");
@@ -101,20 +104,20 @@ const UpdatePost = () => {
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Enter post title : </label>
+          <label htmlFor="#">Title : </label>
           <input
             type="text"
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="Enter the title"
+            placeholder="Title"
             required
           />
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Enter post description : </label>
+          <label htmlFor="#">Description : </label>
           <textarea
             type="text"
             rows={5}
@@ -122,104 +125,103 @@ const UpdatePost = () => {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
-            placeholder="Enter the description"
+            placeholder="Description"
             required
           />
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Select post category : </label>
+          <label htmlFor="#">Select gender : </label>
           <select
             name="cars"
             onChange={(e) => {
-              const selectedCategory = e.target.value;
-              setCategory(selectedCategory);
+              const selectedgender = e.target.value;
+              setgender(selectedgender);
             }}
           >
-            <option value="maindishes">Main Dishes</option>
-            <option value="desserts">Desserts</option>
-            <option value="soups">Soups</option>
-            <option value="salads">Salads</option>
-            <option value="snacks">Snacks</option>
-            <option value="beverages">Beverages</option>
-            <option value="cookie">Cookie</option>
-            <option value="cake">Cake</option>
-            <option value="icecream">Ice Cream</option>
+            <option value="woman">Woman</option>
+            <option value="man">Man</option>
           </select>
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Person : </label>
+          <label htmlFor="#">Select category : </label>
           <select
-            name="cars"
+            name="category"
             onChange={(e) => {
-              const selectedPerson = e.target.value;
-              setPerson(selectedPerson);
+              const selectedcategory = e.target.value;
+              setgender(selectedcategory);
             }}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-            <option value="10">10</option>
-            <option value="12">12</option>
-            <option value="16">16</option>
+            <option value="tshirt">tshirt</option>
+            <option value="jean">jean</option>
+            <option value="dress">dress</option>
+            <option value="blazer">blazer</option>
+            <option value="coat">coat</option>
+            <option value="short">short</option>
+            <option value="skirt">skirt</option>
+            <option value="sweater">sweater</option>
+            <option value="shoes">shoes</option>
+            <option value="bag">bag</option>
+
+
+
+          
           </select>
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Preparation time : </label>
-          <input
-            type="number"
-            rows={5}
-            value={preparation}
+          <label htmlFor="#">Size: </label>
+          <select
+            name="size"
             onChange={(e) => {
-              setPreparation(e.target.value);
+              const selectedsize = e.target.value;
+              setsize(selectedsize);
             }}
-            placeholder="Enter the preparation time"
-            required
-          />
+          >
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
         </div>
+
+
         <div className="input_field">
-          <label htmlFor="#">Cooking time : </label>
-          <input
-            type="number"
-            rows={5}
-            value={cooking}
+          <label htmlFor="#">Color : </label>
+          <select
+            name="cars"
             onChange={(e) => {
-              setCooking(e.target.value);
+              const selectedcolor = e.target.value;
+              setcolor(selectedcolor);
             }}
-            placeholder="Enter the cooking time"
-            required
-          />
+          >
+          <option value="white">white</option>
+            <option value="black">black</option>
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="yellow">yellow</option>
+            <option value="pink">pink</option>
+            <option value="blue">blue</option>
+            <option value="gray">gray</option>
+            <option value="orange">orange</option>
+            <option value="beige">beige</option>
+            <option value="purple">purple</option>
+            <option value="brown">brown</option>
+          </select>
         </div>
 
         <div className="input_field">
-          <label htmlFor="#">Enter post preparation process : </label>
-          <textarea
-            type="text"
-            rows={5}
-            value={preparationWork}
-            onChange={(e) => {
-              setPreparationWork(e.target.value);
-            }}
-            placeholder="Enter the preparation"
-            required
-          />
-        </div>
-
-        <div className="input_field">
-          <label htmlFor="#">Enter post ingredients : </label>
+          <label htmlFor="#">Price: </label>
           <input
-            type="text"
-            value={ingredients}
+            type="number"
+            rows={5}
+            value={price}
             onChange={(e) => {
-              setIngredients(e.target.value);
+              setprice(e.target.value);
             }}
-            placeholder="Enter the ingredients"
+            placeholder="Price"
             required
           />
         </div>

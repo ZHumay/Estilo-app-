@@ -13,12 +13,13 @@ import SinglePost from "./Pages/SinglePost/SinglePost";
 import UpdatePost from "./Pages/UpdatePost/UpdatePost";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 import { useDispatch } from "react-redux";
-import { SET_POSTS } from "./redux/postsSlice";
+import { SET_POSTS } from "./store/postsSlice";
 import Woman from "./Pages/Woman/Woman";
 import Man from "./Pages/Man/Man";
 import Contact from "./Pages/Contact/Contact";
 import Shop from "./Pages/Shop/Shop";
-import { Verify } from "./Pages/Verify/Verify";
+import { VerifyPage } from "./Pages/Verify/VerifyPage";
+import Basket from "./Pages/Basket/Basket";
 function App() {
   const dispatch = useDispatch();
 
@@ -46,15 +47,14 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/verify" element={<PrivateRoute/>}>
-        <Route path="/verify" element={<Verify/>}></Route>
-        </Route>
+        <Route path="/verify" element={<VerifyPage/>}></Route>
         <Route path="/create-post" element={<CreatePost />}></Route>
         <Route path="/woman" element={ <Woman />}></Route>
         <Route path="/man" element={ <Man />}></Route>
         <Route path="/contact" element={ <Contact />}></Route>
         <Route path="/shop" element={ <Shop />}></Route>
 
+        <Route path="/basket" element={ <Basket/>}></Route>
 
         <Route path="/update-post/:id" element={<UpdatePost />}></Route>
 

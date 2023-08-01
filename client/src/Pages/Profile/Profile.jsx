@@ -11,7 +11,7 @@ import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 import { format } from "timeago.js";
 import PageLoader from "../PageLoader/PageLoader";
 import { useDispatch, useSelector } from "react-redux";
-import {CURRENT_POST} from "../../redux/postsSlice";
+import {CURRENT_POST} from "../../store/postsSlice";
 
 const Profile = () => {
   const { id } = useParams();

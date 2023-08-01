@@ -133,26 +133,32 @@ const SinglePost = () => {
             </div>
             <div className="author_and_timestamps">
             
-              {postAuthor ? <p>{format(postAuthor.updatedAt)}</p> : ""}
             </div>
           
 
             <div className="single_post_description_wrapper">
-              <p className="red-text">Description</p>
-              <p>{currentPost ? currentPost.description : ""}</p>
+              <p className="red-text">Description: <span className="span"> {currentPost ? currentPost.description : ""}</span></p>
             </div>
            
            <div className="general">
          
           
            </div>
+           <div className="single_post_description_wrapper">
+      <p className="red-text">
+        Color:
+        {currentPost && currentPost.color ? (
+          <div  className={`color-indicator ${currentPost.color.toLowerCase()}`}
+          >
+          </div>
+        ) : (
+          console.log("color yoxdu")
+        )}
+      </p>
+    </div>
+
             <div className="single_post_description_wrapper">
-              <p className="red-text">Preparation Process: </p>
-              <p>{currentPost ? currentPost.preparationWork : ""}</p>
-            </div>
-            <div className="single_post_description_wrapper">
-              <p className="red-text"> Ingredients: </p>
-              <p>{currentPost ? currentPost.ingredients : ""}</p>
+              <p className="red-text"> Size: <span className="span">{currentPost ? currentPost.size : ""}</span> </p>
             </div>
             <Comments post={currentPost} />
           </div>

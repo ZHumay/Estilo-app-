@@ -7,7 +7,10 @@
     padding-bottom: 100px;
     font-size: 12px;
 }
-
+.span{
+    color: rgb(96, 93, 93);
+    font-weight: 500;
+}
 .single_blog_post{
     width: 60%;
     padding: 15px 30px;
@@ -20,6 +23,8 @@
 
 .single_post_img_wrapper img{
     width: 100%;
+    height: 500px;
+    object-fit: contain;
     border-radius: 10px;
 }
 
@@ -27,6 +32,7 @@
     font-size: 27px;
     font-weight: 700;
     margin: 10px 0;
+    color: rgb(129, 129, 129);
 }
 
 .title_and_buttons_wrapper{
@@ -94,7 +100,7 @@
     margin-top: 20px;
 }
 .red-text {
-    color: brown;
+    color: #a569bd;
     font-weight: 600;
     font-size: 20px;
 }
@@ -114,4 +120,36 @@
     color: rgb(92, 92, 92);
 }
 
+.color-indicator {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 59px;
+    margin-top: -21px;
+  }
+  
+  .color-indicator.white {
+    background-color: white;
+  }
+  
+  .color-indicator.black {
+    background-color: black;
+  }
+  
+  .color-indicator.green {
+    background-color: green;
+  }
+  
+  /* Add more color classes for each color option */
+  
+  .color-indicator.yellow { background-color: yellow; } 
+  .color-indicator.red { background-color: red; } 
+  .color-indicator.pink { background-color: pink; } 
+  .color-indicator.blue { background-color: blue; } 
+  .color-indicator.gray { background-color: gray; } 
+  .color-indicator.orange { background-color: orange; } 
+  .color-indicator.beige { background-color: beige; } 
+  .color-indicator.purple { background-color: purple; } 
+  .color-indicator.brown { background-color: brown; } 
   

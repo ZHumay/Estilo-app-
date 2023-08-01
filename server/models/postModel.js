@@ -8,29 +8,26 @@ const postSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    preparation:{
+    size:{
+        type:[String],
+        required:true
+    },
+    price:{
         type : Number,
         required : true
     },
-    cooking:{
-        type : Number,
-        required : true
-    },
-    person:{
-        type : String,
-        required : true
-    },
-    preparationWork:{
-        type : String,
-        required : true
-    },
-    ingredients:{
+
+    color:{
         type : String,
         required : true
     },
     category : {
         type : String,
         required : true
+    },
+    gender:{
+        type:String,
+        required:true
     },
     authorId : {
         type : String,
