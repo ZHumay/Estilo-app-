@@ -14,6 +14,7 @@ import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 import "./Auth.css";
 export const VerifyPage = () => {
   const { activeUser } = useActiveUserContext();
+
   const { state } = useLocation();
   const navigate = useNavigate();
   //use Formik
@@ -29,7 +30,7 @@ export const VerifyPage = () => {
         });
         const { token } = res.data;
         alert("Successful");
-        activeUser(true, navigate("/login"), token);
+        navigate("/login")
       } catch (error) {
         bag.setErrors({ general: error.response.data.message });
       }

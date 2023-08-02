@@ -149,7 +149,8 @@
   .color-indicator.blue { background-color: blue; } 
   .color-indicator.gray { background-color: gray; } 
   .color-indicator.orange { background-color: orange; } 
-  .color-indicator.beige { background-color: beige; } 
+  .color-indicator.beige { background-color: rgb(122, 111, 7); } 
   .color-indicator.purple { background-color: purple; } 
   .color-indicator.brown { background-color: brown; } 
+
   

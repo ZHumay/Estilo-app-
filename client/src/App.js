@@ -20,6 +20,7 @@ import Contact from "./Pages/Contact/Contact";
 import Shop from "./Pages/Shop/Shop";
 import { VerifyPage } from "./Pages/Verify/VerifyPage";
 import Basket from "./Pages/Basket/Basket";
+import { useActiveUserContext } from "./context/activeUserContext";
 function App() {
   const dispatch = useDispatch();
 
@@ -34,10 +35,20 @@ function App() {
       console.log(error.message);
     }
   };
+  const { dispatchActiceUser } = useActiveUserContext();
 
   useEffect(() => {
     fetchAllPosts();
-  }, [dispatch]);
+
+    // Sayfa yüklendiğinde veya uygulama başladığında depolama alanından "activeUser" değerini al
+    const activeUserFromStorage = JSON.parse(localStorage.getItem("activeUser"));
+
+    // Eğer "activeUser" değeri depolama alanında varsa, context içinde güncelle
+    if (activeUserFromStorage) {
+      dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: activeUserFromStorage });
+    }
+  }, [dispatchActiceUser,dispatch]);
+
 
   return (
     <div className="App">

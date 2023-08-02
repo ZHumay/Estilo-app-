@@ -12,19 +12,18 @@ import Comments from "../../Components/Comments/Comments";
 import { useUsersContext } from "../../hooks/useUsersContext";
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 import Footer from "../../Components/Footer/Footer";
+import Cookies from "js-cookie";
 
 const SinglePost = () => {
   const { dispatch } = usePostsContext();
   const { users } = useUsersContext();
-  const { activeUser } = useActiveUserContext();
   
   const {id} = useParams();
-  
+  const {activeUser, dispatchActiceUser} = useActiveUserContext();
   const [currentPost, setCurrentPost] = useState();
   const [postAuthor, setPostAuthor] = useState();
   const [likeCount, setLikeCount] = useState(0);
-  const [alredyLiked, setAlreadyLiked] = useState("fa-regular fa-star");
-  const [nonLiked, setNonLiked] = useState("fa-regular fa-star");
+
 
 
   const handleDelete = async (id) => {
@@ -42,26 +41,15 @@ const SinglePost = () => {
     }
   };
 
-
-
-  const handleLikeDislike = async (postId) => {
-
-    try {
-      const res = await axios.post(`/api/posts/like-dislike/${postId}`, {
-        userId: activeUser?._id,
-      });
-
-      if (res.status == 200) {
-        setLikeCount(res.data.liked ? likeCount + 1 : likeCount - 1);
-      } else {
-        console.log("post not liked or disliked");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   useEffect(() => {
+    const activeUserFromStorage = JSON.parse(localStorage.getItem("activeUser"));
+
+    // Eğer "activeUser" değeri depolama alanında varsa, context içinde güncelle
+    if (activeUserFromStorage) {
+      dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: activeUserFromStorage });
+      console.log(activeUser);
+
+    }
 
     const fetchCurrentPost = async () => {
       try {
@@ -84,16 +72,53 @@ const SinglePost = () => {
         console.log(error.message);
       }
     };
+   
+      const fetchActiveUser = async () =>{
+        try{
+
+          if(Cookies.get("jwt")){
+              const res = await axios.post("/api/auth/active-user", {token : Cookies.get("jwt")} );
+
+              if(res.status === 200){
+                dispatchActiceUser({type : "GET_ACTIVE_USER", payload : res.data.user});
+              }
+              
+            }
+          }
+          catch(error){
+            console.log(error.message);
+          }
+      }
+
 
     fetchCurrentPost();
-  }, [id]);
+    fetchActiveUser()
+  }, [id,dispatchActiceUser]);
 
   return (
     <>
-      {currentPost ? (
+      {currentPost&&activeUser? (
         <div className="single_blog_post_wrapper">
           <div className="single_blog_post">
-          
+            <Link to={`/profile/${postAuthor?._id}`}>
+              {postAuthor ? (
+                <div className="blog_post_author_single">
+                  <div className="left">
+                    <img
+                      src={postAuthor ? postAuthor.profileImage : ""}
+                      alt=""
+                    />
+                  </div>
+                  <div className="author_name_wrapper">
+                    <h2 className="__title">
+                      {postAuthor ? postAuthor.name : "XYZ"}
+                    </h2>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
+            </Link>
             <div className="single_post_img_wrapper">
               <img
                 src={currentPost ? currentPost.postImage : ""}
@@ -132,33 +157,33 @@ const SinglePost = () => {
               )}
             </div>
             <div className="author_and_timestamps">
-            
+              <p>
+                <span className="author_txxt">Author</span> : {postAuthor?.name}
+              </p>
+              {postAuthor ? <p>{format(postAuthor.updatedAt)}</p> : ""}
             </div>
-          
+        
 
             <div className="single_post_description_wrapper">
               <p className="red-text">Description: <span className="span"> {currentPost ? currentPost.description : ""}</span></p>
             </div>
-           
-           <div className="general">
-         
-          
-           </div>
-           <div className="single_post_description_wrapper">
-      <p className="red-text">
-        Color:
-        {currentPost && currentPost.color ? (
+      
+            <div className="single_post_description_wrapper">
+              <p className="red-text"> Size: <span className="span">{currentPost ? currentPost.size : ""}</span> </p>
+            </div>
+            
+            <div className="single_post_description_wrapper">
+              <div className="red-text"> Color:
+              {currentPost && currentPost.color ? (
           <div  className={`color-indicator ${currentPost.color.toLowerCase()}`}
           >
           </div>
         ) : (
           console.log("color yoxdu")
         )}
-      </p>
-    </div>
-
-            <div className="single_post_description_wrapper">
-              <p className="red-text"> Size: <span className="span">{currentPost ? currentPost.size : ""}</span> </p>
+              
+               </div>
+              {/* <p>{currentPost ? currentPost.color : ""}</p> */}
             </div>
             <Comments post={currentPost} />
           </div>

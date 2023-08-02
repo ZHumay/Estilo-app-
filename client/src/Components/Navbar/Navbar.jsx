@@ -14,8 +14,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   const [searchResultContainerStyle, setSearchResultContainerStyle] = useState("hideSearch");
+  const { dispatchActiceUser } = useActiveUserContext();
 
   const handleLogout = () => {
+    dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: null });
+    localStorage.removeItem("activeUser");
     Cookies.remove("jwt");
     navigate("/", { replace: true });
     window.location.reload();

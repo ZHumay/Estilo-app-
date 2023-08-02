@@ -3,14 +3,17 @@ import React, {useState, useEffect} from 'react'
 import "./Comment.css"
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useCommentsContext } from '../../hooks/useCommentsContext';
 import { useActiveUserContext } from '../../hooks/useActiveUserContext';
+import PageLoader from '../../Pages/PageLoader/PageLoader';
+import Cookies from 'js-cookie';
 
 const Comment = ({comment, post}) => {
 
   const {comments, dispatchComments} = useCommentsContext();
-  const {activeUser} = useActiveUserContext();
+  const {activeUser, dispatchActiceUser} = useActiveUserContext();
+  const {id} = useParams();
   const [user, setUser] = useState();
 
   const handleCommentDelete = async (id) =>{
@@ -45,12 +48,33 @@ const Comment = ({comment, post}) => {
         console.log(error.message);
       }
     }
+    const fetchActiveUser = async () =>{
+      try{
+
+        if(Cookies.get("jwt")){
+            const res = await axios.post("/api/auth/active-user", {token : Cookies.get("jwt")} );
+
+            if(res.status === 200){
+              dispatchActiceUser({type : "GET_ACTIVE_USER", payload : res.data.user});
+            }
+            
+          }
+        }
+        catch(error){
+          console.log(error.message);
+        }
+    }
+
+
+  fetchActiveUser()
 
     fetchCommentAuthor();
     
-  }, [])
+  }, [id])
 
   return (
+    <>
+   {activeUser?(
     <div className='comment'>
       <div className="left">
         <Link to={`/profile/${user?._id}`}>
@@ -79,6 +103,11 @@ const Comment = ({comment, post}) => {
         
       </div>
     </div>
+    ):(
+    <PageLoader/>
+  )}
+    </>
+  
   )
 }
 

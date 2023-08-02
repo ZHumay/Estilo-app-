@@ -7,12 +7,17 @@ import { useNavigate, Link } from "react-router-dom";
 import SendingLoader from "../../Components/SendingLoader/SendingLoader";
 import NoEncryptionIcon from '@mui/icons-material/NoEncryption';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 const Login = () => {
   const navigate = new useNavigate();
+  const{activeUser}=useActiveUserContext()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [sending, setSending] = useState(false);
+  const { dispatchActiceUser } = useActiveUserContext();
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +32,8 @@ const Login = () => {
       if (res.status === 200 && res.data.token) {
         setSending(false);
         Swal.fire("Greate", res.data.msg, "success");
-
         Cookies.set("jwt", res.data.token, { expires: 7 });
-
+        dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: true });
         navigate("/", { replace: true });
       } else {
         setSending(false);

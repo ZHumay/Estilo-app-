@@ -1,12 +1,16 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import "./Comments.css";
 import Comment from "../Comment/Comment";
 import axios from "axios";
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 import { useCommentsContext } from "../../hooks/useCommentsContext";
+import PageLoader from "../../Pages/PageLoader/PageLoader";
+import Cookies from "js-cookie";
+import { useParams } from "react-router-dom";
 
 const Comments = ({ post }) => {
-  const { activeUser } = useActiveUserContext();
+  const {activeUser, dispatchActiceUser} = useActiveUserContext();
+  const {id} = useParams();
 
   const [comment, setComment] = useState();
   const { comments, dispatchComments } = useCommentsContext();
@@ -23,6 +27,7 @@ const Comments = ({ post }) => {
 
       if (res.status === 200) {
         dispatchComments({ type: "ADD_COMMENT", payload: res.data.comment });
+
         setComment("");
       } else {
         console.log("Comment not posted");
@@ -31,8 +36,25 @@ const Comments = ({ post }) => {
       console.log(error.message);
     }
   };
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(`/api/comments/all-comments`);
+        if (res.status === 200) {
+          dispatchComments({ type: "SET_COMMENTS", payload: res.data.comments });
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  
+    fetchComments();
+  }, [post._id]);
+  
 
   return (
+    <>
+    { activeUser ? (
     <div className="comments_section">
       <h5 className="add_comment_txt">Add Comment</h5>
 
@@ -73,6 +95,10 @@ const Comments = ({ post }) => {
         }
       </div>
     </div>
+    ) :(
+      <PageLoader/> 
+    )}
+    </>
   );
 };
 

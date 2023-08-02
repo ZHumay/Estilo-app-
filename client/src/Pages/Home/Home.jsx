@@ -42,6 +42,7 @@ const Home = () => {
 
 
   useEffect(()=>{
+    console.log(activeUser);
       navigate("/", {replace : true});
 
       const fetchActiveUser = async () =>{
