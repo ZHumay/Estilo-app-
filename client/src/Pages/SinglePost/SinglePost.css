@@ -104,6 +104,10 @@
     font-weight: 600;
     font-size: 20px;
 }
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
 .ordinary {
    margin-left: 30px;
 }

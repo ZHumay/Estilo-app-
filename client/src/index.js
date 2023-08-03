@@ -9,6 +9,7 @@ import { SearchResultContextProvider } from './context/SearchResultContext';
 import { CommentsContextProvider } from './context/CommentContext';
 import store from './store/rootReducer';
 import { Provider } from 'react-redux';
+import { BasketProvider } from './context/BasketContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,9 +19,11 @@ root.render(
         <UsersContextProvider>
           <SearchResultContextProvider>
             <CommentsContextProvider>
+            <BasketProvider>
               <Provider store={store}>
                <App />
               </Provider>
+              </BasketProvider>
             </CommentsContextProvider>
           </SearchResultContextProvider>
         </UsersContextProvider>

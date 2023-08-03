@@ -95,6 +95,7 @@ const SinglePost = () => {
     fetchActiveUser()
   }, [id,dispatchActiceUser]);
 
+
   return (
     <>
       {currentPost&&activeUser? (
