@@ -9,15 +9,16 @@
     transition: all .5s;
 }
 .basket .add-btn:hover {
-   background-color: red;
+   background-color: rgb(129, 131, 129);
 }
 .basket .remove-btn {
     font-size:15px ;
-    background-color: red;
+    background-color: rgb(226, 40, 40);
 }
 .btn-body{
     display: flex;
     align-items: center;
+    color: white;
 }
 .total{
     width: 400px;

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Post = require("./postModel");
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -37,6 +38,10 @@ const userSchema = new mongoose.Schema({
     codeCounter:{
         type:Number,
         default: 3
+    },
+    basketItem:{
+        type: [],
+        required:true
     }
     
 }, {timestamps : true});

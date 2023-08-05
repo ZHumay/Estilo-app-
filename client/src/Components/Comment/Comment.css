@@ -7,12 +7,16 @@
     border-radius: 10px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
     overflow: hidden;
+    max-height: 200px; /* Set the maximum height you want for the comment div */
+
 }
 
 .comment .left{
     margin-right: 10px;
 }
-
+.left{
+    transform: translate(1px,10px);
+}
 .comment img{
     width: 35px;
     height: 35px;
@@ -34,15 +38,22 @@
 .comment_txt_wrapper{
     padding-left:0px;
     font-weight: 400;
+    transform: translateY(-28px);
+    word-wrap: break-word; /* Wrap long words */
+    overflow-wrap: break-word;
+    max-width: 500px;
+
 }
 
 .comment_txt_wrapper p{
     padding-right: 20px !important;
+    white-space: pre-wrap;
 }
 
 .comment_del{
     color: lightcoral;
     cursor: pointer;
+transform: translateY(-9px);
 }
 
 .header_name_comment{
@@ -58,6 +69,7 @@
 
 .h1_cr{
     margin-left: auto;
+    margin-top: 33px;
 }
 
 .author_txt_txt{
@@ -70,4 +82,7 @@
     background-color: rgba(0, 154, 157, 0.748);
     color: rgb(255, 255, 255);
     margin-left: 10px;
+}
+.right{
+    margin-top: -2px;
 }

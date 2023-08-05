@@ -38,6 +38,8 @@ a{
     margin-top: 16px;
 }
 
+
+
 .post_home_title p{
     font-weight: 600;
     font-size: 22px;
@@ -84,16 +86,17 @@ a{
 
 .post_home_bottom_wrapper .view_post_home{
     display: block;
-    padding: 3px 20px;
-    transform: translateY(3px);
-    background-color: #A569BD;
-    color: white;
+    padding: 2px 20px;
+    transform: translate(-85px,-19px);
+    color: rgb(196, 191, 191);
     font-weight: 600;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.303);
-    border-radius: 5px;
+    width: 40px;
 }
 .view_post_home{
    margin-top: 10px;
+   font-size: 15px;
+   border: none;
+   background: none;
 }
 .post_icon_wrapper{
     padding: 10px;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,8 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 const BlogPostCardHome = ({ post }) => {
   const { activeUser } = useActiveUserContext();
   const { posts, dispatch } = usePostsContext();
-  const { addToBasket, removeFromBasket, basketItems } = useContext(BasketContext);
+  const { basketItems } = useContext(BasketContext);
+  const { addToBasket, removeFromBasket,  } = useContext(BasketContext);
 
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(activeUser?._id));
@@ -33,6 +34,7 @@ const BlogPostCardHome = ({ post }) => {
 
       if (res.status === 200) {
         dispatch({ type: 'DELETE_POST', payload: res.data.post });
+        window.location.reload()
       } else {
         console.log('Post not deleted, Something went wrong');
       }
@@ -58,15 +60,39 @@ const BlogPostCardHome = ({ post }) => {
     }
   };
 
-  const handleClick = (post) => {
-    if (!basketItems.some((item) => item._id === post._id)) {
-      addToBasket(post)
-    }
-    else (
-      removeFromBasket(post)
+  // const handleClick = (post) => {
+  //   if (!basketItems.some((item) => item._id === post._id)) {
+  //     addToBasket(post)
+  //   }
+  //   else (
+  //     removeFromBasket(post)
 
-    )
-  }
+  //   )
+  // }
+
+
+  const handleClick = async (post) => {
+    try {
+      if (!basketItems.some((item) => item._id === post._id)) {
+        // If the item is not in the basket, add it to the basket
+        const res = await axios.post(`/api/auth/user/${activeUser._id}/basketItems`, {
+          newItem: post
+        });
+        addToBasket(res.data);
+      } else {
+        // If the item is already in the basket, remove it from the basket
+        const res = await axios.delete(`/api/auth/user/${activeUser._id}/basketItems`, {
+          data: { itemToDelete: post },
+        });
+        removeFromBasket(post);
+         
+      }
+    } catch (error) {
+      console.error("Error adding/removing item to/from basket:", error);
+    }
+  };
+  
+  
 
   return (
     <div className="blog-post-card-home">
@@ -101,12 +127,12 @@ const BlogPostCardHome = ({ post }) => {
               to={`/post/${post?._id}`}
               onClick={() => handleSettingId(post?._id)}
             >
-              More info...
+              More...
             </Link>
           </div>
 
           <div className="right">
-            {activeUser._id === post?.authorId && (
+            {activeUser._id === post?.authorId ? (
               <>
                 <p className="post_icon_wrapper">
                   <Link to={`/update-post/${post?._id}`}>
@@ -124,11 +150,27 @@ const BlogPostCardHome = ({ post }) => {
                   </Link>
                 </p>
               </>
+            ) :(    <Button
+              size="small"
+              variant="text"
+              className={basketItems.some((item) => item._id === post._id) ? "remove-btn" : "add-btn"}
+              onClick={() => handleClick(post)}
+            >
+              {basketItems.some((item) => item._id === post._id) ? (
+                // Show RemoveShoppingCartIcon if the item is in the basket
+                <span className="btn-body">
+                  <RemoveShoppingCartIcon style={{ paddingLeft: 10, width: "50px", height: "20px", color: "a569bd" }} />
+                </span>
+              ) : (
+                // Show AddShoppingCartIcon if the item is not in the basket
+                <span className="btn-body">
+                  <AddShoppingCartIcon style={{ paddingLeft: 10, width: "50px", height: "20px", color: "a569bd" }} />
+                </span>
+              )}
+            </Button>
             )}
-          </div>
-          <Button size="small" variant="contained" className={basketItems.some((item) => item._id === post._id) ? "remove-btn" : "add-btn"} onClick={() => handleClick(post)}>
-                    {!basketItems.some((item) => item._id === post._id) ? <span className="btn-body">Add Basket <AddShoppingCartIcon style={{ paddingLeft: 10 }} /> </span> : <span className="btn-body">Remove Basket <RemoveShoppingCartIcon style={{ paddingLeft: 10 }} /> </span>}
-                  </Button>
+          </div> 
+        
         </div>
       )}
     </div>
@@ -136,3 +178,5 @@ const BlogPostCardHome = ({ post }) => {
 };
 
 export default BlogPostCardHome;
+
+

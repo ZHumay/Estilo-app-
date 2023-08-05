@@ -84,9 +84,9 @@ const Comment = ({comment, post}) => {
 
       <div className="right">
         <div className="header_name_comment">
-            <div className='h1_cl'>
+            {/* <div className='h1_cl'>
                <p>{user?.name} {post?.authorId === comment.authorId ? <span className='author_txt_txt'>Author</span> : ""}</p>
-            </div>
+            </div> */}
             <div className='h1_cr'>
               {
               activeUser?._id === comment.authorId ?

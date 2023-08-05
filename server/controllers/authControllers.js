@@ -52,7 +52,7 @@ const post_register = async (req, res) => {
           let codeExpire = moment().add("59", "s");
           const salt = bcrypt.genSaltSync();
           const hashedPassword = bcrypt.hashSync(password, salt);
-  
+          
           const registerUser = await userModel.create({
             name: name,
             email: email,
@@ -308,6 +308,118 @@ const update_profile_image = async (req, res) => {
   }
 };
 
+const get_basketItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    // Get the basket items from the user object
+    const basketItems = user.basketItem;
+
+    return res.status(200).json({ basketItems });
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const post_basketItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    // Extract the new basket item from the request body
+    const { newItem } = req.body;
+
+    // Add the new item to the user's basketItem array
+    user.basketItem.push(newItem);
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.basketItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const delete_basketItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract the item to delete from the request body
+    const { itemToDelete } = req.body;
+
+    // Remove the item from the user's basketItem array
+    user.basketItem = user.basketItem.filter((item) => item._id.toString() !== itemToDelete._id.toString());
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.basketItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+const update_basketItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract the updated basket items from the request body
+    const { updatedItems } = req.body;
+
+    // Update the basket items in the user's basketItem array
+    user.basketItem = updatedItems;
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.basketItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
 module.exports = {
   get_login,
   get_register,
@@ -320,5 +432,11 @@ module.exports = {
   verify_user,
   active_user,
   update_profile_image,
-  confirm
+  confirm,
+  get_basketItems,
+  post_basketItems,
+  delete_basketItems,
+  update_basketItems
 };
+
+

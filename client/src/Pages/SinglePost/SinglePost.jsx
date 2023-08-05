@@ -104,15 +104,15 @@ const SinglePost = () => {
             <Link to={`/profile/${postAuthor?._id}`}>
               {postAuthor ? (
                 <div className="blog_post_author_single">
-                  <div className="left">
+                  {/* <div className="left">
                     <img
                       src={postAuthor ? postAuthor.profileImage : ""}
                       alt=""
                     />
-                  </div>
+                  </div> */}
                   <div className="author_name_wrapper">
                     <h2 className="__title">
-                      {postAuthor ? postAuthor.name : "XYZ"}
+                      {/* {postAuthor ? postAuthor.name : "XYZ"} */}
                     </h2>
                   </div>
                 </div>
@@ -158,10 +158,10 @@ const SinglePost = () => {
               )}
             </div>
             <div className="author_and_timestamps">
-              <p>
+              {/* <p>
                 <span className="author_txxt">Author</span> : {postAuthor?.name}
-              </p>
-              {postAuthor ? <p>{format(postAuthor.updatedAt)}</p> : ""}
+              </p> */}
+              {/* {postAuthor ? <p>{format(postAuthor.updatedAt)}</p> : ""} */}
             </div>
         
 
