@@ -32,6 +32,7 @@ const Profile = () => {
       if (res.status === 200) {
         console.log(res.data);
         dispatch({ type: "DELETE_POST", payload: res.data.post });
+        window.location.reload()
       } else {
         console.log("Post not deleted , Something wents wrong");
       }
