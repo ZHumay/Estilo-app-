@@ -7,6 +7,7 @@
     width: 105px;
     height: 40px;
     margin-top: 25px;
+    transform: translateY(-4px);
     font-weight: bold;
     margin-left: 63px;
     font-size: 15px;

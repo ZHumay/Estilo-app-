@@ -21,6 +21,7 @@ import Shop from "./Pages/Shop/Shop";
 import { VerifyPage } from "./Pages/Verify/VerifyPage";
 import Basket from "./Pages/Basket/Basket";
 import { useActiveUserContext } from "./context/activeUserContext";
+import Myorders from "./Pages/MyOrders/Myorders";
 function App() {
   const dispatch = useDispatch();
 
@@ -72,6 +73,7 @@ function App() {
         <Route path="/profile/:id" element={<Profile />}></Route>
 
         <Route path="/post/:id" element={<SinglePost />}></Route>
+        <Route path="/orders" element={<Myorders/>}></Route>
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

@@ -331,6 +331,29 @@ const get_basketItems = async (req, res) => {
   }
 };
 
+const get_orderItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    // Get the basket items from the user object
+    const orderItems = user.orders;
+
+    return res.status(200).json({ orderItems});
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const post_basketItems = async (req, res) => {
   try {
     // Get the user ID from the request parameters or wherever it's stored
@@ -354,6 +377,35 @@ const post_basketItems = async (req, res) => {
     const updatedUser = await user.save();
 
     return res.status(200).json(updatedUser.basketItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const post_orderItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    // Extract the new basket item from the request body
+    const { newItem } = req.body;
+
+    // Add the new item to the user's basketItem array
+    user.orders.push(newItem);
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.orders);
   } catch (error) {
     // Handle any errors that might occur during the process
     return res.status(500).json({ message: "Internal server error" });
@@ -436,7 +488,9 @@ module.exports = {
   get_basketItems,
   post_basketItems,
   delete_basketItems,
-  update_basketItems
+  update_basketItems,
+  post_orderItems,
+  get_orderItems
 };
 
 

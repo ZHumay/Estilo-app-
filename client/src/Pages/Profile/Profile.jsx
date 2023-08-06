@@ -128,6 +128,12 @@ const Profile = () => {
                     }
                   </p>
                 </div>
+                <div className="orders">
+                <Link to={`/orders`} className="my-orders" >
+
+                  My orders
+                  </Link>
+                </div>
               </div>
 
               <div className="right">

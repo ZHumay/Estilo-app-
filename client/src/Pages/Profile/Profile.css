@@ -6,7 +6,6 @@
 
 }
 
-
 .profile_main_wrapper{
     width: 800px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.444);
@@ -24,12 +23,20 @@
 .profile_main_wrapper .left{
    flex: 2;
    padding: 10px;
+   line-height: 2;
+   font-size: 13px;
 }
 
 .font_wt_500{
    font-weight: 600;
 }
+.my-orders{
+  border-bottom: 0.1px solid rgb(109, 108, 108);
+   color: #7d3998;
+   letter-spacing: 0.1rem;
+   font-weight: bold;
 
+}
 .profile_main_wrapper .right{
    flex: 1;
    display: flex;
@@ -63,7 +70,7 @@
 
 .blog_post_profile_wrapper{
    display: flex;
-   justify-content: center;
+   /* justify-content: center; */
    flex-wrap: wrap;
    padding-top: 0;
    margin-top: 20px !important;

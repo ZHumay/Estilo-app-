@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema({
     basketItem:{
         type: [],
         required:true
+    },
+    orders:{
+        type: [],
+        required:true
     }
     
 }, {timestamps : true});

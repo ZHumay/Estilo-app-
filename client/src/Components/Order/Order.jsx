@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import "./order.css";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import './order.css'
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BasketContext } from "../../context/BasketContext";
 import { OrderContext } from "../../context/OrderContext";
 import { useActiveUserContext } from "../../context/activeUserContext";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -20,29 +20,67 @@ const style = {
   p: 4,
   borderRadius: 3,
 };
+
 const Order = () => {
   const { addToBasket, removeFromBasket, basketItems, total } =
     useContext(BasketContext);
-  const { orders, addOrder } = useContext(OrderContext);
+  const { myorders, addOrder } = useContext(OrderContext);
   const { activeUser } = useActiveUserContext();
-  const [addAddres, setaddAddres] = useState("");
-  let navigate = useNavigate()
+  const [addAddress, setAddAddress] = useState("");
+  let navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
-  
+  };
 
-  }
   const handleClose = () => setOpen(false);
 
-
   const addProductValidationSchema = Yup.object().shape({
-    address: Yup.string()
-      .required("Must be filled!"),
-
+    address: Yup.string().required("Must be filled!"),
   });
-  let user = {activeUser}
-  
+
+  let user = { activeUser };
+
+  const onSubmit = (values) => {
+    handleClose();
+    const order = {
+      ...values,
+      total: total(),
+      count: basketItems.length,
+      items: basketItems.map((item) => ({
+        postImage: item.postImage,
+        title: item.title,
+        price: item.price,
+        
+      }
+      )),
+    };
+
+    addOrder(order);
+
+    const orderDetails = {
+      address: values.address,
+      items: order.items,
+    };
+
+    localStorage.setItem("myorders", JSON.stringify(orderDetails));
+  };
+
+  const addSave = () => {
+    handleClose();
+    const order = {
+      total: total(),
+      count: basketItems.length,
+      address: addAddress,
+      items: basketItems.map((item) => ({
+        postImage: item.postImage,
+        title: item.title,
+        price: item.price,
+      })),
+    };
+    addOrder(order);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -52,30 +90,16 @@ const Order = () => {
       user: user,
     },
     validationSchema: addProductValidationSchema,
-    onSubmit: (values) => {
-      handleClose()
-      addOrder(values)
-      console.log(values)
-    },
+    onSubmit: onSubmit,
   });
 
-
-  const addSave = () => {
-    handleClose()
-    let order = {
-      total: total(),
-      count: basketItems.length,
-      addres: addAddres,
-    };
-    addOrder(order)
-  };
   return (
     <div className="order-box">
       <div className="order" onClick={handleOpen}>
         Order
       </div>
       <Modal
-        open={activeUser ? open : ''}
+        open={activeUser ? open : ""}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -84,22 +108,52 @@ const Order = () => {
           <h3>Please enter your current address</h3>
           <form onSubmit={formik.handleSubmit}>
             <>
-              <div style={{ display: "flex", alignItems: "end", flexWrap: "wrap", padding: "20px 0" }}>
-                <label htmlFor="address" style={{ minWidth: '150px', display: 'inline-block' }}>Address</label>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "end",
+                  flexWrap: "wrap",
+                  padding: "20px 0",
+                }}
+              >
+                <label
+                  htmlFor="address"
+                  style={{ minWidth: "150px", display: "inline-block" }}
+                >
+                  Address
+                </label>
                 <input
                   id="address"
                   name="address"
                   type="text"
                   onChange={formik.handleChange}
                   value={formik.values.address}
-                  style={{ border: "none", width: 230, padding: 10, backgroundColor: "transparent", borderBottom: "1px solid gray", }}
+                  style={{
+                    border: "none",
+                    width: 340,
+                    padding: 10,
+                    backgroundColor: "transparent",
+                    borderBottom: "1px solid gray",
+                  }}
                 />
                 <p style={{ color: "red" }}>{formik.errors?.address}</p>
               </div>
-              <input type="submit" value="Submit" style={{ padding: "10px 50px", border: "none", color: "white", backgroundColor: "green", borderRadius: 5, margin: "20px auto", display: "block", cursor: "pointer" }} />
+              <input
+                type="submit"
+                value="Submit"
+                style={{
+                  padding: "10px 50px",
+                  border: "none",
+                  color: "white",
+                  backgroundColor: "green",
+                  borderRadius: 5,
+                  margin: "20px auto",
+                  display: "block",
+                  cursor: "pointer",
+                }}
+              />
             </>
           </form>
-
         </Box>
       </Modal>
     </div>
