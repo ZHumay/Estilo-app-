@@ -3,7 +3,6 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   background-color:  #c99e39;
 
 }
 
@@ -13,8 +12,8 @@
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.444);
     border-radius: 10px;
     padding: 10px;
-    margin-top: 20px;
-    background-color: wheat;
+    margin-top: 40px;
+    background-color: rgb(234, 234, 234);
 }
 
 .profile_main_wrapper .top{
@@ -167,6 +166,7 @@
    border-radius: 5px;
    border: none;
    font-size: 14px;
+   cursor: pointer;
    letter-spacing: 1px;
    background-color: rgb(0, 123, 164);
    color: white;

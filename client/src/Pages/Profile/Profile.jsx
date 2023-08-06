@@ -11,7 +11,7 @@ import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 import { format } from "timeago.js";
 import PageLoader from "../PageLoader/PageLoader";
 import { useDispatch, useSelector } from "react-redux";
-import {CURRENT_POST} from "../../store/postsSlice";
+import { CURRENT_POST } from "../../store/postsSlice";
 
 const Profile = () => {
   const { id } = useParams();
@@ -21,8 +21,7 @@ const Profile = () => {
   const [postAuthor, setPostAuthor] = useState();
   const [profileImage, setProfileImage] = useState();
 
-  const posts = useSelector((state)=> state.post.posts);
-
+  const posts = useSelector((state) => state.post.posts);
 
   const handleDelete = async (id) => {
     console.log(id);
@@ -41,7 +40,6 @@ const Profile = () => {
     }
   };
 
-
   const handleSumbit = (e) => {
     e.preventDefault();
     let formdata = new FormData();
@@ -56,6 +54,7 @@ const Profile = () => {
       })
       .then((res) => {
         if (res.status === 200) {
+          window.location.reload();
           console.log("Profile Updated successfully");
         } else {
           console.log("Something wents wrong");
@@ -69,11 +68,19 @@ const Profile = () => {
   };
 
   const handleCurrentPost = (currentId) => {
-    postDispatch(CURRENT_POST(currentId)) 
-  }
+    postDispatch(CURRENT_POST(currentId));
+  };
+
 
   useEffect(() => {
-    const fetchPostUser = async () => {
+    function reloadIt() {
+      if (window.location.href.substr(-2) !== "?r") {
+        window.location = window.location.href + "?r";
+      }
+    }
+  
+    setTimeout(reloadIt, 10);
+      const fetchPostUser = async () => {
       try {
         const res = await axios.get(`/api/auth/user/${id}`);
 
@@ -90,123 +97,125 @@ const Profile = () => {
     fetchPostUser();
   }, []);
 
+
   return (
     <>
-    {
-    postAuthor ?
-   
-    <div className="profile_user">
-      <div className="profile_main_wrapper">
-        <div className="top">
-          <div className="left">
-            <div className="profile_name font_wt_500">
-              <p>{postAuthor?.name}</p>
-            </div>
+      {postAuthor ? (
+        <div className="profile_user">
+          <div className="profile_main_wrapper">
+            <div className="top">
+              <div className="left">
+                <div className="profile_name font_wt_500">
+                  <p>{postAuthor?.name}</p>
+                </div>
 
-            <div className="profile_email font_wt_500">
-              <p>{postAuthor?.email}</p>
-            </div>
+                <div className="profile_email font_wt_500">
+                  <p>{postAuthor?.email}</p>
+                </div>
 
-            <div className="joined_data font_wt_500">
-              <p>Joined On : {format(postAuthor?.createdAt)}</p>
-            </div>
+                <div className="joined_data font_wt_500">
+                  <p>Joined On : {format(postAuthor?.createdAt)}</p>
+                </div>
 
-            <div className="total_blogs font_wt_500">
-              <p>
-                Total Products :{" "}
-                {
-                  posts?.filter((post) => post?.authorId === postAuthor?._id)
-                    .length
-                }
-              </p>
-            </div>
-          </div>
-
-          <div className="right">
-            <div className="image_wrapper">
-              <img
-                src={postAuthor?.profileImage}
-                className="profile_user_profile_image"
-                alt="profile  image"
-              />
-            </div>
-            {activeUser?._id === postAuthor?._id ? (
-              <div className="change_image_wrapper">
-                <form encType="multipart/form-data" onSubmit={handleSumbit}>
-                  <input
-                    type="file"
-                    onChange={(e) => setProfileImage(e.target.files[0])}
-                    className="profile_input"
-                  />
-
-                  <div className="profile_submit_wrapper">
-                    <button type="submit" className="profile_submit">
-                      Change
-                    </button>
-                  </div>
-                </form>
+                <div className="total_blogs font_wt_500">
+                  <p>
+                    Total Products :{" "}
+                    {
+                      posts?.filter(
+                        (post) => post?.authorId === postAuthor?._id
+                      ).length
+                    }
+                  </p>
+                </div>
               </div>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-        <div className="bottom">
-          <div>
-            <h4>All Recipes</h4>
-          </div>
 
-          <div className="blog_post_profile_wrapper">
-            {posts
-              ?.filter((post) => post?.authorId === id)
-              ?.map((post) => {
-                return (
-                  <div className="blog_profile_post" key={post?._id}>
-                    <img src={post?.postImage} alt="" />
+              <div className="right">
+                <div className="image_wrapper">
+                  <img
+                    src={postAuthor?.profileImage}
+                    className="profile_user_profile_image"
+                    alt="profile  image"
+                  />
+                </div>
+                {activeUser?._id === postAuthor?._id ? (
+                  <div className="change_image_wrapper">
+                    <form encType="multipart/form-data" onSubmit={handleSumbit}>
+                      <input
+                        type="file"
+                        onChange={(e) => setProfileImage(e.target.files[0])}
+                        className="profile_input"
+                      />
 
-                    <div className="mid__title">
-                      <h3>{post?.title}</h3>
-                    </div>
-
-                    {activeUser?._id === postAuthor?._id ? (
-                      <div className="bottom">
-                        <span>
-                          <DeleteIcon
-                            className="clr"
-                            onClick={() => handleDelete(post?._id)}
-                          />
-                        </span>
-                        <span>
-                          <Link to={`/update-post/${post?._id}`}>
-                            <EditIcon className="clr" />
-                          </Link>
-                        </span>
-                        <span>
-                          <Link to={`/post/${post?._id}`}>
-                            <RemoveRedEyeIcon className="clr" />
-                          </Link>
-                        </span>
+                      <div className="profile_submit_wrapper">
+                        <button type="submit" className="profile_submit">
+                          Change
+                        </button>
                       </div>
-                    ) : (
-                      <div className="bottom">
-                        <span>
-                          <Link to={`/post/${post?._id}`} onClick={() => handleCurrentPost(post._id)}>
-                            <RemoveRedEyeIcon className="clr" />
-                          </Link>
-                        </span>
-                      </div>
-                    )}
+                    </form>
                   </div>
-                );
-              })}
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+            <div className="bottom">
+              <div>
+                <h4>All Products</h4>
+              </div>
+
+              <div className="blog_post_profile_wrapper">
+                {posts
+                  ?.filter((post) => post?.authorId === id)
+                  ?.map((post) => {
+                    return (
+                      <div className="blog_profile_post" key={post?._id}>
+                        <img src={post?.postImage} alt="" />
+
+                        <div className="mid__title">
+                          <h3>{post?.title}</h3>
+                        </div>
+
+                        {activeUser?._id === postAuthor?._id ? (
+                          <div className="bottom">
+                            <span>
+                              <DeleteIcon
+                                className="clr"
+                                onClick={() => handleDelete(post?._id)}
+                              />
+                            </span>
+                            <span>
+                              <Link to={`/update-post/${post?._id}`}>
+                                <EditIcon className="clr" />
+                              </Link>
+                            </span>
+                            <span>
+                              <Link to={`/post/${post?._id}`}>
+                                <RemoveRedEyeIcon className="clr" />
+                              </Link>
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="bottom">
+                            <span>
+                              <Link
+                                to={`/post/${post?._id}`}
+                                onClick={() => handleCurrentPost(post._id)}
+                              >
+                                <RemoveRedEyeIcon className="clr" />
+                              </Link>
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    :
-    <PageLoader />
-            }
+      ) : (
+        <PageLoader />
+      )}
     </>
   );
 };

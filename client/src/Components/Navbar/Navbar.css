@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');.navbar{
     margin:0;
-    height: 80px;
+    height: 95px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,8 +45,9 @@
 .rightt{
     margin-top: 3px;
 }
-.left{
-    transform: translateX(84px);
+.navbar .left{
+    transform: translate(1px,0px);
+
 }
 .center .search_wrapper input{
     width: 100%;

@@ -10,6 +10,7 @@ import { CommentsContextProvider } from './context/CommentContext';
 import store from './store/rootReducer';
 import { Provider } from 'react-redux';
 import { BasketContextProvider, BasketProvider } from './context/BasketContext';
+import { OrderProvider } from './context/OrderContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,11 +20,13 @@ root.render(
         <UsersContextProvider>
           <SearchResultContextProvider>
             <CommentsContextProvider>
+              <OrderProvider>
             <BasketContextProvider>
               <Provider store={store}>
                <App />
               </Provider>
               </BasketContextProvider>
+              </OrderProvider>
             </CommentsContextProvider>
           </SearchResultContextProvider>
         </UsersContextProvider>

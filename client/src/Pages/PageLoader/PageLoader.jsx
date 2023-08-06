@@ -3,9 +3,14 @@ import "./PageLoader.css"
 
 const PageLoader = () => {
   return (
-    <div className='page_loader_wrapper'>
-        <img src={require("../../Images/Logo.gif")} alt="loader" className='page__loader' />
+    <>
+     <div className='page_loader_wrapper'>
+        <img src={require("../../Images/giphy.gif")} alt="loader" className='page__loader' />
     </div>
+  
+    
+    </>
+   
   )
 }
 

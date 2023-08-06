@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, {  useContext, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,17 +7,22 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Container, Grid } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import "./basket.css";
 import {  BasketContext } from "../../context/BasketContext";
 import axios from "axios";
 import { useActiveUserContext } from "../../context/activeUserContext";
+import Order from "../../Components/Order/Order";
 
 const Basket = () => {
   //  const [total, setTotal] = useState(0);
   const { addToBasket, removeFromBasket, basketItems, total } = useContext(BasketContext);
   const { activeUser } = useActiveUserContext();
+  const [productCounts, setProductCounts] = useState([]);
 
   const handleClick = async (post) => {
     try {
@@ -38,62 +43,118 @@ const Basket = () => {
       console.error("Error adding/removing item to/from basket:", error);
     }
   };
+
+
+  const handleIncrementCount = (postId) => {
+    setProductCounts((prevState) => ({
+      ...prevState,
+      [postId]: (prevState[postId] || 0) + 1,
+    }));
+
+  };
+
+  const handleDecrementCount = (postId) => {
+    setProductCounts((prevState) => {
+      const currentCount = prevState[postId] || 0;
+      const updatedCount = currentCount - 1;
+      const newCount = updatedCount >= 0 ? updatedCount : 0;
+
+      return {
+        ...prevState,
+        [postId]: newCount,
+      };
+    });}
+    const calculateTotalPrice = () => {
+      let totalPrice = 0;
+      basketItems.forEach((item) => {
+        const count = productCounts[item._id] || 1;
+        totalPrice += item.price * count;
+      });
+      return totalPrice;
+    };
   
   return (
-    <div className="basket">
-      <Container>
-        <div className="top">
-          <div className="total">Total Count : {total().toFixed(2)}$</div>
-          <div>
-            {/* {
-              users.some((item) => item.islogin === true)? :<></>
-
-            } */}
-          </div>
-        </div>
-
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-        >
-          {basketItems.map((post,index) => (
-            <Grid item xs={3} style={{ padding: 20 }} key={index}>
-              <Card
-                sx={{ maxWidth: 345 }}
+    <>
+     
+      <Grid
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          transform: "translateY(79px)",
+        }}
+        container
+        spacing={4}
+      >
+        {basketItems.map((post,index) => (
+          <Grid item key={index}  xs={6} sm={6} md={4} lg={3} >
+            <Card
+              sx={{ height: "200px" }}
+              style={{
+                margin: "20px 30px 30px 62px",
+                width: "1400px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginLeft:"62px",
+                border:"0.5px solid #EDECEB  ",
+                boxShadow:"none"
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="140"
+                image={post.postImage}
                 style={{
-                  height: "100%",
-                  border: "1px solid gray ",
-                  padding: 10,
+                  width: "190px",
+                  margin: "0px",
+                  height: "200px",
+                  alignSelf: "flex-start", // Align the image to the top left corner
+                }}
+                alt={post.title}
+              />
+              <CardContent
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "500px",
+                  flexDirection: "column",
+                  color: "rgb(66, 64, 64)",
                 }}
               >
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  height="150px"
-                  style={{ width: 200, margin: "0 auto", objectFit: "contain" }}
-                  image={post.postImage}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="div"
-                    style={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      fontSize: 18,
-                    }}
-                  >
-                    {post.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {post.price}$
-                  </Typography>
-                </CardContent>
-                <CardActions>
+                <Typography gutterBottom variant="h4" component="div" className="title">
+                  {post.title}
+                </Typography>
+                <Typography variant="h6" color="rgb(66,64,64)" fontSize={"17px"}>
+                  Price: {`${post.price}$`}
+                </Typography>
+                {/* <Typography variant="h6" color="text.secondary">
+                  Category: {post.category}
+                </Typography> */}
+              </CardContent>
+              <CardActions
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "960px",
+                }}
+              >
                 <Button
+                style={{marginRight:"-40px"}}
+                  onClick={() => handleIncrementCount(post?._id)}
+                  startIcon={<AddIcon style={{color:"#A1A1A1 ",fontSize:"27px"}}/>}
+                ></Button>
+
+                <Button style={{color:"gray",fontSize:"16px"}}>
+                {productCounts[post?._id] || 1  }
+                </Button>
+                <Button
+                style={{marginLeft:"-20px"}}
+                  onClick={() => handleDecrementCount(post?._id)}
+                  startIcon={<RemoveIcon style={{color:"#A1A1A1 ",fontSize:"30px"}} />}
+                ></Button>
+              <Button
               size="small"
               variant="text"
               className={basketItems.some((item) => item._id === post._id) ? "remove-btn" : "add-btn"}
@@ -102,7 +163,7 @@ const Basket = () => {
               {basketItems.some((item) => item._id === post._id) ? (
                 // Show RemoveShoppingCartIcon if the item is in the basket
                 <span className="btn-body">
-                  Delete
+                  <DeleteIcon className="delete-icon"/>
                 </span>
               ) : (
                 // Show AddShoppingCartIcon if the item is not in the basket
@@ -111,14 +172,20 @@ const Basket = () => {
                 </span>
               )}
             </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </div>
-  );
-};
+
+
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <div className="total" >
+        Total Price: {`${calculateTotalPrice()}$`}
+      </div>   
+      <Order/>
+      
+         </>
+  )
+              };
 
 export default Basket;
