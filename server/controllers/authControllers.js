@@ -397,7 +397,7 @@ const post_orderItems = async (req, res) => {
     }
 
     // Extract the new basket item from the request body
-    const { newItem } = req.body;
+    const newItem  = req.body;
 
     // Add the new item to the user's basketItem array
     user.orders.push(newItem);

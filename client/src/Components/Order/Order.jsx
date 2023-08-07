@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import "./order.css";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import "./order.css";
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BasketContext } from "../../context/BasketContext";
-import { OrderContext } from "../../context/OrderContext";
 import { useActiveUserContext } from "../../context/activeUserContext";
+import { OrderContext } from "../../context/OrderContext";
+import axios from "axios"; // Axios eklemeyi unutmayın
 
 const style = {
   position: "absolute",
@@ -24,73 +26,57 @@ const style = {
 const Order = () => {
   const { addToBasket, removeFromBasket, basketItems, total } =
     useContext(BasketContext);
-  const { myorders, addOrder } = useContext(OrderContext);
+  const { orders, addOrder } = useContext(OrderContext);
   const { activeUser } = useActiveUserContext();
-  const [addAddress, setAddAddress] = useState("");
+  const [addAddres, setAddAddress] = useState("");
   let navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
+    if (!activeUser) {
+      navigate("/");
+    }
   };
-
+  
   const handleClose = () => setOpen(false);
 
   const addProductValidationSchema = Yup.object().shape({
     address: Yup.string().required("Must be filled!"),
   });
 
-  let user = { activeUser };
-
-  const onSubmit = (values) => {
-    handleClose();
-    const order = {
-      ...values,
-      total: total(),
-      count: basketItems.length,
-      items: basketItems.map((item) => ({
-        postImage: item.postImage,
-        title: item.title,
-        price: item.price,
-        
-      }
-      )),
-    };
-
-    addOrder(order);
-
-    const orderDetails = {
-      address: values.address,
-      items: order.items,
-    };
-
-    localStorage.setItem("myorders", JSON.stringify(orderDetails));
-  };
-
-  const addSave = () => {
-    handleClose();
-    const order = {
-      total: total(),
-      count: basketItems.length,
-      address: addAddress,
-      items: basketItems.map((item) => ({
-        postImage: item.postImage,
-        title: item.title,
-        price: item.price,
-      })),
-    };
-    addOrder(order);
-  };
-
   const formik = useFormik({
     initialValues: {
       address: "",
-      total: total(),
-      count: basketItems.length,
-      user: user,
     },
     validationSchema: addProductValidationSchema,
-    onSubmit: onSubmit,
+
+    onSubmit: async (values) => {
+      handleClose();
+      const order = {
+        total: total(),
+        count: basketItems.length,
+        address: values.address,
+        items: basketItems.map((item) => ({
+          postImage: item.postImage,
+          title: item.title,
+          price: item.price,
+        }
+        )),
+      };
+      // Axios ile isteği gönder
+      try {
+        const response = await axios.post(`/api/auth/user/${activeUser._id}/orderItems`, order);
+        // İsteğin başarılı olduğunu kontrol et ve gerektiğinde işlemler yap
+        if (response.status === 200) {
+          // Siparişi OrderContext'e ekle
+          addOrder(response.data);
+          console.log(response.data)
+        }
+      } catch (error) {
+        console.error("Error while sending order:", error);
+      }
+    },
   });
 
   return (
@@ -99,7 +85,7 @@ const Order = () => {
         Order
       </div>
       <Modal
-        open={activeUser ? open : ""}
+        open={activeUser ? open : false}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

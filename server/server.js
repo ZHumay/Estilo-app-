@@ -32,3 +32,4 @@ app.use("/api/comments/", require("./routes/commentRoutes"));
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
 })
+

@@ -39,7 +39,7 @@ const CreatePost = () => {
     formdata.append("price", price);
     formdata.append("gender", gender);
     formdata.append("category", category);
-    formdata.append("size", selectedSizes.join(" "));
+    formdata.append("size", selectedSizes.join(","));
     formdata.append("color", color);
     formdata.append("blogImage", blogImage);
     formdata.append("activeUserId", activeUser._id);

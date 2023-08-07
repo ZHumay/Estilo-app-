@@ -68,6 +68,48 @@ const get_post = async (req, res) => {
   }
 };
 
+
+const incrementOrderedCount = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const post = await postModel.findById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    console.log('Incrementing ordered count for post:', post);
+
+    post.productcountinbasket += 1; // Increment orderedcount by 1
+    await post.save();
+
+    console.log('Updated post:', post);
+
+    res.json({ success: true, message: 'Ordered count incremented successfully' });
+  } catch (error) {
+    console.error('Error incrementing ordered count:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+
+const decrementOrderedCount=async(req,res)=>{
+  const id=req.params.id
+  try {
+    const post = await postModel.findById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    post.productcountinbasket = Math.max(post.productcountinbasket - 1, 0); // Decrement orderedcount by 1, ensuring it doesn't go below 0
+    await post.save();
+
+    res.json({ success: true, message: 'Ordered count decremented successfully' });
+  } catch (error) {
+    console.error('Error decrementing ordered count:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+}
+
 const all_posts = async (req, res) => {
   try{
 
@@ -199,5 +241,7 @@ module.exports = {
   all_posts,
   update_post,
   delete_post,
-  like_dislike
+  like_dislike,
+  incrementOrderedCount,
+  decrementOrderedCount
 };

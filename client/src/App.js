@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
-
 import Navbar from "./Components/Navbar/Navbar";
 import Login from "../src/Pages/Login/Login";
 import Register from "../src/Pages/Register/Register";

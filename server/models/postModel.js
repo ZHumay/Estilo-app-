@@ -16,7 +16,12 @@ const postSchema = new mongoose.Schema({
         type : Number,
         required : true
     },
-
+     
+    productcountinbasket:{
+       type:Number,
+       required:true,
+       default:1
+    },
     color:{
         type : String,
         required : true
@@ -45,3 +50,4 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model("post", postSchema);
 
 module.exports = Post;
+

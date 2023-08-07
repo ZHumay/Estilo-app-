@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./myorders.css";
+import axios from "axios";
+import { useActiveUserContext } from "../../context/activeUserContext";
 
 function Myorders() {
-  // Retrieve orders from localStorage
-  const myorders = JSON.parse(localStorage.getItem("myorders"));
+  const { activeUser } = useActiveUserContext();
+  const [orderItems, setOrderItems] = useState([]); // Define a state variable to hold the order items
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        if (activeUser) {
+          const response = await axios.get(`/api/auth/user/${activeUser._id}/orderItems`);
+          setOrderItems(response.data.orderItems); // Set the order items in the state
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
+  }, [activeUser]);
 
   return (
     <>
       <div className="bottomm">
         <div className="blog_postt_profile_wrapper">
-          {myorders?.length > 0 ? (
-            // Render myorders if there are items in the myorders array
-            myorders.map((order, index) => (
-              <  >
+          {orderItems.length > 0 ? (
+            // Render order items if there are items in the orderItems array
+            orderItems.map((order, orderIndex) => (
+              <div className="orders" key={orderIndex}>
                 {order.items?.length > 0 ? (
                   // Display order details if there are items in the items array
                   order.items.map((item, itemIndex) => (
@@ -22,7 +39,6 @@ function Myorders() {
                         <h3>{item.title}</h3>
                         <p>Price: {item.price}$</p>
                         <p>Address: {order.address}</p>
-
                       </div>
                     </div>
                   ))
@@ -30,7 +46,7 @@ function Myorders() {
                   // Render a message when there are no items in the items array
                   <p>No items found for this order.</p>
                 )}
-              </>
+              </div>
             ))
           ) : (
             // Render a message when there are no orders
