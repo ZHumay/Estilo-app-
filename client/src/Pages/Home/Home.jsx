@@ -26,6 +26,7 @@ const Home = () => {
   const {users, dispatchUsers} = useUsersContext();
   const [allPosts, setAllPosts] = useState();
   const [cate, setCate] = useState();
+  const [gender,setgender]=useState()
 
 
   const filterCategory = (category) =>{
@@ -38,6 +39,12 @@ const Home = () => {
       setAllPosts(tempArray);
     }
    
+  }
+
+  const filterGender=(gender)=>{
+     setgender(gender);
+     const tempArr=posts.filter((post)=>post.gender===gender)
+     setAllPosts(tempArr)
   }
 
 
@@ -207,16 +214,14 @@ const Home = () => {
         </h2>
       </div>
       <div className="overview">
-        <Link className="overview_link" to="/allproducts">
-          All products
-        </Link>
 
-        <Link className="overview_link" to="/women">
-          Women
-        </Link>
-        <Link className="overview_link" to="/men">
-          Men
-        </Link>
+        <span className='gender_item' onClick={()=> filterCategory("all")}>All products</span>
+
+
+        <span className='gender_item' onClick={()=> filterGender("woman")}>Woman</span>
+
+        <span className='gender_item' onClick={()=> filterGender("man")}>Man</span>
+
         <button className="filterbtn">
           {" "}
           <FilterListIcon
@@ -262,7 +267,6 @@ const Home = () => {
                 <span className='category_item' onClick={()=> filterCategory("sweater")}>Sweaters</span>
                 <span className='category_item' onClick={()=> filterCategory("shoes")}>Shoes</span>
                 <span className='category_item' onClick={()=> filterCategory("bag")}>Bags</span>
-                <span className='category_item' onClick={()=> filterCategory("all")}>All</span>
            </div>
       </div>
       
@@ -277,3 +281,4 @@ const Home = () => {
 }
 
 export default Home
+
