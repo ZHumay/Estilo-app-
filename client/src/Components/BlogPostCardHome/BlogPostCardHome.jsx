@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
-const BlogPostCardHome = ({ post }) => {
+const BlogPostCardHome = ({ post,color }) => {
   const { activeUser } = useActiveUserContext();
   const { posts, dispatch } = usePostsContext();
   const { basketItems } = useContext(BasketContext);
@@ -95,7 +95,7 @@ const BlogPostCardHome = ({ post }) => {
   
 
   return (
-    <div className="blog-post-card-home">
+    <div className={`blog-post-card-home ${color ? `color-${color}` : ''}`}>
       <div className="blog-post-home-image_wrapper">
         <img src={post?.postImage} alt="post image" />
       </div>

@@ -13,7 +13,8 @@ import CachedIcon from "@mui/icons-material/Cached";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import PaymentIcon from "@mui/icons-material/Payment";
 import {
-  Button
+  Box,
+  Button, Divider, List, ListItem, ListItemIcon, ListItemText, Modal, Typography
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -27,6 +28,20 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState();
   const [cate, setCate] = useState();
   const [gender,setgender]=useState()
+  const [isColorModalOpen, setIsColorModalOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(null);
+
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'rgb(216, 216, 216)',
+  boxShadow: 24,
+  p: 4,
+  outline: 'none',
+};
+
 
 
   const filterCategory = (category) =>{
@@ -41,13 +56,33 @@ const Home = () => {
    
   }
 
+  const filterColor = (color) => {
+    setSelectedColor(color);
+      const tempArray = posts.filter((post) => post.color === color);
+      setAllPosts(tempArray);
+    
+  };
+  
+
   const filterGender=(gender)=>{
      setgender(gender);
      const tempArr=posts.filter((post)=>post.gender===gender)
      setAllPosts(tempArr)
   }
 
-
+  const handleColorModalOpen = () => {
+    setIsColorModalOpen(true);
+  };
+  
+  const handleColorModalClose = () => {
+    setIsColorModalOpen(false);
+  };
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    setIsColorModalOpen(false); // Close the modal
+    // Implement logic to filter posts based on the selected color
+  };
+    
   useEffect(()=>{
     console.log(activeUser);
       navigate("/", {replace : true});
@@ -222,20 +257,59 @@ const Home = () => {
 
         <span className='gender_item' onClick={()=> filterGender("man")}>Man</span>
 
-        <button className="filterbtn">
-          {" "}
-          <FilterListIcon
-            style={{
-              height: "20px",
-              width: "20px",
-              marginBottom: "-5px",
-              marginRight: "6px",
-            }}
-          />
-          <span style={{ color: "rgb(70, 70, 70)", fontSize: "15px" }}>
-            Filter
-          </span>
-        </button>
+        <button className="filterbtn" onClick={handleColorModalOpen}>
+  <FilterListIcon
+    style={{
+      height: "20px",
+      width: "20px",
+      marginBottom: "-5px",
+      marginRight: "6px",
+    }}
+  />
+  <span style={{ color: "rgb(70, 70, 70)", fontSize: "15px" }}>
+    Filter by Color
+  </span>
+</button>
+<Modal
+  open={isColorModalOpen}
+  onClose={handleColorModalClose}
+  aria-labelledby="color-modal-title"
+  aria-describedby="color-modal-description"
+>
+  <Box sx={{ ...modalStyle, width: 300 }}>
+    <Typography id="color-modal-title" variant="h6" component="h2">
+      Select Color
+    </Typography>
+    <Divider />
+    <List >
+  {[
+    'white', 'black', 'red', 'green', 'yellow', 'pink',
+    'blue', 'gray', 'orange', 'beige', 'purple', 'brown'
+  ].map((color) => (
+    <ListItem
+      key={color}
+      button
+      onClick={() =>  filterColor(color)}
+    >
+      <ListItemIcon>
+        <div
+          style={{
+            width: 16,
+            height: 16,
+            borderRadius: '50%',
+            backgroundColor: color,
+            marginRight: 8,
+          }}
+        />
+      </ListItemIcon>
+      <ListItemText primary={color} />
+    </ListItem>
+  ))}
+</List>
+
+  </Box>
+</Modal>
+
       </div>
 
     <div className='home'>
@@ -245,10 +319,14 @@ const Home = () => {
             {
           
 
-            allPosts?.length === 0 ? <p className='posts_not_found'>No Products of {cate} Category</p>: 
-            allPosts?.map((post)=>{
-              return <BlogPostCardHome key={post._id} post={post} />
+            allPosts?.length === 0 ? <p className='posts_not_found'>No products of {cate} category</p>: 
+            allPosts?.map((post) => {
+              if (!selectedColor || post.color === selectedColor) {
+                return <BlogPostCardHome key={post._id} post={post} color={post.color} />;
+              }
+              return null;
             })
+            
              
            
           }

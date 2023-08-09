@@ -22,7 +22,7 @@
 display: flex;
 flex-wrap: wrap;
   flex: 7;
-  height: 90vh;
+  height: 120vh;
   /* overflow-y: scroll; */
   overflow-x: hidden;
   transform: translateX(-147px);
@@ -245,7 +245,7 @@ text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi göster
 }
 
 .filterbtn{
-width: 100px;
+width: 130px;
 height: 40px;
 background-color: white;
 border: 1px solid rgb(209, 207, 207);
