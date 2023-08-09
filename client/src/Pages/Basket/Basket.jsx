@@ -18,6 +18,7 @@ import axios from "axios";
 import { useActiveUserContext } from "../../context/activeUserContext";
 import Order from "../../Components/Order/Order";
 import { useParams } from "react-router-dom";
+import { useProductCount } from "../../context/ProductCountContext";
 
 const Basket = () => {
   //  const [total, setTotal] = useState(0);
@@ -26,33 +27,36 @@ const Basket = () => {
   const { addToBasket, removeFromBasket, basketItems, total } =
     useContext(BasketContext);
   const { activeUser } = useActiveUserContext();
-  const [productCounts, setProductCounts] = useState([]);
+  const { productCounts, setProductCounts } = useProductCount();
+  const [selectedSize, setSelectedSize] = useState("");
 
-  const handleClick = async (post) => {
-    try {
-      if (!basketItems.some((item) => item._id === post._id)) {
-        // If the item is not in the basket, add it to the basket
-        const res = await axios.post(
-          `/api/auth/user/${activeUser._id}/basketItems`,
-          {
-            newItem: post,
-          }
-        );
-        addToBasket(res.data);
-      } else {
-        // If the item is already in the basket, remove it from the basket
-        const res = await axios.delete(
-          `/api/auth/user/${activeUser._id}/basketItems`,
-          {
-            data: { itemToDelete: post },
-          }
-        );
-        removeFromBasket(post);
-      }
-    } catch (error) {
-      console.error("Error adding/removing item to/from basket:", error);
+ const handleClick = async (post) => {
+  try {
+    const isInBasket = basketItems.some((item) => item._id === post._id);
+
+    if (!isInBasket) {
+      const res = await axios.post(
+        `/api/auth/user/${activeUser._id}/basketItems`,
+        {
+          newItem: { ...post },
+        }
+      );
+      addToBasket(res.data);
+    } else {
+      const res = await axios.delete(
+        `/api/auth/user/${activeUser._id}/basketItems`,
+        {
+          data: { itemToDelete: post },
+        }
+      );
+      removeFromBasket(post);
     }
-  };
+
+  } catch (error) {
+    console.error('Error adding/removing item to/from basket:', error);
+  }
+};
+
 
   const handleIncrementCount = async (postId) => {
     try {
@@ -61,6 +65,7 @@ const Basket = () => {
         ...prevState,
         [postId]: (prevState[postId] || 1) + 1,
       }));
+      
     } catch (error) {
       console.error('Error incrementing ordered count:', error);
     }
@@ -104,7 +109,7 @@ const Basket = () => {
         container
         spacing={4}
       >
-        {basketItems.map((post, index) => (
+        {basketItems?.map((post, index) => (
           <Grid item key={index} xs={6} sm={6} md={4} lg={3}>
             <Card
               sx={{ height: "200px" }}
@@ -158,7 +163,12 @@ const Basket = () => {
                   Price: {`${post.price}$`}
                 </Typography>
                 <label htmlFor="size">Select size:</label>
-                <select name="size" id={`${post._id}`}>
+                <select
+                  name="size"
+                  id={`${post._id}`}
+                  value={selectedSize} // Seçilen boyutu belirle
+                  onChange={(e) => setSelectedSize(e.target.value)} // State'i güncelle
+                >
                   {post.size[0].split(",").map((item) => (
                     <option value={item.trim()} key={item}>
                       {item.trim()}
@@ -228,7 +238,7 @@ const Basket = () => {
         ))}
       </Grid>
       <div className="total">Total Price: {`${calculateTotalPrice()}$`}</div>
-      <Order />
+      <Order/>
     </>
   );
 };

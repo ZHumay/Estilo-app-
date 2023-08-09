@@ -1,5 +1,6 @@
 const cloudinary = require("cloudinary").v2;
 const postModel = require("../models/postModel");
+const userModel = require("../models/userModel");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_USER_NAME,
@@ -68,6 +69,28 @@ const get_post = async (req, res) => {
   }
 };
 
+const get_allcount = async (req, res) => {
+  try {
+    const posts = await postModel.find({}, '_id productcountinbasket');
+
+    if (posts) {
+      const counts = posts.map(post => ({
+        _id: post._id,
+        productcountinbasket: post.productcountinbasket
+      }));
+
+      res.status(200).json(counts);
+    } else {
+      res.json({ msg: "No posts found" });
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.json({ msg: "Error fetching data" });
+  }
+};
+
+
+
 
 const incrementOrderedCount = async (req, res) => {
   const id = req.params.id;
@@ -81,7 +104,7 @@ const incrementOrderedCount = async (req, res) => {
 
     post.productcountinbasket += 1; // Increment orderedcount by 1
     await post.save();
-
+    
     console.log('Updated post:', post);
 
     res.json({ success: true, message: 'Ordered count incremented successfully' });
@@ -92,23 +115,47 @@ const incrementOrderedCount = async (req, res) => {
 };
 
 
-const decrementOrderedCount=async(req,res)=>{
-  const id=req.params.id
+const decrementOrderedCount = async (req, res) => {
+  const id = req.params.id;
   try {
     const post = await postModel.findById(id);
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
 
-    post.productcountinbasket = Math.max(post.productcountinbasket - 1, 0); // Decrement orderedcount by 1, ensuring it doesn't go below 0
-    await post.save();
-
-    res.json({ success: true, message: 'Ordered count decremented successfully' });
+    if (post.productcountinbasket > 0) {
+      post.productcountinbasket -= 1; // Decrement orderedcount by 1
+      await post.save();
+      res.json({ success: true, message: 'Ordered count decremented successfully' });
+    } else {
+      res.json({ success: false, message: 'Ordered count is already 0' });
+    }
   } catch (error) {
     console.error('Error decrementing ordered count:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
-}
+};
+
+
+
+const get_productcountinbasket = async (req, res) => {
+  const postId = req.params.id; // Assuming you're passing the post ID in the URL
+
+  try {
+    const post = await postModel.findById(postId);
+
+    if (post) {
+      const productcountinbasket = post.productcountinbasket;
+      res.status(200).json({ productcountinbasket });
+    } else {
+      res.status(404).json({ msg: "Post not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
+
 
 const all_posts = async (req, res) => {
   try{
@@ -151,6 +198,7 @@ const update_post = async (req, res) => {
 
             if (post) {
               res.status(200).json({ msg: "Product updated successfully", post: post });
+            
             } else {
               res.json({ msg: "Post not updated, Something went wrong" });
             }
@@ -243,5 +291,7 @@ module.exports = {
   delete_post,
   like_dislike,
   incrementOrderedCount,
-  decrementOrderedCount
+  decrementOrderedCount,
+  get_productcountinbasket,
+  get_allcount
 };

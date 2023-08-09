@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./myorders.css";
 import axios from "axios";
 import { useActiveUserContext } from "../../context/activeUserContext";
+import { BasketContext } from "../../context/BasketContext";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 function Myorders() {
   const { activeUser } = useActiveUserContext();
   const [orderItems, setOrderItems] = useState([]); // Define a state variable to hold the order items
+  const { basketItems } =useContext(BasketContext);
+  const posts = useSelector((state) => state.post.posts);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         if (activeUser) {
+
           const response = await axios.get(`/api/auth/user/${activeUser._id}/orderItems`);
-          setOrderItems(response.data.orderItems); // Set the order items in the state
+          setOrderItems(response.data.orderItems); // Set the order items in the state   
         }
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -36,9 +45,21 @@ function Myorders() {
                     <div className="blog_profile_postt" key={itemIndex}>
                       <img src={item.postImage} alt="" />
                       <div className="mid__title">
-                        <h3>{item.title}</h3>
+                        <p>{item.title}</p>
                         <p>Price: {item.price}$</p>
                         <p>Address: {order.address}</p>
+                        {order.counts &&
+                        order.counts.length > 0 &&
+                        order.counts[itemIndex] ? (
+                          <p>
+                            Number of product: {order.counts[itemIndex].orderedCount}
+                          </p>
+                          
+                        ) : (
+                          <p>No count found for this order item.</p>
+                        )}
+                       
+                         
                       </div>
                     </div>
                   ))
@@ -53,6 +74,7 @@ function Myorders() {
             <p>No orders found.</p>
           )}
         </div>
+
       </div>
     </>
   );

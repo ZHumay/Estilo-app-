@@ -1,0 +1,9 @@
+.shop  .home_wrapper .leftHome{
+    display: flex;
+    flex-wrap: wrap;
+      flex: 7;
+      height: 90vh;
+      /* overflow-y: scroll; */
+      overflow-x: hidden;
+      transform: translateX(-187px);
+}

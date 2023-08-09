@@ -1,14 +1,24 @@
 import React from "react";
 import "./Footer.css";
-
+import { useNavigate } from "react-router-dom";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
 function Footer() {
+
+  const navigate=useNavigate()
+  const clickshopwoman = () => {
+    navigate("/woman");
+  }
+  const clickshopman=()=>{
+    navigate("/man")
+  }
+
   return (
     <>
       <div className="footer">
         <div className="footer_info-first">
-          <div className="logo">
-           
-          </div>
+          <h3  className="footerh3"> About us</h3>
          
           <p className="text">
           Estilo is one of the largest international fashion companies.
@@ -16,32 +26,35 @@ The customer is at the heart of our unique business model, which includes design
           </p>
         </div>
         <div className="footer_info-second">
-<h3>Categories</h3>
-<ul>
-  <li>Woman</li>
-  <li>Man</li>
+<h3  className="footerh3">Categories</h3>
+  <p className="category" onClick={clickshopwoman}>Woman</p>
+  <br></br>
+  <p className="category" onClick={clickshopman}>Man</p>
 
-</ul>
         </div>
         <div className="footer_info-third">
-        <h3>About us</h3>
-<ul>
-  <li>About Us</li>
-  <li>Press</li>
-  <li>Contact Us</li>
-  <li>Help Center</li>
-  <li>How it Works</li>
-  <li>Privacy</li>
-  <li>Terms</li>
-</ul>
+        <h3 className="footerh3">Contact us</h3>
+
+  <p className="category">Contact </p>
+  <br></br>
+  <div className="contact">
+                <h5>Support service</h5>
+                <p>+994 77 522 53 00</p>
+              </div>
         </div>
         <div className="footer_info-forth">
-          <h3>Stay in the loop</h3>
-          <p>Join our mailing list to stay in the loop with our newest for Recipes</p>
-          <span className="button">
-            <input type="email" placeholder="Enter your email address"/>
-            <button>Subscibe Now</button>
-          </span>
+          <h3  className="footerh3">Follow us</h3>
+          <div className=" row justify-center gap-x-2" >
+                  <div className="col-3 flex items-start">
+                    <a href="https://www.facebook.com/"><FacebookIcon className="text-3xl-f" style={{width:"27px",height:"40px"}} /></a>
+                  </div>
+                  <div className="col-3 flex items-start">
+                    <a href="https://www.instagram.com/"><InstagramIcon className="text-3xl-i"  style={{width:"27px",height:"40px"}}/></a>
+                  </div>
+                  <div className="col-3 flex items-start">
+                    <a href="https://twitter.com/"><TwitterIcon className="text-3xl-t"  style={{width:"27px",height:"40px"}}/></a>
+                  </div>
+                </div>
         </div>
       </div>
       <div className="copyright"></div>

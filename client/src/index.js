@@ -11,6 +11,7 @@ import store from './store/rootReducer';
 import { Provider } from 'react-redux';
 import { BasketContextProvider, BasketProvider } from './context/BasketContext';
 import { OrderContextProvider } from './context/OrderContext';
+import { ProductCountProvider } from './context/ProductCountContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
         <UsersContextProvider>
           <SearchResultContextProvider>
             <CommentsContextProvider>
+            <ProductCountProvider>
               <OrderContextProvider>
             <BasketContextProvider>
               <Provider store={store}>
@@ -27,6 +29,7 @@ root.render(
               </Provider>
               </BasketContextProvider>
               </OrderContextProvider>
+              </ProductCountProvider>
             </CommentsContextProvider>
           </SearchResultContextProvider>
         </UsersContextProvider>

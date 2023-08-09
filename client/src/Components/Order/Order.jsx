@@ -1,15 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./order.css";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import "./order.css";
 import { useNavigate } from "react-router";
+import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BasketContext } from "../../context/BasketContext";
 import { useActiveUserContext } from "../../context/activeUserContext";
 import { OrderContext } from "../../context/OrderContext";
 import axios from "axios"; // Axios eklemeyi unutmayın
+import { usePostsContext } from "../../hooks/usePostsContext";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const style = {
   position: "absolute",
@@ -26,11 +30,16 @@ const style = {
 const Order = () => {
   const { addToBasket, removeFromBasket, basketItems, total } =
     useContext(BasketContext);
+    const [currentPost, setCurrentPost] = useState([]);
   const { orders, addOrder } = useContext(OrderContext);
   const { activeUser } = useActiveUserContext();
   const [addAddres, setAddAddress] = useState("");
+  const [count,setCount]=useState("")
+  const { dispatch } = usePostsContext();  
+  const {id} = useParams();
   let navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const posts = useSelector((state) => state.post.posts);
 
   const handleOpen = () => {
     setOpen(true);
@@ -38,8 +47,22 @@ const Order = () => {
       navigate("/");
     }
   };
-  
   const handleClose = () => setOpen(false);
+
+const allcount=async()=>{
+
+  try {
+    const res=await axios.get(`api/posts/get-allcount`)
+    setCount(res.data)
+    console.log();
+  } catch (error) {
+    console.error("error")
+  }
+ 
+}
+useEffect(()=>{
+allcount()
+},[count])
 
   const addProductValidationSchema = Yup.object().shape({
     address: Yup.string().required("Must be filled!"),
@@ -55,6 +78,10 @@ const Order = () => {
       handleClose();
       const order = {
         total: total(),
+        counts:count.map((items)=>({
+          orderedCount:items.productcountinbasket,
+          id: items._id
+       })),
         count: basketItems.length,
         address: values.address,
         items: basketItems.map((item) => ({
@@ -62,7 +89,9 @@ const Order = () => {
           title: item.title,
           price: item.price,
         }
+
         )),
+
       };
       // Axios ile isteği gönder
       try {
@@ -71,11 +100,14 @@ const Order = () => {
         if (response.status === 200) {
           // Siparişi OrderContext'e ekle
           addOrder(response.data);
-          console.log(response.data)
+          Swal.fire("Order completed", response.data.msg, "success");
+
+     
         }
       } catch (error) {
         console.error("Error while sending order:", error);
       }
+      
     },
   });
 

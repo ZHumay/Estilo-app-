@@ -13,14 +13,15 @@ html {
 
 .footer {
   width: 100%;
-  background-color:  #1a1b1b  !important;
+  background-color:  #222323  !important;
   font-family: 'Roboto', sans-serif;  font-size: 1.4rem;
-  color: #c99e39;
+  color: white;
   font-size: 1.4rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 40rem;
+  height: 300px;
 }
 .footer li {
   margin-bottom: 1rem;
@@ -100,6 +101,32 @@ html {
   font-size: 1rem;
 }
 
+.text-3xl-f{
+  height: 40px;
+  width: 27px;
+  color: rgb(54, 97, 185);
+}
+.text-3xl-i{
+  height: 40px;
+  width: 27px;
+  color: rgb(206, 55, 108);
+}
+.text-3xl-t{
+  height: 40px;
+  width: 27px;
+  color: rgb(87, 181, 194);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+.footerh3{
+  color:#daacec
+}
+.category{
+  cursor:pointer
+}
 @media screen and (min-width: 1400px) {
   .footer {
     font-size: 1.7rem;
