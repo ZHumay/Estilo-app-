@@ -123,6 +123,7 @@ const Basket = () => {
                 marginLeft: "62px",
                 border: "0.5px solid #EDECEB  ",
                 boxShadow: "none",
+                backgroundColor:"rgb( 250,250,250)"
               }}
             >
               <CardMedia

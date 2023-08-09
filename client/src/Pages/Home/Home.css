@@ -25,6 +25,8 @@ flex-wrap: wrap;
   height: 120vh;
   /* overflow-y: scroll; */
   overflow-x: hidden;
+  margin-top: 30px;
+
   transform: translateX(-147px);
 }
 
@@ -228,10 +230,11 @@ width: 600px;
 .gender_item{
 padding-right: 60px;
 cursor: pointer;
+color: #A569BD;
 }
 .gender_item:hover{
 text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi gösterir */
-color: #A569BD;
+color: #803a9b;
 }
 .overview_link{
 margin-right: 80px;
