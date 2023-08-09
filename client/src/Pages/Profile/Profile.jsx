@@ -22,7 +22,6 @@ const Profile = () => {
   const [profileImage, setProfileImage] = useState();
 
   const posts = useSelector((state) => state.post.posts);
-
   const handleDelete = async (id) => {
     console.log(id);
 
@@ -178,9 +177,9 @@ const Profile = () => {
                       <div className="blog_profile_post" key={post?._id}>
                         <img src={post?.postImage} alt="" />
 
-                        <div className="mid__title">
+                        {/* <div className="mid__title">
                           <h3>{post?.title}</h3>
-                        </div>
+                        </div> */}
 
                         {activeUser?._id === postAuthor?._id ? (
                           <div className="bottom">
