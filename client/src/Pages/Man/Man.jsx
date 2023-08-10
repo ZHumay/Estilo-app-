@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BlogPostCardHome from '../../Components/BlogPostCardHome/BlogPostCardHome';
 import { usePostsContext } from '../../hooks/usePostsContext';
+import { useNavigate } from 'react-router-dom';
+import { useActiveUserContext } from '../../context/activeUserContext';
 
 const Man = () => {
   const { posts } = usePostsContext();
   const [manPosts, setManPosts] = useState([]);
+  const { activeUser } = useActiveUserContext();
+  const navigate= useNavigate()
   const [category, setCategory] = useState('all'); // Kategori filtrelemesi için state
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const Man = () => {
   }, [category]); 
 
   return (
-    <div className='home'>
+    activeUser? (  <div className='home'>
     <div className="home_wrapper">
       <div className="leftHome">
       {manPosts.map(post => (
@@ -59,7 +63,8 @@ const Man = () => {
            </div>
       </div>
     </div>
-    </div>
+    </div> ) :(navigate("/login"))
+  
   );
 };
 
