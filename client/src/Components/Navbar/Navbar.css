@@ -19,10 +19,11 @@
 }
 .center{
     transform: translateY(3px);
+    width: 219px;
 }
 
 .center .search_wrapper{
-    width: 280px;
+    width: 215px;
     position: relative;
     margin-left: 100px;
 }
