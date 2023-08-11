@@ -163,7 +163,7 @@ const modalStyle = {
 
   return (   
     <>
- {!admin ? (
+ {!admin &&activeUser ? (
     <>
    <div className="overview">
 
