@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
     orders:{
         type: [],
         required:true
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
     
 }, {timestamps : true});
