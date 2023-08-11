@@ -15,7 +15,7 @@ const Woman = () => {
   useEffect(() => {
     const fetchWomanPosts = async () => {
       try {
-        const res = await axios.get('/api/posts/posts');
+        const res = await axios.get('/api/posts/posts/admin');
 
         if (res.status === 200) {
           let womanPostsArray = res.data.posts.filter(post => post.gender === 'woman');

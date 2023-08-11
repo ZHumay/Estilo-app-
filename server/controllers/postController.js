@@ -25,6 +25,7 @@ const create_post = async (req, res) => {
             gender:req.body.gender,
             authorId : req.body.activeUserId,
             postImage: result.url,
+            userType: "user"
           });
 
           const savePost = await post.save();
@@ -50,24 +51,86 @@ const create_post = async (req, res) => {
   }
 };
 
-const get_post = async (req, res) => {
 
-  const id = req.params.id;
+const create_post_admin = async (req, res) => {
+  try {
+    const file = req.files.blogImage;
 
-  try{
-    const post = await postModel.findById(id);
+    cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+      try {
+        if (result) {
+          const post_admin = new postModel({
+            title: req.body.title,
+            color: req.body.color,
+            price: req.body.price,
+            size:req.body.size,
+            description: req.body.description,
+            category: req.body.category,
+            gender:req.body.gender,
+            authorId : req.body.activeUserId,
+            postImage: result.url,
+            userType: "admin"
+          });
 
-    if(post){
-      res.status(200).json({post : post});
-    }
-    else{
-      res.json({msg : "Post not found"});
-    }
-  }catch(error){
-    console.log(error.message);
-    res.json({msg : error.message});
+          const savePost = await post_admin.save();
+
+          if (savePost) {
+            res
+              .status(200)
+              .json({ post: savePost, msg: "Product created successfully !!" });
+
+          } else {
+            res.json({ msg: "Something wents wrong" });
+          }
+        } else {
+          console.log(err);
+          res.json({ msg: err });
+        }
+      } catch (error) {
+        res.json({ msg: error.message });
+      }
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
+
+const get_post = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const post = await postModel.findById(id);
+
+    if (post) {
+      // Normal kullanıcılar için ilgili işlemler
+      res.status(200).json({ post: post });
+    } else {
+      res.json({ msg: "Post not found" });
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.json({ msg: error.message });
+  }
+};
+
+const get_post_admin = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const post = await postModel.findById(id);
+
+    if (post) {
+      // Yöneticiler için ilgili işlemler
+      res.status(200).json({ post: post });
+    } else {
+      res.json({ msg: "Post not found" });
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.json({ msg: error.message });
+  }
+};
+
 
 const get_allcount = async (req, res) => {
   try {
@@ -88,8 +151,6 @@ const get_allcount = async (req, res) => {
     res.json({ msg: "Error fetching data" });
   }
 };
-
-
 
 
 const incrementOrderedCount = async (req, res) => {
@@ -158,17 +219,28 @@ const get_productcountinbasket = async (req, res) => {
 
 
 const all_posts = async (req, res) => {
-  try{
+  try {
+    const posts = await postModel.find({ userType: "user" }); // Filter posts created by regular users
 
-    const posts = await postModel.find();
-
-    if(posts){
-      res.status(200).json({msg : "Data fetched successfully", posts : posts})
+    if (posts) {
+      res.status(200).json({ msg: "Data fetched successfully", posts: posts });
     }
-
-  }catch(error){
+  } catch (error) {
     console.log(error.message);
-    res.json({msg : "Data can't fetch"});
+    res.json({ msg: "Data can't fetch" });
+  }
+};
+
+const all_posts_fromAdmin = async (req, res) => {
+  try {
+    const posts = await postModel.find({ userType: "admin" }); // Filter posts created by admins
+
+    if (posts) {
+      res.status(200).json({ msg: "Data fetched successfully", posts: posts });
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.json({ msg: "Data can't fetch" });
   }
 };
 
@@ -253,6 +325,86 @@ const delete_post = async (req, res) => {
   }
 };
 
+const update_post_admin = async (req, res) => {
+  try {
+    if (req.files) {
+      // Handle image upload if there is a new image
+      const file = req.files.blogImage;
+      cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        try {
+          if (result) {
+            // Update post with the new image URL
+            const updatedPost = {
+              title: req.body.title,
+              color: req.body.color,
+              price: req.body.price,
+              size: req.body.size,
+              description: req.body.description,
+              category: req.body.category,
+              gender:req.body.gender,
+              authorId: req.body.activeUserId,
+              postImage: result.url,
+            };
+
+            const post = await postModel.findByIdAndUpdate(req.params.id, updatedPost);
+
+            if (post) {
+              res.status(200).json({ msg: "Product updated successfully", post: post });
+            
+            } else {
+              res.json({ msg: "Post not updated, Something went wrong" });
+            }
+          } else {
+            console.log(err);
+            res.json({ msg: err });
+          }
+        } catch (error) {
+          res.json({ msg: error.message });
+        }
+      });
+    } else {
+      // Update post without uploading a new image
+      const updatedPost = {
+        title: req.body.title,
+        color: req.body.color,
+        price: req.body.price,
+        size: req.body.size,
+        description: req.body.description,
+        category: req.body.category,
+        gender:req.body.gender,
+        authorId: req.body.activeUserId,
+      };
+
+      const post = await postModel.findByIdAndUpdate(req.params.id, updatedPost);
+
+      if (post) {
+        res.status(200).json({ msg: "Product updated successfully", post: post });
+      } else {
+        res.json({ msg: "Post not updated, Something went wrong" });
+      }
+    }
+  } catch (error) {
+    res.json({ msg: error.message });
+  }
+};
+
+const delete_post_admin = async (req, res) => {
+  try{
+    const deletePost = await postModel.findByIdAndDelete(req.params.id);
+
+    if(deletePost){
+      res.status(200).json({msg : "Post deleted Successfully", post : deletePost});
+    }
+    else{
+      res.json({msg : "Post not deleted"})
+    }
+
+  }catch(error){
+     console.log(error.message);
+     res.json({msg : "Post not deleted"});
+  }
+};
+
 
 const like_dislike = async (req, res) =>{
   try{
@@ -293,5 +445,10 @@ module.exports = {
   incrementOrderedCount,
   decrementOrderedCount,
   get_productcountinbasket,
-  get_allcount
+  get_allcount,
+  create_post_admin,
+  get_post_admin,
+  all_posts_fromAdmin,
+  update_post_admin,
+  delete_post_admin
 };

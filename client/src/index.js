@@ -12,12 +12,16 @@ import { Provider } from 'react-redux';
 import { BasketContextProvider, BasketProvider } from './context/BasketContext';
 import { OrderContextProvider } from './context/OrderContext';
 import { ProductCountProvider } from './context/ProductCountContext';
+import { AdminContextProvider } from './context/AdminContext';
+import { UserPostsContextProvider } from './context/UserPostsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <PostsContextProvider>
+      <UserPostsContextProvider>
       <ActiveUserContextProvider>
+        <AdminContextProvider>
         <UsersContextProvider>
           <SearchResultContextProvider>
             <CommentsContextProvider>
@@ -33,7 +37,9 @@ root.render(
             </CommentsContextProvider>
           </SearchResultContextProvider>
         </UsersContextProvider>
+        </AdminContextProvider>
       </ActiveUserContextProvider>
+      </UserPostsContextProvider>
     </PostsContextProvider>
   </BrowserRouter>
 );

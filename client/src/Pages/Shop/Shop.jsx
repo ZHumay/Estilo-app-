@@ -47,7 +47,7 @@ function Shop() {
 
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("/api/posts/posts");
+        const res = await axios.get("/api/posts/posts/admin");
 
         if (res.status === 200) {
           setAllPosts(res.data.posts);
