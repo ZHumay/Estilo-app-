@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { useAdminContext } from '../../context/AdminContext';
 const Home = () => {
 
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ const Home = () => {
   const [gender,setgender]=useState()
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
+  const {admin}=useAdminContext()
+
 
 const modalStyle = {
   position: 'absolute',
@@ -106,7 +109,7 @@ const modalStyle = {
 
         const fetchPosts = async () =>{
           try{
-            const res = await axios.get("/api/posts/posts");
+            const res = await axios.get("/api/posts/posts/admin");
 
             if(res.status === 200){
               setAllPosts(res.data.posts);
@@ -165,7 +168,11 @@ const modalStyle = {
 
   return (   
     <>
-    <div className="slider">
+
+    {!admin ? (
+
+      <>
+  <div className="slider">
         <figure>
           <div className="slide">
             <div className="slide-text">
@@ -235,7 +242,8 @@ const modalStyle = {
           </div>
         </div>
       </div>
-      <div className="h2" style={{ width: "300px" }}>
+
+           <div className="h2" style={{ width: "300px" }}>
         <h2
           style={{
             transform: "translateX(70px)",
@@ -248,6 +256,11 @@ const modalStyle = {
           Product overview
         </h2>
       </div>
+      </>
+    ) : (null)}
+  
+
+ 
       <div className="overview">
 
         <span className='gender_item' onClick={()=> filterCategory("all")}>All products</span>

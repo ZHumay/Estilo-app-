@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import "./CreatePost.css";
+import "../CreatePost/CreatePost.css";
 import SendingLoader from "../../Components/SendingLoader/SendingLoader";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
 
-const CreatePost = () => {
+const CreatePostUser = () => {
   const [selectedSizes, setSelectedSizes] = useState([]);
 
   const { dispatch } = usePostsContext();
@@ -41,9 +41,10 @@ const CreatePost = () => {
     formdata.append("color", color);
     formdata.append("blogImage", blogImage);
     formdata.append("activeUserId", activeUser._id);
+    formdata.append("userType", "user");
 
     axios
-      .post("/api/posts/create-post/admin", formdata, {
+      .post("/api/posts/create-post", formdata, {
         headers: {
           "Content-type": "multipart/form-data",
         },
@@ -53,12 +54,12 @@ const CreatePost = () => {
 
           setSending(false);
 
-          dispatch({type :"CREATE_POST", payload : res.data.post}); 
+          dispatch({type :"CREATE_POST_USER", payload : res.data.post}); 
 
 
           Swal.fire("Greate", res.data.msg, "success");
          
-          navigate("/", { replace: true });
+          navigate("/wardrobe", { replace: true });
         } else {
           console.log("Something wents wrong");
           Swal.fire("Oops", res.data.msg, "info");
@@ -323,4 +324,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default CreatePostUser;
