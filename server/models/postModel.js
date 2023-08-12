@@ -44,7 +44,9 @@ const postSchema = new mongoose.Schema({
     postImage : {
         type : String,
         default : "https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_960_720.jpg"
-    }
+    },
+    userType: { type: String, enum: ["user", "admin"], required: true },
+    
 },{timestamps : true});
 
 const Post = mongoose.model("post", postSchema);
