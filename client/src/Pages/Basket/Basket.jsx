@@ -121,7 +121,7 @@ const navigate=useNavigate()
     sx={{
       height: "200px",
       margin: { xs: "10px 30px", md: "20px 30px 30px 62px" },
-      width: { xs: "230px", md: "1400px" }, // Set the width for mobile and wider screens
+      width: { xs: "260px", md: "1400px" }, // Set the width for mobile and wider screens
       display: "flex",
       flexDirection: { xs: "column", md: "row" },
       justifyContent: "center",
@@ -143,7 +143,7 @@ const navigate=useNavigate()
                   height: {md:"200px", xs:"82px"},
                   alignSelf: "flex-start", // Align the image to the top left corner
                   objectFit:{xs:"contain"},
-                  transform: { xs: "translateX(-33px)" }
+                  transform: { xs: "translateX(-20px)" }
                 }}
                 alt={post.title}
               />
