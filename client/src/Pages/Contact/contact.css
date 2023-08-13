@@ -30,3 +30,15 @@ line-height: 35px;
 .infop{
     transform: translateX(30px);
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+
+    .contact-info{
+        transform: translate(-1px,-40px);
+        line-height: 35px;
+        
+        }
+    .form input{
+        width: 200px;
+    }
+}
