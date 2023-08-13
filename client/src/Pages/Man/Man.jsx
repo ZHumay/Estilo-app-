@@ -4,6 +4,7 @@ import BlogPostCardHome from '../../Components/BlogPostCardHome/BlogPostCardHome
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useNavigate } from 'react-router-dom';
 import { useActiveUserContext } from '../../context/activeUserContext';
+import { useAdminContext } from '../../context/AdminContext';
 
 const Man = () => {
   const { posts } = usePostsContext();
@@ -11,6 +12,7 @@ const Man = () => {
   const { activeUser } = useActiveUserContext();
   const navigate= useNavigate()
   const [category, setCategory] = useState('all'); // Kategori filtrelemesi için state
+  const {admin}=useAdminContext()
 
   useEffect(() => {
     const fetchManPosts = async () => {
@@ -38,7 +40,7 @@ const Man = () => {
   }, [category]); 
 
   return (
-    activeUser? (  <div className='home'>
+    activeUser && !admin ? (  <div className='home'>
     <div className="home_wrapper">
       <div className="leftHome">
       {manPosts.map(post => (
