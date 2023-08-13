@@ -8,6 +8,7 @@ import SendingLoader from "../../Components/SendingLoader/SendingLoader";
 import NoEncryptionIcon from '@mui/icons-material/NoEncryption';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
+import { useAdminContext } from "../../context/AdminContext";
 const Login = () => {
   const navigate = new useNavigate();
   const{activeUser}=useActiveUserContext()
@@ -16,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [sending, setSending] = useState(false);
   const { dispatchActiceUser } = useActiveUserContext();
+  const {dispatchAdmin}=useAdminContext()
 
 
 
@@ -34,7 +36,11 @@ const Login = () => {
         Swal.fire("Greate", res.data.msg, "success");
         Cookies.set("jwt", res.data.token, { expires: 7 });
         dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: true });
-        navigate("/", { replace: true });
+        if (email === "zehmetihumay@gmail.com") {
+          dispatchAdmin({ type: "GET_ADMIN", payload: true });
+        } else {
+          dispatchAdmin({ type: "GET_ADMIN", payload: false });
+        }        navigate("/", { replace: true });
       } else {
         setSending(false);
         Swal.fire("Oops", res.data.msg, "info");
