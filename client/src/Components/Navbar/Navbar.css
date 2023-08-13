@@ -33,10 +33,7 @@
     font-weight: 700;
     color: rgb(66,64,64);
 }
-.rightt{
-    margin-top: -7px;
-   
-}
+
 .rightt .menu-link{
     margin-top: -10px;
 }
@@ -44,7 +41,7 @@
     transform: translateY(8px);
 }
 .rightt{
-    margin-top: 3px;
+    margin-top: 6px;
 }
 
 .navbar .left{
@@ -203,6 +200,19 @@
     transition: .2s ease;
     font-size: 10px;
 }
+.righttt{
+    display: flex;
+    flex-direction: row;
+    margin-left:-53px ;
+    margin-top: 33px;
+}
+.ml-login{
+    display: flex;
+}
 
+.ml-register{
+    display: flex;
+    flex-direction: row;
+}
 
 }
