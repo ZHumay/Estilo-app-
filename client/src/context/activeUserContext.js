@@ -17,7 +17,7 @@ export const useActiveUserContext = () => useContext(ActiveUserContext);
 
 export const ActiveUserContextProvider = ({ children }) => {
   const [state, dispatchActiceUser] = useReducer(activeUserReducer, {
-    activeUser: JSON.parse(localStorage.getItem("activeUser")) || false,
+    activeUser: JSON.parse(localStorage.getItem("activeUser")) || null
   });
 
   useEffect(() => {
