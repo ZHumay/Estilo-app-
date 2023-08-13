@@ -186,9 +186,9 @@
     border-radius: 50%;
     border: 0.5px solid gray;
     padding: 2px;
-    transform: translateY(-7px);
+    transform: translate(7px,-6px);
     object-fit: cover;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 .center .search_wrapper input {
     width: 100%;
