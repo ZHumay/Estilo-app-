@@ -245,12 +245,7 @@ const modalStyle = {
 
            <div className="h2" style={{ width: "300px" }}>
         <h2
-          style={{
-            transform: "translateX(70px)",
-            color: "rgb(66, 64, 64)",
-            fontSize: "29px",
-            width: "300px",
-          }}
+    
         >
           {" "}
           Product overview
@@ -279,7 +274,7 @@ const modalStyle = {
       marginRight: "6px",
     }}
   />
-  <span style={{ color: "rgb(70, 70, 70)", fontSize: "15px" }}>
+  <span className='filter' >
     Filter by Color
   </span>
 </button>
