@@ -86,3 +86,37 @@ transform: translateY(-9px);
 .right{
     margin-top: -2px;
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+
+
+    .header_name_comment {
+        width: 212px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    .comment img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid rgb(32, 151, 255);
+        padding: 2px;
+    }
+
+    .comment .left {
+        margin-right: 15px;
+    }
+    .left {
+        transform: translate(1px,11px);
+    }
+    .comment_txt_wrapper {
+        padding-left: 0px;
+        font-weight: 400;
+        transform: translateY(-28px);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 188px;
+    }
+  
+}
