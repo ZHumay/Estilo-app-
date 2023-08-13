@@ -6,6 +6,8 @@ import "../CreatePost/CreatePost.css";
 import SendingLoader from "../../Components/SendingLoader/SendingLoader";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
+import { useAdminContext } from '../../context/AdminContext';
+
 
 const CreatePostUser = () => {
   const [selectedSizes, setSelectedSizes] = useState([]);
@@ -24,6 +26,7 @@ const CreatePostUser = () => {
   const [prevImage, setPrevImage] = useState([]);
   const [imageSelected, setImageSelected] = useState(false)
   const [sending, setSending] = useState(false);
+  const {admin}=useAdminContext()
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -82,7 +85,10 @@ const CreatePostUser = () => {
 
   return (
    <>
-    <div className="create_post_container">
+   {
+    !admin ? (
+      <>
+ <div className="create_post_container">
       <form encType="multipart/form-data" className="createPostForm" onSubmit={handleFormSubmit}>
         <div className="create_post_heading_wrapper">
           <h2 className="create_post_heading">Create New Product</h2>
@@ -320,6 +326,10 @@ const CreatePostUser = () => {
         </div>
       </form>
     </div>
+      </>
+    ) :(navigate("/login"))
+   }
+   
    </>
   );
 };
