@@ -70,7 +70,7 @@ const Contact = () => {
 
       </div>
 
-          <StyledContactForm>
+          <StyledContactForm className="form">
       <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
         <input type="text" name="user_name" placeholder="Enter your name" />
