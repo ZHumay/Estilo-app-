@@ -145,7 +145,7 @@ const Profile = () => {
                 </div>
                 {activeUser?._id === postAuthor?._id ? (
                   <div className="change_image_wrapper">
-                    <form encType="multipart/form-data" onSubmit={handleSumbit}>
+                    <form className="profileform" encType="multipart/form-data" onSubmit={handleSumbit}>
                       <input
                         type="file"
                         onChange={(e) => setProfileImage(e.target.files[0])}
