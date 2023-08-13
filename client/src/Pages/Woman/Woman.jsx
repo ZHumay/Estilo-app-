@@ -4,13 +4,14 @@ import BlogPostCardHome from '../../Components/BlogPostCardHome/BlogPostCardHome
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useActiveUserContext } from '../../context/activeUserContext';
 import { useNavigate } from 'react-router-dom';
-
+import { useAdminContext } from '../../context/AdminContext';
 const Woman = () => {
   const { posts } = usePostsContext();
   const { activeUser } = useActiveUserContext();
   const navigate= useNavigate()
   const [womanPosts, setWomanPosts] = useState([]);
   const [category, setCategory] = useState('all'); // Kategori filtrelemesi için state
+  const {admin}=useAdminContext()
 
   useEffect(() => {
     const fetchWomanPosts = async () => {
@@ -38,7 +39,7 @@ const Woman = () => {
   }, [category]); 
 
   return (
-    activeUser ? (     <div className='home'>
+    activeUser && !admin ? (     <div className='home'>
 
     <div className="home_wrapper">
       <div className="leftHome">
