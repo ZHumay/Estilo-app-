@@ -118,59 +118,64 @@ const navigate=useNavigate()
         {basketItems?.map((post, index) => (
           <Grid item key={index} xs={6} sm={6} md={4} lg={3}>
             <Card
-              sx={{ height: "200px" }}
-              style={{
-                margin: "20px 30px 30px 62px",
-                width: "1400px",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginLeft: "62px",
-                border: "0.5px solid #EDECEB  ",
-                boxShadow: "none",
-                backgroundColor:"rgb( 250,250,250)"
-              }}
+    sx={{
+      height: "200px",
+      margin: { xs: "10px 30px", md: "20px 30px 30px 62px" },
+      width: { xs: "230px", md: "1400px" }, // Set the width for mobile and wider screens
+      display: "flex",
+      flexDirection: { xs: "column", md: "row" },
+      justifyContent: "center",
+      alignItems: "center",
+      border: "0.5px solid #EDECEB",
+      boxShadow: "none",
+      backgroundColor: "rgb(250, 250, 250)",
+      transform: { xs: "translate(23px,-30px)" ,md:"translateX(-1px)"}
+
+    }}              
             >
               <CardMedia
                 component="img"
                 height="140"
                 image={post.postImage}
-                style={{
-                  width: "190px",
+                sx={{
+                  width: {xs:"299px",md:"190px"},
                   margin: "0px",
-                  height: "200px",
+                  height: {md:"200px", xs:"82px"},
                   alignSelf: "flex-start", // Align the image to the top left corner
+                  objectFit:{xs:"contain"},
+                  transform: { xs: "translateX(-33px)" }
                 }}
                 alt={post.title}
               />
               <CardContent
-                style={{
+               sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "500px",
+                  width: {md:"500px",xs:"140px"},
                   flexDirection: "column",
                   color: "rgb(66, 64, 64)",
+                  padding:"5px"
                 }}
               >
                 <Typography
-                  gutterBottom
-                  variant="h4"
-                  component="div"
-                  className="title"
+                 gutterBottom
+                 variant={{ xs: "h6", md: "h4" }} // Set variant based on screen size
+                 component="div"
+                 className="title"
                 >
                   {post.title}
                 </Typography>
                 <Typography
                   variant="h6"
                   color="rgb(66,64,64)"
-                  fontSize={"17px"}
+                  className="price"
                 >
                   Price: {`${post.price}$`}
                 </Typography>
                 <label htmlFor="size">Select size:</label>
                 <select
+                className="select"
                   name="size"
                   id={`${post._id}`}
                   value={selectedSize} // Seçilen boyutu belirle
@@ -184,21 +189,21 @@ const navigate=useNavigate()
                 </select>
               </CardContent>
               <CardActions
-                style={{
+                sx={{
                   display: "flex",
                   justifyContent: "flex-end",
-                  width: "960px",
+                  width:{md:"960px",xs:"213"},
                 }}
               >
                 <Button
                   style={{ marginRight: "-40px" }}
                   onClick={() => handleIncrementCount(post?._id)}
                   startIcon={
-                    <AddIcon style={{ color: "#A1A1A1 ", fontSize: "27px" }} />
+                    <AddIcon sx={{ color: "#A1A1A1 ", fontSize: {md:"27px",xs:"11px"} }} />
                   }
                 ></Button>
 
-                <Button style={{ color: "gray", fontSize: "16px" }}>
+                <Button sx={{ color: "gray", fontSize:{md:"16px",xs:"12px"} }}>
                   {productCounts[post?._id] || 1}
                 </Button>
                 <Button
@@ -206,8 +211,7 @@ const navigate=useNavigate()
                   onClick={() => handleDecrementCount(post?._id)}
                   startIcon={
                     <RemoveIcon
-                      style={{ color: "#A1A1A1 ", fontSize: "30px" }}
-                    />
+                    sx={{ color: "#A1A1A1 ", fontSize: {md:"30px",xs:"13px"} }}                    />
                   }
                 ></Button>
                 <Button
@@ -249,6 +253,7 @@ const navigate=useNavigate()
       </>
     ) : (navigate("/login"))}
     
+
     </>
   );
 };
