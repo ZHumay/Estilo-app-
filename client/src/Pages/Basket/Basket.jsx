@@ -10,14 +10,14 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import { useAdminContext } from '../../context/AdminContext';
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import "./basket.css";
 import { BasketContext } from "../../context/BasketContext";
 import axios from "axios";
 import { useActiveUserContext } from "../../context/activeUserContext";
 import Order from "../../Components/Order/Order";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useProductCount } from "../../context/ProductCountContext";
 
 const Basket = () => {
@@ -29,6 +29,8 @@ const Basket = () => {
   const { activeUser } = useActiveUserContext();
   const { productCounts, setProductCounts } = useProductCount();
   const [selectedSize, setSelectedSize] = useState("");
+  const {admin}=useAdminContext()
+
 
  const handleClick = async (post) => {
   try {
@@ -56,6 +58,7 @@ const Basket = () => {
     console.error('Error adding/removing item to/from basket:', error);
   }
 };
+const navigate=useNavigate()
 
 
   const handleIncrementCount = async (postId) => {
@@ -100,7 +103,10 @@ const Basket = () => {
 
   return (
     <>
-      <Grid
+    { !admin ? (
+
+      <>
+  <Grid
         style={{
           display: "flex",
           flexDirection: "column",
@@ -240,6 +246,9 @@ const Basket = () => {
       </Grid>
       <div className="total">Total Price: {`${calculateTotalPrice()}$`}</div>
       <Order/>
+      </>
+    ) : (navigate("/login"))}
+    
     </>
   );
 };
