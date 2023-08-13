@@ -122,7 +122,7 @@ allcount()
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={{ ...style, width: { xs: 300, sm: 400 } }}>
           <h3>Please enter your current address</h3>
           <form onSubmit={formik.handleSubmit}>
             <>
