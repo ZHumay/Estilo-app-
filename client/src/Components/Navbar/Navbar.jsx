@@ -317,23 +317,24 @@ console.log(admin);
             </>
           ) : (
             <>
-            <div className="rightt" >
+            <div className="righttt" >
             <Link
                 to="/login"
-                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700" }}
-                className="mll"
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:"translateX(20px)" }}
+                className="ml-login"
               >
                 Login 
-                <LoginIcon style={{width:"30px",height:"20px",transform:"translateY(5px)"}}/>
+                <LoginIcon sx={{width:"30px",height:"20px", transform: {md:"translateY(5px)", xs:"translateY(1px)"}}}/>
               </Link>
               <Link
                 to="/register"
-                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700" }}
-                className="ml;"
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:"translateY(2px)" }}
+                className="ml-register;"
               >
                 Register
-                <HowToRegIcon style={{width:"30px",height:"20px",transform:"translateY(5px)"}}/>
+                <HowToRegIcon sx={{width:"30px",height:"20px", transform: {md:"translateY(5px)", xs:"translate(60px,-20px)"}}}/>
               </Link>
+              
             </div>
            
             </>
