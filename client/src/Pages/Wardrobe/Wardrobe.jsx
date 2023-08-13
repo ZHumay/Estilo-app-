@@ -176,14 +176,14 @@ const modalStyle = {
 
 <button className="filterbtn" onClick={handleColorModalOpen}>
 <FilterListIcon
-style={{
-height: "20px",
-width: "20px",
-marginBottom: "-5px",
+sx={{
+height:{md:"20px",xs:"15px"},
+width:{md:"20px",xs:"15px"},
+marginBottom: {md:"-5px",xs:"-3px"},
 marginRight: "6px",
 }}
 />
-<span style={{ color: "rgb(70, 70, 70)", fontSize: "15px" }}>
+<span className='spancolor'>
 Filter by Color
 </span>
 </button>
