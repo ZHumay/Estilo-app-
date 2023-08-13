@@ -60,6 +60,7 @@ const post_register = async (req, res) => {
             cPassword: hashedPassword,
             code: confirmCode,
             codeExpire: codeExpire,
+            isAdmin: email === 'zehmetihumay@gmail.com'
           });
   
           sendConfirmEMail(email, confirmCode);
@@ -492,3 +493,4 @@ module.exports = {
   post_orderItems,
   get_orderItems
 };
+
