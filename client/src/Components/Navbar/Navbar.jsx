@@ -11,6 +11,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useAdminContext } from "../../context/AdminContext";
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+
 const Navbar = () => {
   const { activeUser } = useActiveUserContext();
   const navigate = useNavigate();
@@ -19,6 +25,26 @@ const Navbar = () => {
   const { dispatchActiceUser } = useActiveUserContext();
   const {dispatchAdmin}=useAdminContext()
   const {admin}=useAdminContext()
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+
+  const settings = [ 'Shop', 'Woman', 'Man', 'Contact','Add product','Wardrobe','Logout'];
 
   const handleLogout = () => {
     dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: null });
@@ -53,6 +79,50 @@ console.log(admin);
           />
         </>
       )}
+       <Box sx={{ flexGrow: 0 }} className="box" >
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                 <DensityMediumIcon/> 
+              </IconButton>
+            </Tooltip>
+            <Menu
+        sx={{ mt: '45px' }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        {settings.map((setting) => (
+          <MenuItem key={setting} onClick={setting.toLowerCase() === "logout" ? handleLogout : handleCloseUserMenu}>            <Link
+                   to={
+                    setting.toLowerCase() === "add product"
+                      ? admin
+                        ? "/create-post"
+                        : "/create-post/user"
+                      : setting.toLowerCase() === "logout"
+                      ? "/"
+                      : setting.toLowerCase()
+                  }
+              style={{
+                textDecoration: 'none',
+                color: 'inherit'
+              }}
+            >
+              <Typography textAlign="center">{setting}</Typography>
+            </Link>
+          </MenuItem>
+        ))}
+      </Menu>
+          </Box>
 
 <div className="left">
   <div className="logo">
@@ -217,10 +287,10 @@ console.log(admin);
               <>
               <Link
                 to="/basket"
-                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",marginRight:"-50px"}}
-                className="ml"
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700"}}
+                className="mll-basket"
               >
-                <ShoppingBagOutlinedIcon style={{width:"30px",height:"24px",transform:"translateY(5.2px)"}}/>
+                <ShoppingBagOutlinedIcon className="shopbag"/>
               </Link>
               </>
             ) : (null)}
@@ -251,7 +321,7 @@ console.log(admin);
             <Link
                 to="/login"
                 style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700" }}
-                className="ml"
+                className="mll"
               >
                 Login 
                 <LoginIcon style={{width:"30px",height:"20px",transform:"translateY(5px)"}}/>
@@ -259,7 +329,7 @@ console.log(admin);
               <Link
                 to="/register"
                 style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700" }}
-                className="ml"
+                className="ml;"
               >
                 Register
                 <HowToRegIcon style={{width:"30px",height:"20px",transform:"translateY(5px)"}}/>
