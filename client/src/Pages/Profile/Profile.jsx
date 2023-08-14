@@ -102,7 +102,7 @@ const Profile = () => {
 
   return (
     <>
-      {postAuthor ?(
+      { activeUser && postAuthor ?(
         <div className="profile_user">
           <div className="profile_main_wrapper">
             <div className="top">
