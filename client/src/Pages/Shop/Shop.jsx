@@ -135,12 +135,7 @@ function Shop() {
                   >
                     Sweaters
                   </span>
-                  <span
-                    className="category_item"
-                    onClick={() => filterCategory("shoes")}
-                  >
-                    Shoes
-                  </span>
+                 
                   <span
                     className="category_item"
                     onClick={() => filterCategory("bag")}
