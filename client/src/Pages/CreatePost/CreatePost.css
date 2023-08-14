@@ -64,6 +64,7 @@ font-size: 13px;
 
 .prev-image{
     width: 50%;
+    height: auto;
     margin: 10px 0;
     border-radius: 7px;
     margin-bottom: 5px;
