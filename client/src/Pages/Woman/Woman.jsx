@@ -58,7 +58,7 @@ const Woman = () => {
                 <span className='category_item' onClick={()=> setCategory("short")}>Shorts</span>
                 <span className='category_item' onClick={()=> setCategory("skirt")}>Skirts</span>
                 <span className='category_item' onClick={()=> setCategory("sweater")}>Sweaters</span>
-                <span className='category_item' onClick={()=> setCategory("shoes")}>Shoes</span>
+                {/* <span className='category_item' onClick={()=> setCategory("shoes")}>Shoes</span> */}
                 <span className='category_item' onClick={()=> setCategory("bag")}>Bags</span>
                 <span className='category_item' onClick={()=> setCategory("all")}>All</span>
 
