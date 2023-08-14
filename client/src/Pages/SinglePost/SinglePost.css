@@ -134,7 +134,7 @@ table, th, td {
   }
   
   .color-indicator.white {
-    background-color: white;
+    background-color: rgb(243, 241, 241);
   }
   
   .color-indicator.black {
