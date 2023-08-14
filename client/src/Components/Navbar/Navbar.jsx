@@ -16,6 +16,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Navbar = () => {
   const { activeUser } = useActiveUserContext();
@@ -28,6 +29,19 @@ const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+
+  const customBreakpoints = {
+    xs: 321,
+    md: 768,
+    lg: 1279,
+    xl: 1920, // Örnek bir büyük boyut
+  };
+  
+  const theme = createTheme({
+    breakpoints: {
+      values: customBreakpoints,
+    },
+  });
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -66,6 +80,9 @@ const Navbar = () => {
   };
 console.log(admin);
   return (
+
+    <ThemeProvider theme={theme}>
+
     <div className="navbar">
       {searchResultContainerStyle === "showSearch" && (
         <>
@@ -324,15 +341,15 @@ console.log(admin);
                 className="ml-login"
               >
                 Login 
-                <LoginIcon sx={{width:"30px",height:"20px", transform: {md:"translateY(5px)", xs:"translateY(1px)"}}}/>
+                <LoginIcon sx={{width:"30px",height:"20px", transform: {lg:"translateY(5px)", xs:"translateY(1px)"}}}/>
               </Link>
               <Link
                 to="/register"
-                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:"translateY(2px)" }}
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:{lg:"translateY(2px)" , md:"translateY(-1px)",xs:"translateY(-5px)" }}}
                 className="ml-register;"
               >
                 Register
-                <HowToRegIcon sx={{width:"30px",height:"20px", transform: {md:"translateY(5px)", xs:"translate(60px,-20px)"}}}/>
+                <HowToRegIcon sx={{width:"30px",height:"20px", transform: {lg:"translateY(5px)", xs:"translate(60px,-20px)" ,md:"translate(7px,3px)"}}}/>
               </Link>
               
             </div>
@@ -342,6 +359,7 @@ console.log(admin);
         </div>
       </div>
     </div>
+    </ThemeProvider>
   );
 };
 
