@@ -19,6 +19,7 @@ import { useActiveUserContext } from "../../context/activeUserContext";
 import Order from "../../Components/Order/Order";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useProductCount } from "../../context/ProductCountContext";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Basket = () => {
   //  const [total, setTotal] = useState(0);
@@ -31,6 +32,18 @@ const Basket = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const {admin}=useAdminContext()
 
+  const customBreakpoints = {
+    xs: 321,
+    md: 768,
+    lg: 1279,
+    xl: 1920, // Örnek bir büyük boyut
+  };
+  
+  const theme = createTheme({
+    breakpoints: {
+      values: customBreakpoints,
+    },
+  });
 
  const handleClick = async (post) => {
   try {
@@ -103,6 +116,7 @@ const navigate=useNavigate()
 
   return (
     <>
+      <ThemeProvider theme={theme}>
     { !admin ? (
 
       <>
@@ -116,14 +130,14 @@ const navigate=useNavigate()
         spacing={4}
       >
         {basketItems?.map((post, index) => (
-          <Grid item key={index} xs={6} sm={6} md={4} lg={3}>
-            <Card
+          <Grid  item key={index} xs={6} sm={6} md={4} lg={3}>
+            <Card  
     sx={{
       height: "200px",
-      margin: { xs: "10px 30px", md: "20px 30px 30px 62px" },
-      width: { xs: "260px", md: "1400px" }, // Set the width for mobile and wider screens
+      margin: { xs: "10px 30px", lg: "20px 30px 30px 62px",md:"10px 30px 30px 30px" },
+      width: { xs: "260px", md: "700px",lg:"1400px" }, // Set the width for mobile and wider screens
       display: "flex",
-      flexDirection: { xs: "column", md: "row" },
+      flexDirection: { xs: "column", md: "row", },
       justifyContent: "center",
       alignItems: "center",
       border: "0.5px solid #EDECEB",
@@ -253,7 +267,7 @@ const navigate=useNavigate()
       </>
     ) : (navigate("/login"))}
     
-
+    </ThemeProvider>
     </>
   );
 };
