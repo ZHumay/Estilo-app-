@@ -12,6 +12,7 @@ import { format } from "timeago.js";
 import PageLoader from "../PageLoader/PageLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { CURRENT_POST } from "../../store/postsSlice";
+import { useAdminContext } from "../../context/AdminContext";
 
 const Profile = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const Profile = () => {
   const { activeUser } = useActiveUserContext();
   const [postAuthor, setPostAuthor] = useState();
   const [profileImage, setProfileImage] = useState();
+  const {admin}=useAdminContext()
 
   const posts = useSelector((state) => state.post.posts);
   const handleDelete = async (id) => {
@@ -100,7 +102,7 @@ const Profile = () => {
 
   return (
     <>
-      {postAuthor ? (
+      {postAuthor ?(
         <div className="profile_user">
           <div className="profile_main_wrapper">
             <div className="top">
@@ -116,8 +118,9 @@ const Profile = () => {
                 <div className="joined_data font_wt_500">
                   <p>Joined On : {format(postAuthor?.createdAt)}</p>
                 </div>
-
-                <div className="total_blogs font_wt_500">
+              {!admin ? (
+                <>
+                 <div className="total_blogs font_wt_500">
                   <p>
                     Total Products :{" "}
                     {
@@ -127,12 +130,23 @@ const Profile = () => {
                     }
                   </p>
                 </div>
-                <div className="orders">
+                </>
+              ) :(null)}
+               
+
+                {
+                  !admin ?(
+                    <>
+                     <div className="orders">
                 <Link to={`/orders`} className="my-orders" >
 
                   My orders
                   </Link>
                 </div>
+                    </>
+                  ) :(null)
+                }
+               
               </div>
 
               <div className="right">
@@ -165,9 +179,14 @@ const Profile = () => {
               </div>
             </div>
             <div className="bottom">
-              <div>
+              {!admin ? (
+                <>
+                 <div>
                 <h4>All Products</h4>
               </div>
+                </>
+              ):(null)}
+             
 
               <div className="blog_post_profile_wrapper">
                 {posts
