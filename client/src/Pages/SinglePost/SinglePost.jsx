@@ -168,6 +168,9 @@ const SinglePost = () => {
             <div className="single_post_description_wrapper">
               <p className="red-text">Description: <span className="span"> {currentPost ? currentPost.description : ""}</span></p>
             </div>
+            <div className="single_post_description_wrapper">
+              <p className="red-text">Price: <span className="span"> {currentPost ? `${currentPost.price}$` : ""}</span></p>
+            </div>
       
             <div className="single_post_description_wrapper">
               <p className="red-text"> Size: <span className="span">{currentPost ? currentPost.size : ""}</span> </p>
