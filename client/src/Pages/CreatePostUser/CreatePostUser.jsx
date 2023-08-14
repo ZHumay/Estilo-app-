@@ -153,7 +153,7 @@ const CreatePostUser = () => {
             <option value="short">short</option>
             <option value="skirt">skirt</option>
             <option value="sweater">sweater</option>
-            <option value="shoes">shoes</option>
+            {/* <option value="shoes">shoes</option> */}
             <option value="bag">bag</option>
 
 
@@ -259,6 +259,24 @@ const CreatePostUser = () => {
             }}
           />
           XL
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="size"
+            value="Standart"
+            onChange={(e) => {
+              const selectedSize = e.target.value;
+              setSelectedSizes((prevSelectedSizes) => {
+                if (e.target.checked) {
+                  return [...prevSelectedSizes, selectedSize];
+                } else {
+                  return prevSelectedSizes.filter((size) => size !== selectedSize);
+                }
+              });
+            }}
+          />
+          Standart
         </label>
 
       </div>
