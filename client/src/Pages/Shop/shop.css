@@ -7,3 +7,17 @@
       overflow-x: hidden;
       transform: translateX(-187px);
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+
+  .shop .home_wrapper .leftHome {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 7 1;
+    height: 90vh;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+    transform: translateX(2px);
+}
+
+}
