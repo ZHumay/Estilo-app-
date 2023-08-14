@@ -260,7 +260,7 @@ onClick={() =>  filterColor(color)}
         <span className='category_item' onClick={()=> filterCategory("short")}>Shorts</span>
         <span className='category_item' onClick={()=> filterCategory("skirt")}>Skirts</span>
         <span className='category_item' onClick={()=> filterCategory("sweater")}>Sweaters</span>
-        <span className='category_item' onClick={()=> filterCategory("shoes")}>Shoes</span>
+        {/* <span className='category_item' onClick={()=> filterCategory("shoes")}>Shoes</span> */}
         <span className='category_item' onClick={()=> filterCategory("bag")}>Bags</span>
    </div>
 </div>
