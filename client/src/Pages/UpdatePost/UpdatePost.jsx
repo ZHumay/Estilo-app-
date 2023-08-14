@@ -161,7 +161,7 @@ const UpdatePost = () => {
             <option value="short">short</option>
             <option value="skirt">skirt</option>
             <option value="sweater">sweater</option>
-            <option value="shoes">shoes</option>
+            {/* <option value="shoes">shoes</option> */}
             <option value="bag">bag</option>
 
 
