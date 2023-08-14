@@ -60,16 +60,6 @@ const BlogPostCardHome = ({ post,color }) => {
     }
   };
 
-  // const handleClick = (post) => {
-  //   if (!basketItems.some((item) => item._id === post._id)) {
-  //     addToBasket(post)
-  //   }
-  //   else (
-  //     removeFromBasket(post)
-
-  //   )
-  // }
-
 
   const handleClick = async (post) => {
     try {
