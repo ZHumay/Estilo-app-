@@ -1,203 +1,234 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { usePostsContext } from "../../hooks/usePostsContext";
-import "./SinglePost.css";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import PageLoader from "../PageLoader/PageLoader";
-import { format } from "timeago.js";
-import Comments from "../../Components/Comments/Comments";
+.single_blog_post_wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding-bottom: 100px;
+    font-size: 12px;
+}
+.span{
+    color: rgb(96, 93, 93);
+    font-weight: 500;
+}
+.single_blog_post{
+    width: 60%;
+    padding: 15px 30px;
+    border: 1px solid rgba(128, 128, 128, 0.255);
+}
 
-import { useUsersContext } from "../../hooks/useUsersContext";
-import { useActiveUserContext } from "../../hooks/useActiveUserContext";
-import Footer from "../../Components/Footer/Footer";
-import Cookies from "js-cookie";
+.single_post_img_wrapper{
+    width: 100%;
+}
 
-const SinglePost = () => {
-  const { dispatch } = usePostsContext();
-  const { users } = useUsersContext();
+.single_post_img_wrapper img{
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.single_post_title_wrappper p{
+    font-size: 27px;
+    font-weight: 700;
+    margin: 10px 0;
+    color: rgb(129, 129, 129);
+}
+
+.title_and_buttons_wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+.buttons_wrapper{
+    display: flex;
+    margin-left: 10px;
+}
+
+.buttons_wrapper p{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.blog_post_author_single{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* border-bottom: 1px solid rgba(128, 128, 128, 0.348); */
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.blog_post_author_single .left{
+    margin-right: 15px;
+}
+
+.author_name_wrapper h2{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.blog_post_author_single .left img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid rgba(136, 136, 136, 0.262);
+    
+}
+
+.author_and_timestamps{
+    display: flex;
+    justify-content: space-between;
+}
+
+.author_txxt{
+    font-weight: 600;
+    border-bottom: 1px solid gray;
+}
+.general {
+    display: flex;
+    justify-content: space-around;
+}
+.single_post_description_wrapper{
+    margin: 10px 0;
+    margin-top: 20px;
+}
+.red-text {
+    color: #a569bd;
+    font-weight: 600;
+    font-size: 20px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+.ordinary {
+   margin-left: 30px;
+}
+.red-content {
+    width: 150px;
+    height: 7px;
+    background-color: brown;
+}
+
+
+.__title{
+    font-weight: 700;
+    font-size: 22px;
+    color: rgb(92, 92, 92);
+}
+
+.color-indicator {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 59px;
+    margin-top: -21px;
+  }
   
-  const {id} = useParams();
-  const {activeUser, dispatchActiceUser} = useActiveUserContext();
-  const [currentPost, setCurrentPost] = useState();
-  const [postAuthor, setPostAuthor] = useState();
-  const [likeCount, setLikeCount] = useState(0);
+  .color-indicator.white {
+    background-color: rgb(243, 241, 241);
+  }
+  
+  .color-indicator.black {
+    background-color: black;
+  }
+  
+  .color-indicator.green {
+    background-color: green;
+  }
+  
+  /* Add more color classes for each color option */
+  
+  .color-indicator.yellow { background-color: yellow; } 
+  .color-indicator.red { background-color: red; } 
+  .color-indicator.pink { background-color: pink; } 
+  .color-indicator.blue { background-color: blue; } 
+  .color-indicator.gray { background-color: gray; } 
+  .color-indicator.orange { background-color: orange; } 
+  .color-indicator.beige { background-color: rgb(122, 111, 7); } 
+  .color-indicator.purple { background-color: purple; } 
+  .color-indicator.brown { background-color: rgb(123, 74, 38); } 
+
+  @media screen and (min-width: 320px) and (max-width: 768px){
 
 
-
-  const handleDelete = async (id) => {
-
-    try {
-      const res = await axios.delete(`/api/posts/delete-post/${id}`);
-
-      if (res.status === 200) {
-        dispatch({ type: "DELETE_POST", payload: res.data.post });
-      } else {
-        console.log("Post not deleted , Something wents wrong");
-      }
-    } catch (error) {
-      console.log(error.message);
+    .single_blog_post {
+        width: 90%;
+        padding: 15px 30px;
+        border: 1px solid rgba(128, 128, 128, 0.255);
+        margin-top: 30px;
     }
-  };
-
-  useEffect(() => {
-    const activeUserFromStorage = JSON.parse(localStorage.getItem("activeUser"));
-
-    // Eğer "activeUser" değeri depolama alanında varsa, context içinde güncelle
-    if (activeUserFromStorage) {
-      dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: activeUserFromStorage });
-      console.log(activeUser);
-
+    .single_post_img_wrapper img {
+        width: 100%;
+        height: 234px;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+    .single_post_title_wrappper p {
+        font-size: 15px;
+        font-weight: 700;
+        margin: 10px 0;
+        color: rgb(129, 129, 129);
     }
 
-    const fetchCurrentPost = async () => {
-      try {
-
-        const res = await axios.get(`/api/posts/post/${id}`);
-
-        if (res.status === 200) {
-          setCurrentPost(res.data.post);
-          setLikeCount(res.data.post.likes.length);
-
-          users?.map((user) => {
-            if (user?._id === res.data.post.authorId) {
-              setPostAuthor(user);
-            }
-          });
-        } else {
-          console.log("Post not found");
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-   
-      const fetchActiveUser = async () =>{
-        try{
-
-          if(Cookies.get("jwt")){
-              const res = await axios.post("/api/auth/active-user", {token : Cookies.get("jwt")} );
-
-              if(res.status === 200){
-                dispatchActiceUser({type : "GET_ACTIVE_USER", payload : res.data.user});
-              }
-              
-            }
-          }
-          catch(error){
-            console.log(error.message);
-          }
-      }
+    .red-text {
+        color: #a569bd;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    .color-indicator {
+        position: relative;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        margin-left: 48px;
+        margin-top: -15px;
+    }
+  }
 
 
-    fetchCurrentPost();
-    fetchActiveUser()
-  }, [id,dispatchActiceUser]);
+  @media screen and (min-width: 768px) and (max-width: 1279px){
+
+    .single_blog_post {
+        width: 90%;
+        padding: 15px 30px;
+        border: 1px solid rgba(128, 128, 128, 0.255);
+        margin-top: 20px;
+    }
+    .single_post_img_wrapper img {
+        width: 100%;
+        height: 314px;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+    .single_post_title_wrappper p {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 10px 0;
+        color: rgb(129, 129, 129);
+    }
+
+    .red-text {
+        color: #a569bd;
+        font-weight: 600;
+        font-size: 19px;
+    }
+    .color-indicator {
+        position: relative;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin-left: 53px;
+        margin-top: -18px;
+    }
 
 
-  return (
-    <>
-      {currentPost&&activeUser? (
-        <div className="single_blog_post_wrapper">
-          <div className="single_blog_post">
-            <Link to={`/profile/${postAuthor?._id}`}>
-              {postAuthor ? (
-                <div className="blog_post_author_single">
-                  {/* <div className="left">
-                    <img
-                      src={postAuthor ? postAuthor.profileImage : ""}
-                      alt=""
-                    />
-                  </div> */}
-                  <div className="author_name_wrapper">
-                    <h2 className="__title">
-                      {/* {postAuthor ? postAuthor.name : "XYZ"} */}
-                    </h2>
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-            </Link>
-            <div className="single_post_img_wrapper">
-              <img
-                src={currentPost ? currentPost.postImage : ""}
-                alt="postImg"
-              />
-            </div>
-            <div className="title_and_buttons_wrapper">
-              <div className="single_post_title_wrappper">
-                <p>{currentPost ? currentPost.title : ""}</p>
-              </div>
-
-              {activeUser?._id === currentPost?.authorId ? (
-                <div className="buttons_wrapper">
-                  <p className="post_icon_wrapper">
-                    <Link
-                      to={`/update-post/${
-                        currentPost ? currentPost?._id : null
-                      }`}
-                    >
-                      <EditIcon className="post_icon" />
-                    </Link>
-                  </p>
-                  <p
-                    className="post_icon_wrapper"
-                    onClick={() => {
-                      handleDelete(currentPost ? currentPost?._id : null);
-                    }}
-                  >
-                    <Link to="/">
-                      <DeleteIcon className="post_icon delete_post_icon_home" />
-                    </Link>
-                  </p>
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="author_and_timestamps">
-              {/* <p>
-                <span className="author_txxt">Author</span> : {postAuthor?.name}
-              </p> */}
-              {/* {postAuthor ? <p>{format(postAuthor.updatedAt)}</p> : ""} */}
-            </div>
-        
-
-            <div className="single_post_description_wrapper">
-              <p className="red-text">Description: <span className="span"> {currentPost ? currentPost.description : ""}</span></p>
-            </div>
-            <div className="single_post_description_wrapper">
-              <p className="red-text">Price: <span className="span"> {currentPost ? `${currentPost.price}$` : ""}</span></p>
-            </div>
-      
-            <div className="single_post_description_wrapper">
-              <p className="red-text"> Size: <span className="span">{currentPost ? currentPost.size : ""}</span> </p>
-            </div>
-            
-            <div className="single_post_description_wrapper">
-              <div className="red-text"> Color:
-              {currentPost && currentPost.color ? (
-          <div  className={`color-indicator ${currentPost.color.toLowerCase()}`}
-          >
-          </div>
-        ) : (
-          console.log("color yoxdu")
-        )}
-              
-               </div>
-              {/* <p>{currentPost ? currentPost.color : ""}</p> */}
-            </div>
-            <Comments post={currentPost} />
-          </div>
-        </div>
-      ) : (
-        <PageLoader />
-      )}
-      <Footer/>
-    </>
-  );
-};
-
-export default SinglePost;
+  }
