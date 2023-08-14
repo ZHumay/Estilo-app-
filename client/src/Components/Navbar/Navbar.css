@@ -41,7 +41,7 @@
     transform: translateY(8px);
 }
 .rightt{
-    margin-top: 6px;
+    margin-top: 15px;
 }
 
 .navbar .left{
@@ -132,6 +132,8 @@
 }
 .mll-basket{
     margin-right: -50px;
+
+
 }
 
 @media screen and (min-width: 320px) and (max-width: 768px){
@@ -214,5 +216,69 @@
     display: flex;
     flex-direction: row;
 }
+.navbar .menu-link a {
+    margin-left: 58px;
+    font-size: 16px;
+    transform: translateY(0px);
+    padding: 2px 5px;
+    font-weight: 500;
+    letter-spacing: .1px;
+    transition: .2s ease;
+}
+.rightt{
+margin-top: 6px;
+}
+}
 
+@media screen and (min-width: 768px) and (max-width: 1279px){
+
+    .navbar .left {
+        transform: translate(-30px,-12px);
+    }
+    
+    .nav_profile_image {
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        border: 0.5px solid gray;
+        padding: 2px;
+        transform: translate(-15px,10px);
+        object-fit: cover;
+        margin-left: 15px;
+    }
+    .mll-basket .shopbag {
+        width: 32px;
+        height: 32px;
+        transform: translate(-24px,9px);
+    }
+
+    .righttt {
+        display: flex;
+        flex-direction: row;
+        margin-left: -53px;
+        margin-top: 16px;
+    }
+    .ml-login{
+        display: flex;
+    }
+    
+    .ml-register{
+        display: flex;
+        flex-direction: row;
+    }
+    .navbar .menu-link a {
+        margin-left: 58px;
+        font-size: 16px;
+        transform: translateY(-3px);
+        padding: 2px 5px;
+        font-weight: 500;
+        letter-spacing: .1px;
+        transition: .2s ease;
+    }
+    .navbar .left {
+        transform: translate(-140px,-12px);
+    }
+    .rightt{
+        margin-top: 5px;
+        }
 }
