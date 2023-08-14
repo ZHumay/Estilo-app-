@@ -15,6 +15,8 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import { useAdminContext } from '../../context/AdminContext';
+
 function Shop() {
   const navigate = useNavigate();
   const { comments, dispatchComments } = useCommentsContext();
@@ -24,6 +26,7 @@ function Shop() {
   const [allPosts, setAllPosts] = useState();
   const [cate, setCate] = useState();
   const [gender, setgender] = useState();
+  const {admin}=useAdminContext()
 
   const filterCategory = (category) => {
     setCate(category);
@@ -65,7 +68,7 @@ function Shop() {
 
   return (
     <>
-      {activeUser ? (
+      {activeUser && !admin ? (
         <div className="shop">
           <div className="home">
             <div className="home_wrapper">
