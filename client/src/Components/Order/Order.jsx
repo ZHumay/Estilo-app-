@@ -83,6 +83,10 @@ const Order = () => {
     onSubmit: async (values) => {
     
         handleClose();
+        if (basketItems.length === 0) {
+          Swal.fire("Error", "Your basket is empty. Please add items before placing an order.", "error");
+          return;
+        }
         const orderedBasketItems = basketItems.map((basketItem) => {
           const matchedPost = allPosts.find((post) => post._id === basketItem._id);
           return {
@@ -130,6 +134,7 @@ const Order = () => {
         }
       } catch (error) {
         console.error("Error while sending order:", error);
+       
       }
     },
   });
