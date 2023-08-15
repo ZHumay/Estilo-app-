@@ -113,7 +113,20 @@ const Order = () => {
         if (response.status === 200) {
           // Siparişi OrderContext'e ekle
           addOrder(response.data);
+
           Swal.fire("Order completed", response.data.msg, "success");
+
+         
+           // Loop through each item and delete from both server and local state
+      for (const item of basketItems) {
+        await axios.delete(`/api/auth/user/${activeUser._id}/basketItems`, {
+          data: { itemToDelete: item },
+        });
+        removeFromBasket(item); // Remove each item from the basket
+      }
+
+      // Clear basket items from local storage
+
         }
       } catch (error) {
         console.error("Error while sending order:", error);
