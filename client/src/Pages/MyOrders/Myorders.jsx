@@ -48,16 +48,11 @@ function Myorders() {
                         <p>{item.title}</p>
                         <p>Price: {item.price}$</p>
                         <p>Address: {order.address}</p>
-                        {order.counts &&
-                        order.counts.length > 0 &&
-                        order.counts[itemIndex] ? (
                           <p>
-                            Number of product: {order.counts[itemIndex].orderedCount}
+                            Number of product: {item.productcountinbasket}
                           </p>
                           
-                        ) : (
-                          <p>No count found for this order item.</p>
-                        )}
+                       
                        
                          
                       </div>
