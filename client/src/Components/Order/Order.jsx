@@ -30,16 +30,15 @@ const style = {
 const Order = () => {
   const { addToBasket, removeFromBasket, basketItems, total } =
     useContext(BasketContext);
-    const [currentPost, setCurrentPost] = useState([]);
   const { orders, addOrder } = useContext(OrderContext);
   const { activeUser } = useActiveUserContext();
-  const [addAddres, setAddAddress] = useState("");
-  const [count,setCount]=useState("")
-  const { dispatch } = usePostsContext();  
-  const {id} = useParams();
+  const [count, setCount] = useState("");
+  const { posts, dispatch } = usePostsContext();
+  const [allPosts, setAllPosts] = useState();
+
+  const { id } = useParams();
   let navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
-  const posts = useSelector((state) => state.post.posts);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,20 +48,27 @@ const Order = () => {
   };
   const handleClose = () => setOpen(false);
 
-const allcount=async()=>{
+  useEffect(() => {
 
-  try {
-    const res=await axios.get(`api/posts/get-allcount`)
-    setCount(res.data)
-    console.log();
-  } catch (error) {
-    console.error("error")
-  }
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get("/api/posts/posts/admin");
+
+        if (res.status === 200) {
+          setAllPosts(res.data.posts);
+          dispatch({ type: "SET_POSTS", payload: res.data.posts.reverse() });
+        } else {
+          console.log(res.data.msg);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    fetchPosts();
+  }, [dispatch]);
+  
  
-}
-useEffect(()=>{
-allcount()
-},[count])
 
   const addProductValidationSchema = Yup.object().shape({
     address: Yup.string().required("Must be filled!"),
@@ -75,39 +81,43 @@ allcount()
     validationSchema: addProductValidationSchema,
 
     onSubmit: async (values) => {
-      handleClose();
-      const order = {
-        total: total(),
-        counts:count.map((items)=>({
-          orderedCount:items.productcountinbasket,
-          id: items._id
-       })),
-        count: basketItems.length,
-        address: values.address,
-        items: basketItems.map((item) => ({
-          postImage: item.postImage,
-          title: item.title,
-          price: item.price,
-        }
+    
+        handleClose();
+        const orderedBasketItems = basketItems.map((basketItem) => {
+          const matchedPost = allPosts.find((post) => post._id === basketItem._id);
+          return {
+            ...basketItem,
+            productcountinbasket: matchedPost ? matchedPost.productcountinbasket : 0,
+          };
+        });
+  
+        const order = {
+          total: total(),
+          count: orderedBasketItems.length,
+          address: values.address,
+          items: orderedBasketItems.map((item) => ({
+            postImage: item.postImage,
+            title: item.title,
+            price: item.price,
+            productcountinbasket: item.productcountinbasket,
+          })),
+        };
 
-        )),
-
-      };
       // Axios ile isteği gönder
       try {
-        const response = await axios.post(`/api/auth/user/${activeUser._id}/orderItems`, order);
+        const response = await axios.post(
+          `/api/auth/user/${activeUser._id}/orderItems`,
+          order
+        );
         // İsteğin başarılı olduğunu kontrol et ve gerektiğinde işlemler yap
         if (response.status === 200) {
           // Siparişi OrderContext'e ekle
           addOrder(response.data);
           Swal.fire("Order completed", response.data.msg, "success");
-
-     
         }
       } catch (error) {
         console.error("Error while sending order:", error);
       }
-      
     },
   });
 
