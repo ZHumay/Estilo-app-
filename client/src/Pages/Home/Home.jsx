@@ -19,6 +19,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useAdminContext } from '../../context/AdminContext';
+import Order from '../../Components/Order/Order';
 const Home = () => {
 
   const navigate = useNavigate();
@@ -331,6 +332,8 @@ const modalStyle = {
             allPosts?.map((post) => {
               if (!selectedColor || post.color === selectedColor) {
                 return <BlogPostCardHome key={post._id} post={post} color={post.color} />;
+               
+                
               }
               return null;
             })
