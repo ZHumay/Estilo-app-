@@ -34,8 +34,18 @@ const Basket = () => {
 
   const customBreakpoints = {
     xs: 321,
+    xs2:383,
+    s:490,
+    s2:530,
+    md2:703,
+    md3:885,
     md: 768,
+    lg2:915,
+    lg3:1013,
+    lg4:1173,
+    lg5:1245,
     lg: 1279,
+    xl1:1301,
     xl: 1920, // Örnek bir büyük boyut
   };
   
@@ -133,9 +143,9 @@ const navigate=useNavigate()
           <Grid  item key={index} xs={6} sm={6} md={4} lg={3}>
             <Card  
     sx={{
-      height: "200px",
+      height: "220px",
       margin: { xs: "10px 30px", lg: "20px 30px 30px 62px",md:"10px 30px 30px 30px" },
-      width: { xs: "260px", md: "700px",lg:"1400px" }, // Set the width for mobile and wider screens
+      width: { xs: "260px", md: "678px",lg:"1400px",s2:"270px",md2:"479px",lg2:"826px",md3:"793px",lg3:"913px",lg4:"1088px",lg5:"1169px" }, // Set the width for mobile and wider screens
       display: "flex",
       flexDirection: { xs: "column", md: "row", },
       justifyContent: "center",
@@ -143,7 +153,7 @@ const navigate=useNavigate()
       border: "0.5px solid #EDECEB",
       boxShadow: "none",
       backgroundColor: "rgb(250, 250, 250)",
-      transform: { xs: "translate(23px,-30px)" ,md:"translateX(-1px)"}
+      transform: { xs: "translate(0px,-30px)", xs2: "translate(28px,-30px)" ,md:"translateX(14px)",s:"translate(70px,-30px)",s2:"translate(76px,-30px)"}
 
     }}              
             >
@@ -152,7 +162,7 @@ const navigate=useNavigate()
                 height="140"
                 image={post.postImage}
                 sx={{
-                  width: {xs:"299px",md:"190px"},
+                  width: {xs:"299px",md:"190px",md2:"515px"},
                   margin: "0px",
                   height: {md:"200px", xs:"82px"},
                   alignSelf: "flex-start", // Align the image to the top left corner
