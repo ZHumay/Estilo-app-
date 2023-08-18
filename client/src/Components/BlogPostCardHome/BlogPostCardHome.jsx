@@ -63,24 +63,41 @@ const BlogPostCardHome = ({ post,color }) => {
 
   const handleClick = async (post) => {
     try {
+      const itemToAdd = {
+        _id: post._id,
+        title: post.title,
+        description: post.description,
+        size: post.size,
+        price: post.price,
+        color: post.color,
+        category: post.category,
+        gender: post.gender,
+        authorId: post.authorId,
+        likes: post.likes,
+        postImage: post.postImage,
+        userType: post.userType,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt
+      };
+  
       if (!basketItems.some((item) => item._id === post._id)) {
         // If the item is not in the basket, add it to the basket
         const res = await axios.post(`/api/auth/user/${activeUser._id}/basketItems`, {
-          newItem: post
+          newItem: itemToAdd
         });
         addToBasket(res.data);
       } else {
         // If the item is already in the basket, remove it from the basket
         const res = await axios.delete(`/api/auth/user/${activeUser._id}/basketItems`, {
-          data: { itemToDelete: post },
+          data: { itemToDelete: itemToAdd },
         });
-        removeFromBasket(post);
-         
+        removeFromBasket(itemToAdd);
       }
     } catch (error) {
       console.error("Error adding/removing item to/from basket:", error);
     }
   };
+  
   
   
 
