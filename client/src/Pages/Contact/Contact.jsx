@@ -72,11 +72,11 @@ const Contact = () => {
 
           <StyledContactForm className="form">
       <form ref={form} onSubmit={sendEmail}>
-        <label>Name</label>
+        <label className="label">Name</label>
         <input type="text" name="user_name" placeholder="Enter your name" />
-        <label>Email</label>
+        <label className="label">Email</label>
         <input type="email" name="user_email" placeholder="Enter your email" />
-        <label>Message</label>
+        <label className="label">Message</label>
         <textarea name="message" placeholder="Message..." />
         <input type="submit" value="Send" />
       </form>
