@@ -146,7 +146,7 @@ console.log(admin);
     <Link to="/">
       <span
         style={{
-          color: "rgb(66, 64, 64)",
+          color: "rgb(66,64,64)",
           fontSize: "20px",
           fontWeight: "700",
         }}
@@ -163,7 +163,7 @@ console.log(admin);
         <>
             <Link
         style={{
-          color: "rgb(66, 64, 64)",
+          color: "rgb(66,64,64)",
           fontSize: "17px",
           fontWeight: "700",
         }}
@@ -174,7 +174,7 @@ console.log(admin);
       </Link>
           <Link
             style={{
-              color: "rgb(66, 64, 64)",
+              color: "rgb(66,64,64)",
               fontSize: "17px",
               fontWeight: "700",
             }}
@@ -185,7 +185,7 @@ console.log(admin);
           </Link>
           <Link
             style={{
-              color: "rgb(66, 64, 64)",
+              color: "rgb(66,64,64)",
               fontSize: "17px",
               fontWeight: "700",
             }}
@@ -196,7 +196,7 @@ console.log(admin);
           </Link>
           <Link
             style={{
-              color: "rgb(66, 64, 64)",
+              color: "rgb(66,64,64)",
               fontSize: "17px",
               fontWeight: "700",
             }}
@@ -207,7 +207,7 @@ console.log(admin);
           </Link>
           <Link
             style={{
-              color: "rgb(66, 64, 64)",
+              color: "rgb(66,64,64)",
               fontSize: "17px",
               fontWeight: "700",
             }}
@@ -218,7 +218,7 @@ console.log(admin);
           </Link>
           <Link
         style={{
-          color: "rgb(66, 64, 64)",
+          color: "rgb(66,64,64)",
           fontSize: "17px",
           fontWeight: "700",
         }}
@@ -229,7 +229,7 @@ console.log(admin);
       </Link>
       <Link
         style={{
-          color: "rgb(66, 64, 64)",
+          color: "rgb(66,64,64)",
           fontSize: "17px",
           fontWeight: "700",
         }}
@@ -244,7 +244,7 @@ console.log(admin);
         <>
           <Link
         style={{
-          color: "rgb(66, 64, 64)",
+          color: "rgb(66,64,64)",
           fontSize: "17px",
           fontWeight: "700",
         }}
@@ -255,7 +255,7 @@ console.log(admin);
       </Link>
       <Link
         style={{
-          color: "rgb(66, 64, 64)",
+          color: "rgb(66,64,64)",
           fontSize: "17px",
           fontWeight: "700",
         }}
