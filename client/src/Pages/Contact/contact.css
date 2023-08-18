@@ -30,6 +30,15 @@ line-height: 35px;
 .infop{
     transform: translateX(30px);
 }
+.form{
+    box-shadow: 1px 1px 23px rgb(208, 187, 208);
+    transform: translateY(16px);
+
+}
+.form .label{
+    color: #9448b2;
+    font-weight: bold;
+}
 
 @media screen and (min-width: 320px) and (max-width: 768px){
 
