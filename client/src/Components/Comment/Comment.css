@@ -38,11 +38,19 @@
 .comment_txt_wrapper{
     padding-left:0px;
     font-weight: 400;
-    transform: translateY(-28px);
+    transform: translateY(-10px);
     word-wrap: break-word; /* Wrap long words */
     overflow-wrap: break-word;
     max-width: 500px;
 
+}
+.comment_txt_wrapperr{
+    padding-left:0px;
+    font-weight: 400;
+    transform: translateY(-25px);
+    word-wrap: break-word; /* Wrap long words */
+    overflow-wrap: break-word;
+    max-width: 500px;
 }
 
 .comment_txt_wrapper p{
