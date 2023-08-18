@@ -6,7 +6,7 @@
   padding: 10px 200px;
   box-sizing: border-box; */
   width: 100%;
-  height: auto;
+  height: 101.5vh;
   margin: 0;
   padding: 10px 200px;
   box-sizing: border-box;
@@ -23,8 +23,9 @@ display: flex;
 flex-wrap: wrap;
   flex: 7;
   height: auto;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   overflow-x: hidden;
+  height: 120vh;
   margin-top: 30px;
 
   transform: translateX(-147px);
@@ -66,7 +67,7 @@ flex-wrap: wrap;
   font-weight: 500;
   cursor: pointer;
   border-bottom: 1px solid rgba(70, 161, 194, 0.103);
-  background-color: #f3f2ee;
+  background-color: #dfacee77;
   margin-bottom: 2px;
   transition: all .1s ease;
 }
@@ -244,7 +245,9 @@ width: 598px;
 .gender_item{
 padding-right: 60px;
 cursor: pointer;
-color: #A569BD;
+color: #b164cf;
+font-weight: bold;
+letter-spacing: 0.1rem;
 }
 .gender_item:hover{
 text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi gösterir */
