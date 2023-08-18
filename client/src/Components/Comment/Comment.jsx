@@ -97,9 +97,10 @@ const Comment = ({comment, post}) => {
             </div>
           
         </div>
-        <div className="comment_txt_wrapper">
-            <p> {comment?.comment}</p>
-        </div>
+        <div className={`comment_txt_wrapper ${activeUser?._id === comment.authorId ? 'comment_txt_wrapperr' : ''}`}>
+    <p> {comment?.comment}</p>
+</div>
+
         
       </div>
     </div>
