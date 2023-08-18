@@ -16,6 +16,7 @@ import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useAdminContext } from '../../context/AdminContext';
+import Carousel from "../../Components/CarouselSwiper/Carousel";
 
 function Shop() {
   const navigate = useNavigate();
@@ -150,7 +151,10 @@ function Shop() {
       ) : (
         navigate("/login")
       )}
+      <h2 className="popular-products">Most popular products</h2>
+      <Carousel/>
       <Footer />
+
     </>
   );
 }
