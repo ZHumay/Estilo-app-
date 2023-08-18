@@ -4,7 +4,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import "./order.css";
 import { useNavigate } from "react-router";
-import { useParams } from "react-router-dom";
+import { useFetcher, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BasketContext } from "../../context/BasketContext";
@@ -35,6 +35,7 @@ const Order = () => {
   const [count, setCount] = useState("");
   const { posts, dispatch } = usePostsContext();
   const [allPosts, setAllPosts] = useState();
+  const [allPostsUser, setAllPostsUser] = useState([]);
 
   const { id } = useParams();
   let navigate = useNavigate();
@@ -48,7 +49,7 @@ const Order = () => {
   };
   const handleClose = () => setOpen(false);
 
-  useEffect(() => {
+
 
     const fetchPosts = async () => {
       try {
@@ -56,6 +57,22 @@ const Order = () => {
 
         if (res.status === 200) {
           setAllPosts(res.data.posts);
+          dispatch({ type: "SET_POSTS", payload: res.data.posts.reverse() });
+          console.log(res.data.posts)
+            } else {
+          console.log(res.data.msg);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    const fetchPostsUser = async () => {
+      try {
+        const res = await axios.get("/api/posts/posts");
+
+        if (res.status === 200) {
+          setAllPostsUser(res.data.posts);
           dispatch({ type: "SET_POSTS", payload: res.data.posts.reverse() });
         } else {
           console.log(res.data.msg);
@@ -65,10 +82,11 @@ const Order = () => {
       }
     };
 
+
     fetchPosts();
-  }, [dispatch]);
+    fetchPostsUser()
+
   
- 
 
   const addProductValidationSchema = Yup.object().shape({
     address: Yup.string().required("Must be filled!"),
@@ -87,14 +105,27 @@ const Order = () => {
           Swal.fire("Error", "Your basket is empty. Please add items before placing an order.", "error");
           return;
         }
+        
         const orderedBasketItems = basketItems.map((basketItem) => {
           const matchedPost = allPosts.find((post) => post._id === basketItem._id);
+          const matchedPostUser = allPostsUser.find((post) => post._id === basketItem._id);
+          console.log(matchedPost);
+          let productcountinbasket=1
+        
+          if (matchedPost) {
+            productcountinbasket = matchedPost.productcountinbasket;
+          } else if (matchedPostUser) {
+             productcountinbasket = matchedPostUser.productcountinbasket;
+          }
+        
           return {
             ...basketItem,
-            productcountinbasket: matchedPost ? matchedPost.productcountinbasket : 0,
+            productcountinbasket: productcountinbasket,
           };
         });
-  
+        console.log(orderedBasketItems);
+
+        
         const order = {
           total: total(),
           count: orderedBasketItems.length,
@@ -117,10 +148,8 @@ const Order = () => {
         if (response.status === 200) {
           // Siparişi OrderContext'e ekle
           addOrder(response.data);
-
           Swal.fire("Order completed", response.data.msg, "success");
 
-         
            // Loop through each item and delete from both server and local state
       for (const item of basketItems) {
         await axios.delete(`/api/auth/user/${activeUser._id}/basketItems`, {
@@ -138,6 +167,7 @@ const Order = () => {
       }
     },
   });
+
 
   return (
     <div className="order-box">
