@@ -331,6 +331,7 @@ const modalStyle = {
             allPosts?.length === 0 ? <p className='posts_not_found'>No products of {cate} category</p>: 
             allPosts?.map((post) => {
               if (!selectedColor || post.color === selectedColor) {
+                
                 return <BlogPostCardHome key={post._id} post={post} color={post.color} />;
                
                 
@@ -338,8 +339,6 @@ const modalStyle = {
               return null;
             })
             
-             
-           
           }
       </div>
     
