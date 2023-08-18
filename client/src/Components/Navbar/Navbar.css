@@ -13,11 +13,13 @@
 
 .navbar a {
   text-decoration: none;
+
 }
 
 .logo a {
   font-size: 24px;
   font-weight: 700;
+
 }
 .center {
   transform: translateY(3px);
@@ -34,6 +36,7 @@
   font-family: monospace;
   font-weight: 700;
   color: rgb(66, 64, 64);
+  
 }
 
 .rightt .menu-link {
@@ -469,6 +472,7 @@
   width: 241px;
 }
 
+
 }
 
 @media screen and (min-width: 1279px) and (max-width:1296px) {
@@ -494,7 +498,9 @@
 margin-left: 13px;
 }
 
+
 }
+
 
  @media screen and (min-width: 1296px)  {
 
@@ -518,6 +524,7 @@ margin-left: 13px;
   position: relative;
 margin-left: 13px;
 }
+
 
 } 
 
@@ -543,6 +550,7 @@ margin-left: 13px;
   position: relative;
 margin-left: 13px;
 }
+
 
 } 
 
