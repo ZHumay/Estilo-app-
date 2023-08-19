@@ -179,7 +179,7 @@ const modalStyle = {
             <div className="slide-text">
               <h1> Women collection</h1>
               <Button
-                style={{ backgroundColor: "#A569BD",fontSize:"10px",fontWeight:"bold" }}
+                style={{ backgroundColor: "#DE782E",fontSize:"10px",fontWeight:"bold" }}
                 className="slidebtn"
                 variant="contained"
                 onClick={clickshopwoman}
@@ -188,7 +188,7 @@ const modalStyle = {
               </Button>
             </div>
             <img
-              src="https://themewagon.github.io/cozastore/images/slide-01.jpg"
+              src={require("../../Images/Untitled.png")}
               alt=""
             />
           </div>
@@ -196,7 +196,7 @@ const modalStyle = {
             <div className="slide-text">
               <h1> Men collection</h1>
               <Button
-                style={{ backgroundColor: "#A569BD",fontSize:"10px",fontWeight:"bold" }}
+                style={{ backgroundColor: "#DE782E",fontSize:"10px",fontWeight:"bold" }}
                 className="slidebtn"
                 variant="contained"
                 onClick={clickshopman}

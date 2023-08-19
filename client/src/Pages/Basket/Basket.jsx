@@ -300,7 +300,7 @@ const Basket = () => {
                                 paddingLeft: 10,
                                 width: "50px",
                                 height: "20px",
-                                color: "a569bd",
+                                color: "#e08e53",
                               }}
                             />
                           </span>

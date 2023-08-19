@@ -12,7 +12,8 @@ font-size: 26px;
 transform: translate(50px,90px);
 margin-top: 90px;
 width: 350px;
-color: rgb(139, 44, 160);
+color: #e08e53;
+letter-spacing: 0.1rem;
 }
 @media screen and (min-width: 320px) and (max-width: 768px){
 

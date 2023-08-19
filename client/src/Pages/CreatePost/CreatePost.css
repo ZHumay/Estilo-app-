@@ -14,7 +14,7 @@
     background-color: white;
     padding: 15px 30px;
     border-radius: 15px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(169, 45, 185, 0.2778361344537815) 100%); 
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(195, 130, 74, 0.278) 100%); 
     border: 0.5px solid rgb(203, 200, 200);
 transform: translateY(-16px);
 }
@@ -23,12 +23,11 @@ transform: translateY(-16px);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #A569BD;
+    color: #e08e53;
 }
 
 .create_post_heading{
     display: inline-block;
-    border-bottom: 2px solid gray;
 }
 
 .create_post_container form .input_field{
@@ -38,7 +37,7 @@ transform: translateY(-16px);
 .create_post_container form .input_field label{
     font-weight: 400;
     margin-bottom: 5px;
-    color: #A569BD;
+    color: #e08e53;
 font-weight: bold;
 font-size: 13px;
     display: block;
@@ -86,7 +85,7 @@ font-size: 13px;
     font-weight: 600;
     color: white;
     border: none;
-    background-color: #A569BD;
+    background-color: #e08e53;
     letter-spacing: 1px;
     cursor: pointer;
     border-radius: 5px;
@@ -102,7 +101,7 @@ font-size: 13px;
         background-color: white;
         padding: 15px 30px;
         border-radius: 15px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(169, 45, 185, 0.2778361344537815) 100%);
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(195, 130, 74, 0.278) 100%);
         border: 0.5px solid rgb(203, 200, 200);
         transform: translateY(-16px);
     }
@@ -114,7 +113,7 @@ font-size: 13px;
         font-weight: 600;
         color: white;
         border: none;
-        background-color: #A569BD;
+        background-color: #e08e53;
         letter-spacing: 1px;
         cursor: pointer;
         border-radius: 5px;
@@ -131,7 +130,7 @@ font-size: 13px;
         background-color: white;
         padding: 15px 30px;
         border-radius: 15px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(169, 45, 185, 0.2778361344537815) 100%); 
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(195, 130, 74, 0.278) 100%); 
         border: 0.5px solid rgb(203, 200, 200);
     transform: translateY(-16px);
     }

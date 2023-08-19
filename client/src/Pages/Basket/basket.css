@@ -16,7 +16,7 @@
 }
 .title{
     font-weight: bold;
-    color: #A569BD;
+    color: #e08e53;
     font-size: 20px;
 }
 .price{
@@ -41,7 +41,7 @@
 @media screen and (min-width: 320px) and (max-width: 768px){
     .title{
         font-weight: bold;
-        color: #A569BD;
+        color: #e08e53;
         font-size: 12px;
     }
     .price{
@@ -56,7 +56,7 @@
 @media screen and (min-width:530px) {
     .title {
         font-weight: bold;
-        color: #A569BD;
+        color: #e08e53;
         font-size: 16px;
     }
 }

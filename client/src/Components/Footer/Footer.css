@@ -122,7 +122,8 @@ html {
   row-gap: 20px;
 }
 .footerh3{
-  color:#daacec
+  color:#e08e53;
+  letter-spacing: 0.1rem;
 }
 .category{
   cursor:pointer

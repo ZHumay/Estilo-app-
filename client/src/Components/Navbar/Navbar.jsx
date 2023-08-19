@@ -78,6 +78,8 @@ const Navbar = () => {
       setSearchResultContainerStyle("hideSearch");
     }
   };
+
+ 
 console.log(admin);
   return (
 
@@ -322,16 +324,16 @@ console.log(admin);
                 Logout
               </Link>
 
-              <Link to={`/profile/${activeUser && activeUser._id}`} className="nav_profile_img" >
+
+              <Link to={`/profile/${activeUser && activeUser._id}`} className="nav_profile_img"  >
                 <img
                   src={activeUser && activeUser.profileImage}
                   alt="Profile"
                   className="nav_profile_image"
                 />
-                
               </Link>
-           
             </>
+            
           ) : (
             <>
             <div className="righttt" >

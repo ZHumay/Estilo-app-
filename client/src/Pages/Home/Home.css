@@ -10,9 +10,10 @@
   margin: 0;
   padding: 10px 200px;
   box-sizing: border-box;
-  background-color: white ;
 }
-
+body{
+  background-color: rgb(251, 251, 254);
+}
 .home_wrapper{
   display: flex;
   justify-content: center;
@@ -67,7 +68,7 @@ flex-wrap: wrap;
   font-weight: 500;
   cursor: pointer;
   border-bottom: 1px solid rgba(70, 161, 194, 0.103);
-  background-color: #dfacee77;
+  background-color: #cfa45a77;
   margin-bottom: 2px;
   transition: all .1s ease;
 }
@@ -76,7 +77,7 @@ flex-wrap: wrap;
   background-color: rgba(251, 245, 245, 0.238);
   transform: scale(1.08);
   margin-left: 4px;
-  color: #A569BD
+  color: #b5703f
   ;
 }
 .filter{
@@ -89,6 +90,7 @@ flex-wrap: wrap;
   font-size: 22px;
   padding: 10px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.238);
+  margin-top: 50px;
 }
 
 .posts_not_found{
@@ -97,7 +99,7 @@ font-weight: 500;
 margin-top: 100px;
 text-align: center;
 padding: 10px 50px;
-color: #A569BD;
+color: #DE782E;
 transform: translateX(-23px);
 }
 
@@ -130,8 +132,9 @@ color: rgb(66, 64, 64); /* text ve buton rengi */
 z-index: 1; /* resmin üzerinde olması için z-index'i artırın */
 }
 h1{
-font-size: 50px;
+font-size: 56px;
 font-weight: bold;
+color: #57515a;
 }
 .slidebtn {
 color: white; /* Butonun metin rengi */
@@ -245,13 +248,13 @@ width: 598px;
 .gender_item{
 padding-right: 60px;
 cursor: pointer;
-color: #b164cf;
+color: #e08e53;
 font-weight: bold;
 letter-spacing: 0.1rem;
 }
 .gender_item:hover{
 text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi gösterir */
-color: #803a9b;
+color: #e5b563;
 }
 .overview_link{
 margin-right: 80px;
@@ -309,7 +312,7 @@ cursor: pointer;
 .gender_item {
   /* padding-right: 60px; */
   cursor: pointer;
-  color: #A569BD;
+  color: #DE782E;
   margin-left: 14px;
   padding-bottom: 7px;
   font-size: 12px;
@@ -417,7 +420,7 @@ h1{
 }
 .gender_item {
   cursor: pointer;
-  color: #A569BD;
+  color: #DE782E;
   margin-left: 14px;
   padding-bottom: 15px;
   font-size: 16px;

@@ -159,12 +159,12 @@ const BlogPostCardHomeUser = ({ post,color }) => {
               {basketItems.some((item) => item._id === post._id) ? (
                 // Show RemoveShoppingCartIcon if the item is in the basket
                 <span className="btn-body">
-                  <RemoveShoppingCartIcon style={{ paddingLeft: 10, width: "50px", height: "20px", color: "a569bd" }} />
+                  <RemoveShoppingCartIcon style={{ paddingLeft: 10, width: "50px", height: "20px", color: "#e08e53" }} />
                 </span>
               ) : (
                 // Show AddShoppingCartIcon if the item is not in the basket
                 <span className="btn-body">
-                  <AddShoppingCartIcon style={{ paddingLeft: 10, width: "50px", height: "20px", color: "a569bd" }} />
+                  <AddShoppingCartIcon style={{ paddingLeft: 10, width: "50px", height: "20px", color: "#e08e53" }} />
                 </span>
               )}
             </Button>

@@ -14,7 +14,7 @@
 .single_blog_post{
     width: 60%;
     padding: 15px 30px;
-    box-shadow: 1px 1px 45px rgb(226, 195, 226);
+    box-shadow: 1px 1px 85px rgb(245, 227, 212);
 
 }
 
@@ -101,7 +101,7 @@
     margin-top: 20px;
 }
 .red-text {
-    color: #a569bd;
+    color: #e08e53;
     font-weight: 600;
     font-size: 20px;
 }
@@ -181,7 +181,7 @@ table, th, td {
     }
 
     .red-text {
-        color: #a569bd;
+        color: #e08e53;
         font-weight: 600;
         font-size: 16px;
     }
@@ -218,7 +218,7 @@ table, th, td {
     }
 
     .red-text {
-        color: #a569bd;
+        color: #e08e53;
         font-weight: 600;
         font-size: 19px;
     }

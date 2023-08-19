@@ -114,7 +114,7 @@ const StyledContactForm = styled.div`
 
 
       &:focus {
-        border: 2px solid #a569bd;
+        border: 2px solid #e08e53;
       }
     }
 
@@ -131,7 +131,7 @@ const StyledContactForm = styled.div`
       margin-top:14px;
 
       &:focus {
-        border: 2px solid #a569bd;
+        border: 2px solid #e08e53;
       }
     }
 
@@ -143,7 +143,7 @@ const StyledContactForm = styled.div`
     input[type="submit"] {
       margin-top: 2rem;
       cursor: pointer;
-      background: #a569bd;
+      background: #e08e53;
       color: white;
       border: none;
     }

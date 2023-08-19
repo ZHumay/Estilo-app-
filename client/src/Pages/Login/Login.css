@@ -1,16 +1,110 @@
-    .login{
-        width: 100%;
-        height: 90.7vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: white;
-    }
-    
+.login{
+    width: 100%;
+    height: 90.7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.login form{
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(195, 130, 74, 0.278)100%); 
+    padding: 12px 25px;
+    padding-bottom: 10px;
+    border-radius: 15px;
+    border: 0.5px solid rgb(239, 238, 238);
+
+}
+
+.login_heading_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icons{
+    transform: translateY(2px);
+    color: rgb(81, 79, 79);
+  }
+
+.login_heading{
+    text-align: center;
+    padding: 5px 0;
+    display: inline-block;
+    color: #e08e53;
+    font-size: 30px; 
+    margin-top: 20px;
+   }
+
+.login .input_filed{
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.login .input_filed label{
+    display: block;
+    margin-bottom: 15px;
+    font: 400;
+}
+
+.login .input_filed input{
+    padding: 10px 10px;
+    border-radius: 5px;
+    width: 100%;
+    border:2px solid transparent;
+    outline: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.24);
+    transition: .2s ease;
+}
+
+.login .input_filed input:focus{
+    border: 2px solid #e08e53;
+}
+
+.login_button_container{
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.login_button_container button{
+    padding: 7px 30px;
+    font-size: 16px;
+    background-color: none;
+    font-weight: 600;
+    color: white;
+    border: none;
+    background-color: #e08e53 ;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.429);
+}
+.login_button_container button:hover{
+    background-color: #d19ce6;
+  }
+
+.bottom_form{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.bottom-signup {
+    color: #e08e53;
+    font-size: 14px;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+
+
     .login form{
-        width: 400px;
+        width: 300px;
         height: 400px;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(169, 45, 185, 0.2778361344537815) 100%); 
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(195, 130, 74, 0.278) 100%); 
         padding: 12px 25px;
         padding-bottom: 10px;
         border-radius: 15px;
@@ -18,115 +112,21 @@
 
     }
 
-    .login_heading_wrapper{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .icons{
-        transform: translateY(2px);
-        color: rgb(81, 79, 79);
-      }
-    
-    .login_heading{
-        text-align: center;
-        padding: 5px 0;
-        display: inline-block;
-        color: #A569BD;
-        font-size: 30px; 
-        margin-top: 20px;
-       }
-    
-    .login .input_filed{
-        margin-bottom: 15px;
-        font-size: 15px;
-    }
-    
-    .login .input_filed label{
-        display: block;
-        margin-bottom: 15px;
-        font: 400;
-    }
-    
-    .login .input_filed input{
-        padding: 10px 10px;
-        border-radius: 5px;
-        width: 100%;
-        border:2px solid transparent;
-        outline: none;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.24);
-        transition: .2s ease;
-    }
-    
-    .login .input_filed input:focus{
-        border: 2px solid #A569BD;
-    }
-    
-    .login_button_container{
-        margin: 10px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-    }
-    
-    .login_button_container button{
-        padding: 7px 30px;
-        font-size: 16px;
-        background-color: none;
-        font-weight: 600;
-        color: white;
-        border: none;
-        background-color: #A569BD ;
-        letter-spacing: 1px;
-        cursor: pointer;
-        border-radius: 5px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.429);
-    }
-    .login_button_container button:hover{
-        background-color: #d19ce6;
-      }
-
-    .bottom_form{
-        text-align: center;
-        margin-top: 10px;
-        font-size: 14px;
-    }
-    .bottom-signup {
-        color: #A569BD;
-        font-size: 14px;
-    }
+}
 
 
-    @media screen and (min-width: 320px) and (max-width: 768px){
+@media screen and (min-width: 768px) and (max-width: 1279px){
 
-
-        .login form{
-            width: 300px;
-            height: 400px;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(169, 45, 185, 0.2778361344537815) 100%); 
-            padding: 12px 25px;
-            padding-bottom: 10px;
-            border-radius: 15px;
-            border: 0.5px solid rgb(239, 238, 238);
-    
-        }
+    .login form{
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(195, 130, 74, 0.278) 100%); 
+        padding: 12px 25px;
+        padding-bottom: 10px;
+        border-radius: 15px;
+        border: 0.5px solid rgb(239, 238, 238);
+        
 
     }
 
-
-    @media screen and (min-width: 768px) and (max-width: 1279px){
-
-        .login form{
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(169, 45, 185, 0.2778361344537815) 100%); 
-            padding: 12px 25px;
-            padding-bottom: 10px;
-            border-radius: 15px;
-            border: 0.5px solid rgb(239, 238, 238);
-            
-    
-        }
-
-    }
+}

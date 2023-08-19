@@ -97,7 +97,7 @@ const Profile = () => {
     };
 
     fetchPostUser();
-  }, []);
+  }, [id]);
 
 
   return (
@@ -135,7 +135,7 @@ const Profile = () => {
                
 
                 {
-                  !admin ?(
+                  !admin && activeUser?._id === postAuthor?._id  ?(
                     <>
                      <div className="orders">
                 <Link to={`/orders`} className="my-orders" >

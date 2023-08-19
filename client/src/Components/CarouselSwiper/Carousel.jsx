@@ -8,6 +8,7 @@ import { useCommentsContext } from "../../hooks/useCommentsContext";
 import axios from "axios";
 import Comment from "../Comment/Comment";
 import Comments from "../Comments/Comments";
+import { Link } from "react-router-dom";
 // import 'swiper/css/autoplay';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
@@ -41,7 +42,7 @@ function Carousel({ comment }) {
         modules={[Autoplay]}
         spaceBetween={20}
         loop={true}
-        slidesPerView={3}
+        slidesPerView={4}
         centeredSlides={true}
         autoplay={{ delay: "1500" }}
         navigation={true}
@@ -54,11 +55,9 @@ function Carousel({ comment }) {
             <p className="carousel_item_title">{post.title}</p>
             <br></br>
             <div className="item_carousel_img_wrapper">
-              <img
-                className="postimg"
-                src={post.postImage}
-                alt="Slide"
-              />
+              <Link to={`/post/${post?._id}`}>
+                <img className="postimg" src={post.postImage} alt="Slide" />
+              </Link>
             </div>
             <br></br>
             <div className="karusel-comment">
