@@ -20,6 +20,8 @@ import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useAdminContext } from '../../context/AdminContext';
 import Order from '../../Components/Order/Order';
+import LatestProducts from '../../Components/LatestProducts/LatestProducts';
+import Sale from "../../Components/Sale/Sale"
 const Home = () => {
 
   const navigate = useNavigate();
@@ -61,11 +63,16 @@ const modalStyle = {
   }
 
   const filterColor = (color) => {
-    setSelectedColor(color);
+    if (color === "All") {
+      setSelectedColor(null); // Reset the selected color
+      setAllPosts(posts); // Show all posts
+    } else {
+      setSelectedColor(color);
       const tempArray = posts.filter((post) => post.color === color);
       setAllPosts(tempArray);
-    
+    }
   };
+  
   
 
   const filterGender=(gender)=>{
@@ -188,7 +195,7 @@ const modalStyle = {
               </Button>
             </div>
             <img
-              src={require("../../Images/Untitled.png")}
+              src={require("../../Images/Untitled (3).png")}
               alt=""
             />
           </div>
@@ -290,31 +297,36 @@ const modalStyle = {
       Select Color
     </Typography>
     <Divider />
-    <List >
+    <List>
   {[
-    'white', 'black', 'red', 'green', 'yellow', 'pink',
+    'All', 'white', 'black', 'red', 'green', 'yellow', 'pink',
     'blue', 'gray', 'orange', 'beige', 'purple', 'brown'
   ].map((color) => (
     <ListItem
       key={color}
       button
-      onClick={() =>  filterColor(color)}
+      onClick={() => filterColor(color)}
     >
       <ListItemIcon>
-        <div
-          style={{
-            width: 16,
-            height: 16,
-            borderRadius: '50%',
-            backgroundColor: color,
-            marginRight: 8,
-          }}
-        />
+        {color === 'All' ? (
+          <span></span>
+        ) : (
+          <div
+            style={{
+              width: 16,
+              height: 16,
+              borderRadius: '50%',
+              backgroundColor: color,
+              marginRight: 8,
+            }}
+          />
+        )}
       </ListItemIcon>
       <ListItemText primary={color} />
     </ListItem>
   ))}
 </List>
+
 
   </Box>
 </Modal>
@@ -362,7 +374,13 @@ const modalStyle = {
     </div>
  
     </div>
+     
+
+  <LatestProducts/>
+   <Sale/>
    <Footer/>
+
+
    </>
   
   )

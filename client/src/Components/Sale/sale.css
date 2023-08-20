@@ -1,0 +1,75 @@
+
+.countdown{
+    background-color: rgb(238, 230, 222);
+    display: flex;
+    width: 680px;
+    justify-content: center;
+    align-items: flex-end;
+    border: 1px solid gray;
+    border-radius: 18px;
+    margin-top: 70px;
+    
+}
+.time-unit{
+    padding: 50px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(15, 94, 196);
+}
+.timeP{
+    font-weight: 500;
+    font-size: 20px;
+}
+.sectionsale{
+    display: flex;
+}
+.rightSale{
+    width: 43%;
+}
+.mySwiperSale{
+    width: 100%;
+    margin-top: 100px;
+  
+  }
+  .mySwiperSale-head {
+    box-shadow: 1px 1px 23px rgb(228, 186, 157);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  }
+  
+  .mySwiperSale .postimg {
+    width:208px;
+    height:223px;
+    margin-top: 70px;
+  
+  }
+  .carousel_item_title_sale{
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    color: #1c1c1c;
+  }
+  .PostPrice{
+    font-size: 20px;
+    transform: translate(30px,10px);
+    font-weight: bold;
+    color: #a1131f;
+    text-decoration: line-through;
+    padding-right: 16px;
+
+  }
+  .newprice{
+    display: flex;
+    flex-direction: row;
+
+  }
+  .newPostprice{
+    font-size: 20px;
+    transform: translate(28px,10px);
+    font-weight: bold;
+    color: #359d2c;
+  }

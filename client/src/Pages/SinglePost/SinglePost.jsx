@@ -16,8 +16,8 @@ import Cookies from "js-cookie";
 
 const SinglePost = () => {
   const { dispatch } = usePostsContext();
-  const { users } = useUsersContext();
-  
+  const { users ,dispatchUsers} = useUsersContext();
+  console.log(users);
   const {id} = useParams();
   const {activeUser, dispatchActiceUser} = useActiveUserContext();
   const [currentPost, setCurrentPost] = useState();
@@ -44,11 +44,24 @@ const SinglePost = () => {
   useEffect(() => {
     const activeUserFromStorage = JSON.parse(localStorage.getItem("activeUser"));
 
-    // Eğer "activeUser" değeri depolama alanında varsa, context içinde güncelle
     if (activeUserFromStorage) {
       dispatchActiceUser({ type: "GET_ACTIVE_USER", payload: activeUserFromStorage });
       console.log(activeUser);
 
+    }
+    const fetchUsers = async () =>{
+      try{
+        const res = await axios.get("/api/auth/all-users");
+
+        if(res.status === 200){
+           dispatchUsers({type : "SET_USERS", payload : res.data.users});
+           
+ 
+        }
+      }
+      catch(error){
+        console.log(error.message);
+      }
     }
 
     const fetchCurrentPost = async () => {
@@ -58,13 +71,16 @@ const SinglePost = () => {
 
         if (res.status === 200) {
           setCurrentPost(res.data.post);
-          setLikeCount(res.data.post.likes.length);
-
+          console.log(currentPost);
           users?.map((user) => {
-            if (user?._id === res.data.post.authorId) {
+            if (user?._id === currentPost.authorId) {
               setPostAuthor(user);
+              console.log(postAuthor.name);
             }
           });
+          setLikeCount(res.data.post.likes.length);
+
+         
         } else {
           console.log("Post not found");
         }
@@ -90,9 +106,9 @@ const SinglePost = () => {
           }
       }
 
-
     fetchCurrentPost();
     fetchActiveUser()
+    fetchUsers()
   }, [id,dispatchActiceUser]);
 
 
@@ -104,16 +120,16 @@ const SinglePost = () => {
             <Link to={`/profile/${postAuthor?._id}`}>
               {postAuthor ? (
                 <div className="blog_post_author_single">
-                  {/* <div className="left">
-                    <img
-                      src={postAuthor ? postAuthor.profileImage : ""}
+                  <div className="left">
+                    {/* <img
+                      src={currentPost ? postAuthor.profileImage : ""}
                       alt=""
-                    />
-                  </div> */}
+                    /> */}
+                  </div>
                   <div className="author_name_wrapper">
-                    <h2 className="__title">
-                      {/* {postAuthor ? postAuthor.name : "XYZ"} */}
-                    </h2>
+                    {/* <h2 className="__title">
+                      {postAuthor ? postAuthor.name : "XYZ"}
+                    </h2> */}
                   </div>
                 </div>
               ) : (

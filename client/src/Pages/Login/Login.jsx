@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -12,7 +12,6 @@ import { useAdminContext } from "../../context/AdminContext";
 const Login = () => {
   const navigate = new useNavigate();
   const{activeUser}=useActiveUserContext()
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [sending, setSending] = useState(false);

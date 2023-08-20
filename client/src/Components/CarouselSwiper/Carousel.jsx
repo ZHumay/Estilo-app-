@@ -50,7 +50,7 @@ function Carousel({ comment }) {
         style={{ padding: "20px 0" }}
       >
         {popularPosts.map((post, index) => (
-          <SwiperSlide key={post._id} className={`card rounded-lg `}>
+          <SwiperSlide key={post._id} className={`cardd rounded-lg `}>
             <br></br>
             <p className="carousel_item_title">{post.title}</p>
             <br></br>

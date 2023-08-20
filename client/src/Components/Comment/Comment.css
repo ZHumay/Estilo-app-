@@ -8,6 +8,7 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
     overflow: hidden;
     max-height: 200px; /* Set the maximum height you want for the comment div */
+    background-color: white;
 
 }
 
@@ -21,7 +22,7 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    border : 1px solid rgb(32, 151, 255);
+    /* border : 1px solid rgb(134, 90, 13); */
     padding : 2px;
 }
 .comment .right .header_name{
@@ -37,11 +38,13 @@
 
 .comment_txt_wrapper{
     padding-left:0px;
-    font-weight: 400;
+    font-weight: 600;
     transform: translateY(-10px);
     word-wrap: break-word; /* Wrap long words */
     overflow-wrap: break-word;
     max-width: 500px;
+    font-size: 10px;
+    font-family: 'Times New Roman', Times, serif;
 
 }
 .comment_txt_wrapperr{
