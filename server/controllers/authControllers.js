@@ -472,6 +472,70 @@ const update_basketItems = async (req, res) => {
   }
 };
 
+const forgetpassword= async (req, res) => {
+  const email = req.body.email;
+  try {
+    const findUser = await userModel.findOne({ email });
+    if (!findUser) {
+      return res.status(404).json("email bulunamadi");
+    }
+  
+    await findUser.save();
+    transporter.sendMail({
+      from: "c8657545@gmail.com", // sender address
+      to:email, // list of receivers
+      subject: "Change password: ", // Subject line
+      html: `
+                 
+                  <p> 
+                  <a href="http://localhost:3000/changepassword?userId=${findUser._id}">
+                  Reset password
+                  </a>
+                  </p>
+              `,
+    });
+    return res.status(200).json("okay")
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+// İlgili kütüphanelerin importları
+
+const changepassword = async (req, res) => {
+  const userId = req.body.userId;
+  const newPassword = req.body.password;
+
+  try {
+    // Kullanıcının kimliğini kullanarak kullanıcıyı bul
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json("Kullanıcı bulunamadı");
+    }
+
+    // Yeni şifreyi bcrypt ile hash'le
+    const salt = bcrypt.genSaltSync();
+    const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+    // Kullanıcının şifresini güncelle
+    user.password = hashedPassword;
+    user.cPassword = hashedPassword;
+
+    // Kullanıcıyı kaydet
+    await user.save();
+
+    return res.status(200).json("Şifre değiştirildi");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Sunucu hatası");
+  }
+};
+
+// Gerekli diğer işlevler ve exportlar
+
+
+
 
 module.exports = {
   get_login,
@@ -491,6 +555,8 @@ module.exports = {
   delete_basketItems,
   update_basketItems,
   post_orderItems,
-  get_orderItems
+  get_orderItems,
+  changepassword,
+  forgetpassword
 };
 

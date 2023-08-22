@@ -1,4 +1,5 @@
 
+
 .home{
   /* width: 98vw;
   height: 91.5vh;
@@ -81,7 +82,7 @@ flex-wrap: wrap;
   font-weight: 500;
   cursor: pointer;
   border-bottom: 1px solid rgba(70, 161, 194, 0.103);
-  background-color: #cfa45a77;
+  background-color: #e79052;
   margin-bottom: 2px;
   transition: all .1s ease;
 }
@@ -94,7 +95,7 @@ flex-wrap: wrap;
   ;
 }
 .filter{
-  color: rgb(70, 70, 70);
+  color: #fff;
   font-size: 15px
 }
 
@@ -256,7 +257,7 @@ display: flex;
 flex-direction: row;
 margin-top: 30px;
 font-size: 20px;
-width: 598px;
+width: 778px;
 }
 .gender_item{
 padding-right: 60px;
@@ -276,6 +277,26 @@ text-decoration: none; /* Altçizgiyi gizler */
 
 }
 
+.select {
+  font-weight: bold;
+}
+
+.select select {
+  background-color: #DE782E;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+.select select:hover {
+  background-color: #444443;
+}
+
 .overview_link:hover {
 text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi gösterir */
 }
@@ -283,13 +304,13 @@ text-decoration: underline; /* Linkin üzerine gelindiğinde altçizgiyi göster
 .filterbtn{
 width: 180px;
 height: 30px;
-background-color: white;
+background-color: #DE782E;
 border: 1px solid rgb(209, 207, 207);
 color: rgb(70, 70, 70);
 cursor: pointer;
 }
 .filter{
-  color: rgb(70, 70, 70);
+  color: #fff;
    font-size: 15px
 }
 
@@ -313,6 +334,23 @@ cursor: pointer;
   transform: translateY(-100px);
   color: rgb(66, 64, 64);
   }
+  .select {
+    margin-top: 9px;
+    margin-left: -5px;
+  
+}
+.select select {
+  background-color: #DE782E;
+  color: #fff;
+  border: none;
+  padding: 4px 1px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+  margin-left: 20px;
+  font-size: 8px;
+  width: 90px;
+}
 .overview {
   transform: translateX(0px);
   display: flex;
@@ -334,6 +372,7 @@ cursor: pointer;
 h1{
   font-size: 20px;
   font-weight: bold;
+
   }
   .slide-text {
     position: absolute;
@@ -380,14 +419,14 @@ h1{
 .filterbtn{
   width: 90px;
   height: 20px;
-  background-color: white;
+  background-color:#DE782E;
   border: 0.5px solid rgb(226, 226, 226);
   color: rgb(70, 70, 70);
   cursor: pointer;
   transform: translateX(15px)  }
   .filter{
-    color: rgb(70, 70, 70);
-     font-size: 10px
+    color: #fff;
+    font-size: 10px
   }
 
   .icon{
@@ -399,6 +438,22 @@ h1{
     .separator {
      display: none;
       }
+      .latestimg {
+        width: 412px;
+        height: 226px;
+        /* box-shadow: 1px 1px 23px rgb(182, 159, 142); */
+        margin-top: 30px;
+        cursor: pointer;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: 10px;
+      color: #b97341;
+      margin-top: 170px;
+      letter-spacing: 0.5rem;
+      transform: translateX(44px);
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px){
@@ -442,7 +497,7 @@ h1{
 .filterbtn {
   width: 115px;
   height: 20px;
-  background-color: white;
+  background-color:#DE782E;
   border: 0.5px solid rgb(226, 226, 226);
   color: rgb(70, 70, 70);
   cursor: pointer;
@@ -450,6 +505,8 @@ h1{
 }
 .filter{
   font-size: 13px; 
+  color: #fff;
+
 }
 .home_wrapper .leftHome {
   display: flex;
@@ -482,13 +539,13 @@ h1{
   flex-direction: row;
   margin-top: 30px;
   font-size: 20px;
-  width: 609px;
+  width: 849px;
 }
 
 .filterbtn {
   width: 188px;
   height: 20px;
-  background-color: white;
+  background-color:#DE782E;
   border: 0.5px solid rgb(226, 226, 226);
   color: rgb(70, 70, 70);
   cursor: pointer;
@@ -521,5 +578,6 @@ h1{
     transform: translateY(-100px);
     color: rgb(66, 64, 64);
 }
+
 
 }

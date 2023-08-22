@@ -22,6 +22,7 @@ import { useAdminContext } from '../../context/AdminContext';
 import Order from '../../Components/Order/Order';
 import LatestProducts from '../../Components/LatestProducts/LatestProducts';
 import Sale from "../../Components/Sale/Sale"
+import NewProducts from '../../Components/NewProducts/NewProducts';
 const Home = () => {
 
   const navigate = useNavigate();
@@ -35,7 +36,21 @@ const Home = () => {
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
   const {admin}=useAdminContext()
+  const [sortOrder, setSortOrder] = useState('lowToHigh'); // Default sorting order
 
+  // Function to handle sorting order change
+  const handleSortOrderChange = (order) => {
+    setSortOrder(order);
+    // Sort the products based on the selected order
+    const sortedPosts = [...allPosts];
+    if (order === 'lowToHigh') {
+      sortedPosts.sort((a, b) => a.price - b.price);
+    } else if (order === 'highToLow') {
+      sortedPosts.sort((a, b) => b.price - a.price);
+    }
+    setAllPosts(sortedPosts);
+  };
+  
 
 const modalStyle = {
   position: 'absolute',
@@ -280,6 +295,7 @@ const modalStyle = {
       width: "20px",
       marginBottom: "-5px",
       marginRight: "6px",
+      color:"#fff"
     }}
   />
   <span className='filter' >
@@ -331,6 +347,19 @@ const modalStyle = {
   </Box>
 </Modal>
 
+<div className='select'>
+<select
+    id="sortOrder"
+    value={sortOrder}
+    onChange={(e) => handleSortOrderChange(e.target.value)}
+  >
+    <option value="lowToHigh">Price: Low to High</option>
+    <option value="highToLow">Price: High to Low</option>
+  </select>
+</div>
+ 
+
+
       </div>
 
     <div className='home'>
@@ -378,6 +407,8 @@ const modalStyle = {
 
   <LatestProducts/>
    <Sale/>
+
+   <NewProducts/>
    <Footer/>
 
 

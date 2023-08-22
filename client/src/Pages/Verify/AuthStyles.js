@@ -1,9 +1,9 @@
 export const paperStyle = {
-  padding: " 40px",
-  width: "350px",
+  padding: " 50px",
+  width: "370px",
   margin: "100px auto",
   transform:"translateY(40px)",
-  background: "linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(195, 130, 74, 0.278) 100%)"
+  background: "linear-gradient(90deg, rgb(250, 110, 120) 0%, rgba(255,185,95) 100%)"
 
  
 };
@@ -19,15 +19,15 @@ export const loginStyle = {
 export const buttonSubmit={
 border: "none",
 outline: "none",
-backgroundColor: "#e08e53",
+backgroundColorcolor:"rgb(109, 157, 233)",
 padding: "10px",
 marginTop:"-10px",
 borderRadius: "10px",
-color: "#fff",
+color: "white",
 fontSize: "16px",
 transform: ".3s ease",
 "&:hover": {
-  backgroundColor: "#6C3483",
+  backgroundColor: "blue",
 },
 }
 export const input={

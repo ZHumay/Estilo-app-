@@ -171,22 +171,22 @@ i:hover{
 @media screen and (min-width: 320px) and (max-width: 768px){
 
     .blog-post-card-home {
-        width: 167px;
+        width: 148px;
         min-height: 212px;
         max-height: 217px;
         margin: -11px;
         margin-bottom: 40px;
         margin-top: 20px;
-        margin-left: 6px;
+        margin-left: 5px;
         background-color: white;
         box-shadow: 1px 1px 23px rgb(231, 207, 190);
         border-radius: 2px;
-        padding: 10px 13px;
+        padding: 10px 6px;
         overflow: hidden;
         color: rgb(119, 118, 118);
         display: flex;
         flex-direction: column;
-}
+    }
 .blog-post-home-image_wrapper img {
     width: 100%;
     height: 113px;

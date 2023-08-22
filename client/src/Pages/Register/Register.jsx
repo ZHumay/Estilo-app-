@@ -8,6 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import NoEncryptionIcon from '@mui/icons-material/NoEncryption';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import CheckIcon from '@mui/icons-material/Check';
+import Cookies from "js-cookie";
 const Register = () => {
   const navigate = new useNavigate();
 
@@ -36,6 +37,7 @@ const Register = () => {
       if (res.status === 200) {
         setSending(false);
         Swal.fire("Greate", res.data.msg, "success");
+
         navigate("/verify", {
           state: email,
         });
@@ -48,7 +50,11 @@ const Register = () => {
   };
 
   return (
-    <div className="register">
+
+    < div className="registerPage">
+
+<img className="loginimg" src={require("../../Images/CaptureLogin.PNG")} />  
+<div className="register">
       <form onSubmit={handleSubmit}>
 
              <div className="register_heading_wrapper">
@@ -110,6 +116,8 @@ const Register = () => {
         </div>
       </form>
     </div>
+    </div>
+  
     
   );
 

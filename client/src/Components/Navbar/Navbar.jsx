@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 const Navbar = () => {
   const { activeUser } = useActiveUserContext();
@@ -323,7 +324,7 @@ console.log(admin);
               >
                 Logout
               </Link>
-
+            
 
               <Link to={`/profile/${activeUser && activeUser._id}`} className="nav_profile_img"  >
                 <img
@@ -332,6 +333,7 @@ console.log(admin);
                   className="nav_profile_image"
                 />
               </Link>
+
             </>
             
           ) : (

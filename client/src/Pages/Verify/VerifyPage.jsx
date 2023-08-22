@@ -30,7 +30,7 @@ export const VerifyPage = () => {
         });
         const { token } = res.data;
         alert("Successful");
-        navigate("/login")
+        navigate("/login");
       } catch (error) {
         bag.setErrors({ general: error.response.data.message });
       }
@@ -41,7 +41,11 @@ export const VerifyPage = () => {
     <Grid>
       <Paper elevation={20} style={paperStyle}>
         <Grid style={{ textAlign: "center" }} marginBottom={2}>
-          <Typography variant="h5" fontWeight="bold" style={{ fontSize: 25 }}>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            style={{ fontSize: 25, color:"#2B92C6" }}
+          >
             Verify
           </Typography>
           <Typography variant="caption" style={{ fontSize: 12 }}>

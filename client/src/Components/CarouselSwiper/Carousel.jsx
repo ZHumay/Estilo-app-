@@ -9,6 +9,7 @@ import axios from "axios";
 import Comment from "../Comment/Comment";
 import Comments from "../Comments/Comments";
 import { Link } from "react-router-dom";
+import { useActiveUserContext } from "../../context/activeUserContext";
 // import 'swiper/css/autoplay';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
@@ -17,6 +18,7 @@ function Carousel({ comment }) {
   const { posts } = usePostsContext();
   const popularPosts = posts.filter((post) => post.likes.length >= 5);
   const { comments, dispatchComments } = useCommentsContext();
+  const { activeUser} = useActiveUserContext();
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -42,12 +44,24 @@ function Carousel({ comment }) {
         modules={[Autoplay]}
         spaceBetween={20}
         loop={true}
-        slidesPerView={4}
+        slidesPerView={3}
         centeredSlides={true}
         autoplay={{ delay: "1500" }}
         navigation={true}
         className="mySwiper"
         style={{ padding: "20px 0" }}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+          },
+          768:{
+            slidesPerView: 2,
+
+          },
+          1200: {
+            slidesPerView: 3,
+          },
+         }}
       >
         {popularPosts.map((post, index) => (
           <SwiperSlide key={post._id} className={`cardd rounded-lg `}>
@@ -55,6 +69,7 @@ function Carousel({ comment }) {
             <p className="carousel_item_title">{post.title}</p>
             <br></br>
             <div className="item_carousel_img_wrapper">
+              
               <Link to={`/post/${post?._id}`}>
                 <img className="postimg" src={post.postImage} alt="Slide" />
               </Link>

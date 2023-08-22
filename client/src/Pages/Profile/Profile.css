@@ -8,11 +8,11 @@
 
 .profile_main_wrapper{
     width: 800px;
-    box-shadow: 1px 1px 55px rgb(243, 211, 190);
+    box-shadow: 1px 1px 55px rgb(219, 177, 149);
     border-radius: 10px;
     padding: 10px;
     margin-top: 40px;
-    background-color: rgb(251, 244, 250);
+    background-color:#ec985c;
 }
 
 .profile_main_wrapper .top{
@@ -32,7 +32,7 @@
 }
 .my-orders{
   border-bottom: 0.1px solid rgb(109, 108, 108);
-   color: #e08e53;
+   color: #f6ceba;
    letter-spacing: 0.1rem;
    font-weight: bold;
 

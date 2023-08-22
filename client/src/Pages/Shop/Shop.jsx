@@ -12,7 +12,8 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CachedIcon from "@mui/icons-material/Cached";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import PaymentIcon from "@mui/icons-material/Payment";
-import { Box,
+import {
+  Box,
   Button,
   Divider,
   List,
@@ -20,13 +21,13 @@ import { Box,
   ListItemIcon,
   ListItemText,
   Modal,
-  Typography, } from "@mui/material";
+  Typography,
+} from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { useAdminContext } from "../../context/AdminContext";
 import Carousel from "../../Components/CarouselSwiper/Carousel";
 import PageLoader from "../PageLoader/PageLoader";
-
 
 function Shop() {
   const navigate = useNavigate();
@@ -41,63 +42,70 @@ function Shop() {
   const [isLoading, setIsLoading] = useState(true);
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [sortOrder, setSortOrder] = useState("lowToHigh"); // Default sorting order
 
+  // Function to handle sorting order change
+  const handleSortOrderChange = (order) => {
+    setSortOrder(order);
+    // Sort the products based on the selected order
+    const sortedPosts = [...allPosts];
+    if (order === "lowToHigh") {
+      sortedPosts.sort((a, b) => a.price - b.price);
+    } else if (order === "highToLow") {
+      sortedPosts.sort((a, b) => b.price - a.price);
+    }
+    setAllPosts(sortedPosts);
+  };
   const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    bgcolor: 'rgb(216, 216, 216)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "rgb(216, 216, 216)",
     boxShadow: 24,
     p: 4,
-    outline: 'none',
+    outline: "none",
   };
-  
-  
-  
-    const filterCategory = (category) =>{
-      setCate(category);
-      if(category === "all"){
-        setAllPosts(posts);
-      }
-      else{
-        const tempArray = posts.filter((post) => post.category === category);
-        setAllPosts(tempArray);
-      }
-     
+
+  const filterCategory = (category) => {
+    setCate(category);
+    if (category === "all") {
+      setAllPosts(posts);
+    } else {
+      const tempArray = posts.filter((post) => post.category === category);
+      setAllPosts(tempArray);
     }
-  
-    const filterColor = (color) => {
-      if (color === "All") {
-        setSelectedColor(null); // Reset the selected color
-        setAllPosts(posts); // Show all posts
-      } else {
-        setSelectedColor(color);
-        const tempArray = posts.filter((post) => post.color === color);
-        setAllPosts(tempArray);
-      }
-    };
-    
-    
-  
-    const filterGender=(gender)=>{
-       setgender(gender);
-       const tempArr=posts.filter((post)=>post.gender===gender)
-       setAllPosts(tempArr)
-    }
-  
-    const handleColorModalOpen = () => {
-      setIsColorModalOpen(true);
-    };
-    
-    const handleColorModalClose = () => {
-      setIsColorModalOpen(false);
-    };
-    const handleColorSelect = (color) => {
+  };
+
+  const filterColor = (color) => {
+    if (color === "All") {
+      setSelectedColor(null); // Reset the selected color
+      setAllPosts(posts); // Show all posts
+    } else {
       setSelectedColor(color);
-      setIsColorModalOpen(false); // Close the modal
-      // Implement logic to filter posts based on the selected color
-    };
+      const tempArray = posts.filter((post) => post.color === color);
+      setAllPosts(tempArray);
+    }
+  };
+
+  const filterGender = (gender) => {
+    setgender(gender);
+    const tempArr = posts.filter((post) => post.gender === gender);
+    setAllPosts(tempArr);
+  };
+
+  const handleColorModalOpen = () => {
+    setIsColorModalOpen(true);
+  };
+
+  const handleColorModalClose = () => {
+    setIsColorModalOpen(false);
+  };
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+    setIsColorModalOpen(false); // Close the modal
+    // Implement logic to filter posts based on the selected color
+  };
 
   useEffect(() => {
     console.log(activeUser);
@@ -145,6 +153,7 @@ function Shop() {
               width: "20px",
               marginBottom: "-5px",
               marginRight: "6px",
+              color: "#fff",
             }}
           />
           <span className="filter">Filter by Color</span>
@@ -198,6 +207,17 @@ function Shop() {
             </List>
           </Box>
         </Modal>
+
+        <div className="select">
+          <select
+            id="sortOrder"
+            value={sortOrder}
+            onChange={(e) => handleSortOrderChange(e.target.value)}
+          >
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="highToLow">Price: High to Low</option>
+          </select>
+        </div>
       </div>
       {activeUser && !admin ? (
         <div className="shop">
@@ -212,7 +232,15 @@ function Shop() {
                   </p>
                 ) : (
                   allPosts?.map((post) => {
-                    return <BlogPostCardHome key={post._id} post={post} />;
+                    if (!selectedColor || post.color === selectedColor) {
+                      return (
+                        <BlogPostCardHome
+                          key={post._id}
+                          post={post}
+                          color={post.color}
+                        />
+                      );
+                    }
                   })
                 )}
               </div>

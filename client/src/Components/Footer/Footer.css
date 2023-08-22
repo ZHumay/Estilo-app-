@@ -191,7 +191,10 @@ html {
     margin-top: 40rem;
     height: 530px;
   }
-
+  .footer_info-first {
+    margin-top: 6rem;
+    transform: translateX(3px);
+}
 
 }
 

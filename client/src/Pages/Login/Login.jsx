@@ -53,7 +53,11 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div className="loginPage">
+
+
+   <img className="loginimg" src={require("../../Images/CaptureLogin.PNG")} />  
+   <div className="login">
       <form onSubmit={handleSubmit}>
         <div className="login_heading_wrapper">
           <h2 className="login_heading">Login</h2>
@@ -83,17 +87,25 @@ const Login = () => {
         </div>
 
         <div className="login_button_container">
-          <button type="submit">Login</button>
+          <button type="submit">Log In</button>
           {sending ? <SendingLoader /> : ""}
         </div>
 
         <div className="bottom_form">
-          <p>
-            Don't have an account ? <Link className="bottom-signup" to="/register">Sign Up</Link>
+          
+        
+          <div className="forgot">
+            <Link style={{color:"white"}}  to="/forgetpassword"> Forgot password ?</Link>
+          </div>
+         
+          <p className="signupP">
+            Don't have an account ? <Link className="bottom-signup" style={{color:"rgb(109, 157, 233)"}} to="/register">Sign Up</Link>
           </p>
         </div>
       </form>
     </div>
+  </div>
+    
   );
 };
 

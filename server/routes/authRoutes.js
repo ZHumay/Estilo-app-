@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { get_login, get_register, post_login, post_register, get_all_users, get_user, update_profile_image, update_user, delete_user, verify_user, active_user,confirm, get_basketItems, post_basketItems, delete_basketItems, update_basketItems, get_orderItems, post_orderItems } = require("../controllers/authControllers");
+const { get_login, get_register, post_login, post_register, get_all_users, get_user, update_profile_image, update_user, delete_user, verify_user, active_user,confirm, get_basketItems, post_basketItems, delete_basketItems, update_basketItems, get_orderItems, post_orderItems, forgetpassword, changepassword } = require("../controllers/authControllers");
 
 router.get("/get-login", get_login );
 router.post("/post-login", post_login );
@@ -20,6 +20,7 @@ router.get("/user/:id/orderItems", get_orderItems);
 router.post("/user/:id/orderItems", post_orderItems);
 router.delete("/user/:id/basketItems", delete_basketItems);
 router.put("/user/:id/basketItems", update_basketItems);
-
+router.post('/forgetpassword', forgetpassword)
+router.put('/changepassword', changepassword)
 
 module.exports = router;

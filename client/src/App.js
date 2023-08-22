@@ -23,6 +23,10 @@ import { useActiveUserContext } from "./context/activeUserContext";
 import Myorders from "./Pages/MyOrders/Myorders";
 import Wardrobe from "./Pages/Wardrobe/Wardrobe";
 import CreatePostUser from "./Pages/CreatePostUser/CreatePostUser";
+import { ForgetPasswordPage } from "./Pages/ForgetPassword";
+import { ChangePasswordPage } from "./Pages/ChangePassword/ChangePassowrd";
+
+
 function App() {
   const dispatch = useDispatch();
 
@@ -63,23 +67,18 @@ function App() {
         <Route path="/verify" element={<VerifyPage/>}></Route>
         <Route path="/create-post" element={<CreatePost />}></Route>
         <Route path="/create-post/user" element={<CreatePostUser/>}></Route>
-
         <Route path="/woman" element={ <Woman />}></Route>
         <Route path="/man" element={ <Man />}></Route>
         <Route path="/contact" element={ <Contact />}></Route>
         <Route path="/shop" element={ <Shop />}></Route>
-
         <Route path="/wardrobe" element={<Wardrobe/>}></Route>
-
         <Route path="/basket" element={ <Basket/>}></Route>
-
         <Route path="/update-post/:id" element={<UpdatePost />}></Route>
-
         <Route path="/profile/:id" element={<Profile />}></Route>
-
         <Route path="/post/:id" element={<SinglePost />}></Route>
         <Route path="/orders" element={<Myorders/>}></Route>
-
+        <Route path="/forgetpassword" element={<ForgetPasswordPage />} />
+    <Route path="/changepassword" element={<ChangePasswordPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

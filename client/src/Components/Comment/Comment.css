@@ -131,12 +131,127 @@ transform: translateY(-9px);
     }
   
 }
+@media screen and (min-width: 542px) and (max-width: 708px){
+
+    .header_name_comment {
+        width: 370px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
+@media screen and (min-width: 561px) and (max-width: 708px){
+
+    .header_name_comment {
+        width: 370px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 664px) and (max-width: 708px){
+
+    .header_name_comment {
+        width: 460px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
+@media screen and (min-width: 705px) and (max-width: 768px){
+
+    .header_name_comment {
+        width: 490px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 715px) and (max-width: 768px){
+
+    .header_name_comment {
+        width: 520px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
 
 
 @media screen and (min-width: 768px) and (max-width: 1279px){
 
     .header_name_comment {
         width: 550px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 846px) and (max-width: 1279px){
+
+    .header_name_comment {
+        width: 620px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
+@media screen and (min-width: 888px) and (max-width: 1279px){
+
+    .header_name_comment {
+        width: 660px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
+@media screen and (min-width: 981px) and (max-width: 1279px){
+
+    .header_name_comment {
+        width: 765px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 1042px) and (max-width: 1279px){
+
+    .header_name_comment {
+        width: 795px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 1183px) and (max-width: 1279px){
+
+    .header_name_comment {
+        width: 935px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 1285px) and (max-width: 1325px){
+
+    .header_name_comment {
+        width: 635px;
         display: flex;
         justify-content: space-between;
         overflow: hidden;
