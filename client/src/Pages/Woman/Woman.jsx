@@ -55,8 +55,6 @@ const Woman = () => {
     outline: "none",
   };
 
-  
-  
   const handleColorModalOpen = () => {
     setIsColorModalOpen(true);
   };
@@ -73,26 +71,33 @@ const Woman = () => {
     const fetchWomanPosts = async () => {
       try {
         const res = await axios.get("/api/posts/posts/admin");
-    
+
         if (res.status === 200) {
           let womanPostsArray = res.data.posts.filter(
             (post) => post.gender === "woman"
           );
-    
+
           // Kategoriye göre filtreleme
+
+          if (category === "all products") {
+            let womanPostsArray = res.data.posts.filter(
+              (post) => post.gender === "woman"
+            );
+            setWomanPosts(womanPostsArray)
+          }
           if (category !== "all products") {
             womanPostsArray = womanPostsArray.filter(
               (post) => post.category === category
             );
           }
-    
+
           // Filtreleme: Seçilen renge göre filtreleme
           if (selectedColor) {
             womanPostsArray = womanPostsArray.filter(
               (post) => post.color === selectedColor
             );
           }
-    
+
           setWomanPosts(womanPostsArray);
         } else {
           console.log(res.data.msg);
@@ -103,7 +108,6 @@ const Woman = () => {
         setIsLoading(false);
       }
     };
-    
 
     fetchWomanPosts();
   }, [category]);
@@ -117,17 +121,15 @@ const Woman = () => {
       setWomanPosts(filteredWomanPosts);
     } else {
       setSelectedColor(color);
-  
+
       // Filter posts based on gender and selected color
       const tempArray = posts.filter(
         (post) => post.gender === "woman" && post.color === color
       );
-      
+
       setWomanPosts(tempArray);
     }
   };
-  
-  
 
   return (
     <>
@@ -214,9 +216,7 @@ const Woman = () => {
                 {isLoading ? (
                   <PageLoader />
                 ) : womanPosts?.length === 0 ? (
-                  <p className="posts_not_found">
-                    No Products
-                  </p>
+                  <p className="posts_not_found">No Products</p>
                 ) : (
                   womanPosts?.map((post) => {
                     if (!selectedColor || post.color === selectedColor) {
@@ -227,7 +227,8 @@ const Woman = () => {
                           color={post.color}
                         />
                       );
-                    }                  })
+                    }
+                  })
                 )}
               </div>
               <div className="rightHome">

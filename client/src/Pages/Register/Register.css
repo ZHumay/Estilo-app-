@@ -119,6 +119,43 @@
 
 }
 
+@media screen and (min-width: 531px) and (max-width: 768px){
+
+    .register form{
+        width: 317px;
+        height: 530px;
+        background: linear-gradient(90deg, rgb(250, 110, 129) 0%, rgba(255,185,95) 100%); 
+        padding: 10px 25px;
+        padding-bottom: 10px;
+        border-radius: 15px;
+        border: 0.5px solid rgb(239, 238, 238);
+    
+      }
+      .righttt {
+        display: flex;
+        flex-direction: row;
+        margin-left: -120px;
+        margin-top: 63px;
+    }
+
+}
+
+@media screen and (min-width: 986px) and (max-width: 1279px){
+
+    .register form{
+        width: 317px;
+        height: 530px;
+        background: linear-gradient(90deg, rgb(250, 110, 129) 0%, rgba(255,185,95) 100%); 
+        padding: 10px 25px;
+        padding-bottom: 10px;
+        border-radius: 15px;
+        border: 0.5px solid rgb(239, 238, 238);
+    
+      }
+   
+
+}
+
 @media screen and (min-width: 768px) and (max-width: 1279px){
     .register form{
         width: 417px;

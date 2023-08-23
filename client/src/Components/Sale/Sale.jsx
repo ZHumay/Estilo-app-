@@ -48,7 +48,7 @@ function Sale() {
       };
     }
 
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 64));
     const hours = Math.floor(
       (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );

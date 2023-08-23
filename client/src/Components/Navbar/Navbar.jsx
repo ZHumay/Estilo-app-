@@ -33,6 +33,8 @@ const Navbar = () => {
 
   const customBreakpoints = {
     xs: 321,
+    xs2:330,
+    xs3:618,
     md: 768,
     lg: 1279,
     xl: 1920, // Örnek bir büyük boyut
@@ -341,7 +343,7 @@ console.log(admin);
             <div className="righttt" >
             <Link
                 to="/login"
-                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:"translateX(20px)" }}
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:"translateX(20px)",transform:{xs:"translateX(52px)" }}}
                 className="ml-login"
               >
                 Login 
@@ -349,11 +351,11 @@ console.log(admin);
               </Link>
               <Link
                 to="/register"
-                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:{lg:"translateY(2px)" , md:"translateY(-1px)",xs:"translateY(-5px)" }}}
+                style={{ color: "rgb(66,64,64)", fontSize: "17px", fontWeight: "700",transform:{lg:"translateY(2px)" , md:"translateY(-1px)",xs:"translateY(-5px)",xs2:"translate(70px,2px)" }}}
                 className="ml-register;"
               >
                 Register
-                <HowToRegIcon sx={{width:"30px",height:"20px", transform: {lg:"translateY(5px)", xs:"translate(60px,-20px)" ,md:"translate(7px,3px)"}}}/>
+                <HowToRegIcon sx={{width:"30px",height:"20px", transform: {lg:"translateY(5px)", xs:"translate(60px,-20px)" ,md:"translate(7px,3px)",xs3:"translate(7px,3px)"}}}/>
               </Link>
               
             </div>

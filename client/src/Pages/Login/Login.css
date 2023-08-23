@@ -118,7 +118,9 @@ padding: 4.3px;
 
 @media screen and (min-width: 320px) and (max-width: 768px){
 
-
+     .loginimg{
+        display: none;
+     }
     .login form{
         width: 300px;
         height: 400px;
@@ -129,7 +131,83 @@ padding: 4.3px;
         border: 0.5px solid rgb(239, 238, 238);
 
     }
+    .login{
+        background-color:white
 
+    }
+    .signupP {
+        margin-top: 16px;
+    }
+    .forgot {
+        background-color: rgb(109, 157, 233);
+        color: white;
+        border-radius: 5px;
+        width: 140px;
+        height: 32px;
+        transform: translate(55px,10px);
+        cursor: pointer;
+        padding: 4.3px;
+    }
+}
+@media screen and (min-width: 516px) and (max-width: 768px){
+
+    .forgot {
+        background-color: rgb(109, 157, 233);
+        color: white;
+        border-radius: 5px;
+        width: 140px;
+        height: 32px;
+        transform: translate(55px,6px);
+        cursor: pointer;
+        padding: 4.3px;
+    }
+    .righttt {
+        display: flex;
+        flex-direction: row;
+        margin-left: -150px;
+        margin-top: 63px;
+    }
+}
+
+@media screen and (min-width: 618px) and (max-width: 768px){
+
+    .forgot {
+        background-color: rgb(109, 157, 233);
+        color: white;
+        border-radius: 5px;
+        width: 140px;
+        height: 32px;
+        transform: translate(55px,6px);
+        cursor: pointer;
+        padding: 4.3px;
+    }
+    .righttt {
+        display: flex;
+        flex-direction: row;
+        margin-left: -150px;
+        margin-top: 40px;
+    }
+}
+
+@media screen and (min-width: 778px) and (max-width: 1278px){
+    .loginPage {
+        display: flex;
+        flex-direction: row;
+        margin-top: -3px;
+    }
+    .signupP {
+        margin-top: 12px;
+      }
+      .forgot {
+        background-color: rgb(109, 157, 233);
+        color: white;
+        border-radius: 5px;
+        width: 140px;
+        height: 32px;
+        transform: translate(105px,4px);
+        cursor: pointer;
+        padding: 4.3px;
+      }
 }
 
 

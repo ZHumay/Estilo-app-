@@ -50,7 +50,12 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
-    }
+    },
+    favItem:{
+        type: [],
+        required:true
+    },
+
     
 }, {timestamps : true});
 

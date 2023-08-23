@@ -201,7 +201,7 @@ const modalStyle = {
             <div className="slide-text">
               <h1> Women collection</h1>
               <Button
-                style={{ backgroundColor: "#DE782E",fontSize:"10px",fontWeight:"bold" }}
+                style={{ backgroundColor: "#DE782E",fontSize:"13px",fontWeight:"bold" }}
                 className="slidebtn"
                 variant="contained"
                 onClick={clickshopwoman}
@@ -216,9 +216,9 @@ const modalStyle = {
           </div>
           <div className="slide">
             <div className="slide-text">
-              <h1> Men collection</h1>
+              <h1 className='men'> Men collection</h1>
               <Button
-                style={{ backgroundColor: "#DE782E",fontSize:"10px",fontWeight:"bold" }}
+                style={{ backgroundColor: "#DE782E",fontSize:"13px",fontWeight:"bold" }}
                 className="slidebtn"
                 variant="contained"
                 onClick={clickshopman}

@@ -208,11 +208,16 @@
   .righttt {
     display: flex;
     flex-direction: row;
-    margin-left: -53px;
+    margin-left: -102px;
     margin-top: 33px;
-  }
+}
+
   .ml-login {
     display: flex;
+    color: rgb(66, 64, 64);
+    font-size: 17px;
+    font-weight: 700;
+    transform: translateX(52px);
   }
 
   .ml-register {
@@ -244,6 +249,47 @@
     transition: 0.2s ease;
 }
 
+}
+
+
+@media screen and (min-width: 330px) and (max-width: 440px) {
+  .righttt {
+    display: flex;
+    flex-direction: row;
+    margin-left: -39px;
+    margin-top: 33px;
+  }
+  
+  .navbar .menu-link a {
+    margin-left: 32px;
+    font-size: 16px;
+    transform: translateY(0px);
+    padding: 2px 5px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    transition: 0.2s ease;
+  }
+}
+
+
+
+@media screen and (min-width: 348px) and (max-width: 440px) {
+  .righttt {
+    display: flex;
+    flex-direction: row;
+    margin-left: -102px;
+    margin-top: 11px;
+  }
+}
+
+@media screen and (min-width: 516px) and (max-width: 768px) {
+  .righttt {
+    display: flex;
+    flex-direction: row;
+    margin-left: -178px;
+    margin-top: 33px;
+  }
+  
 }
 
 @media screen and (min-width: 440px) and (max-width: 450px) {
@@ -351,6 +397,15 @@
 }
 
 }
+
+@media screen and (min-width: 618px) and (max-width: 768px) {
+  .navbar .left {
+    transform: translate(-34px, -12px);
+}
+
+
+}
+
 @media screen and (min-width: 637px) and (max-width: 769px) {
 
   .navbar .menu-link a {
@@ -451,7 +506,23 @@
 
 } 
 
+@media screen and (min-width: 778px) and (max-width: 1279px){
+  .navbar .left {
+    transform: translate(-78px, -12px);
+    width: 294px;
+}
+.righttt {
+  display: flex;
+  flex-direction: row;
+  margin-left: -28px;
+  margin-top: 16px;
+  /* width: 276px; */
+  transform: translateX(412px);
+}
 
+
+
+} 
 
 @media screen and (min-width: 991px) and (max-width: 1279px){
 
@@ -527,6 +598,22 @@ margin-left: 13px;
 
 
 } 
+@media screen and (min-width: 986px) and (max-width: 1279px){
+
+
+    .righttt {
+      display: flex;
+      flex-direction: row;
+      margin-left: -416px;
+      margin-top: 26px;
+      width: 284px;
+  }
+  .navbar .left {
+    transform: translate(-279px, -12px);
+    width: 294px;
+}
+
+}
 
 @media screen and (min-width: 1356px)  {
 

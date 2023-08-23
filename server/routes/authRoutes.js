@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { get_login, get_register, post_login, post_register, get_all_users, get_user, update_profile_image, update_user, delete_user, verify_user, active_user,confirm, get_basketItems, post_basketItems, delete_basketItems, update_basketItems, get_orderItems, post_orderItems, forgetpassword, changepassword } = require("../controllers/authControllers");
+const { get_login, get_register, post_login, post_register, get_all_users, get_user, update_profile_image, update_user, delete_user, verify_user, active_user,confirm, get_basketItems, post_basketItems, delete_basketItems, update_basketItems, get_orderItems, post_orderItems, forgetpassword, changepassword, get_favItems, post_favItems, delete_favItems, update_FavItems } = require("../controllers/authControllers");
 
 router.get("/get-login", get_login );
 router.post("/post-login", post_login );
@@ -20,7 +20,11 @@ router.get("/user/:id/orderItems", get_orderItems);
 router.post("/user/:id/orderItems", post_orderItems);
 router.delete("/user/:id/basketItems", delete_basketItems);
 router.put("/user/:id/basketItems", update_basketItems);
-router.post('/forgetpassword', forgetpassword)
-router.put('/changepassword', changepassword)
+router.post('/forgetpassword', forgetpassword);
+router.put('/changepassword', changepassword);
+router.get("/user/:id/favItems", get_favItems);
+router.post("/user/:id/favItems", post_favItems);
+router.delete("/user/:id/favItems", delete_favItems);
+router.put("/user/:id/favItems", update_FavItems);
 
 module.exports = router;

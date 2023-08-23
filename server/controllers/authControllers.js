@@ -331,6 +331,28 @@ const get_basketItems = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+const get_favItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    // Get the basket items from the user object
+    const favItems = user.favItem;
+
+    return res.status(200).json({ favItems });
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 const get_orderItems = async (req, res) => {
   try {
@@ -384,6 +406,34 @@ const post_basketItems = async (req, res) => {
   }
 };
 
+const post_favItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    // Extract the new basket item from the request body
+    const { newItem } = req.body;
+
+    // Add the new item to the user's basketItem array
+    user.favItem.push(newItem);
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.favItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 const post_orderItems = async (req, res) => {
   try {
     // Get the user ID from the request parameters or wherever it's stored
@@ -442,6 +492,34 @@ const delete_basketItems = async (req, res) => {
   }
 };
 
+const delete_favItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract the item to delete from the request body
+    const { itemToDelete } = req.body;
+
+    // Remove the item from the user's basketItem array
+    user.favItem = user.favItem.filter((item) => item._id.toString() !== itemToDelete._id.toString());
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.favItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 const update_basketItems = async (req, res) => {
   try {
@@ -466,6 +544,35 @@ const update_basketItems = async (req, res) => {
     const updatedUser = await user.save();
 
     return res.status(200).json(updatedUser.basketItem);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const update_FavItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract the updated basket items from the request body
+    const { updatedItems } = req.body;
+
+    // Update the basket items in the user's basketItem array
+    user.favItem = updatedItems;
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.favItem);
   } catch (error) {
     // Handle any errors that might occur during the process
     return res.status(500).json({ message: "Internal server error" });
@@ -557,6 +664,10 @@ module.exports = {
   post_orderItems,
   get_orderItems,
   changepassword,
-  forgetpassword
+  forgetpassword,
+  get_favItems,
+  post_favItems,
+  delete_favItems,
+  update_FavItems
 };
 

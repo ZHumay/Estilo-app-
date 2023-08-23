@@ -7,10 +7,7 @@ import { usePostsContext } from '../../hooks/usePostsContext';
 import { useUsersContext } from '../../hooks/useUsersContext';
 import { useCommentsContext } from '../../hooks/useCommentsContext';
 import Footer from '../../Components/Footer/Footer';
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CachedIcon from "@mui/icons-material/Cached";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
-import PaymentIcon from "@mui/icons-material/Payment";
+import "../Shop/shop.css";
 import {
   Box,
   Button, Divider, List, ListItem, ListItemIcon, ListItemText, Modal, Typography
@@ -33,7 +30,20 @@ const Wardrobe = () => {
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(null);
   const {admin}=useAdminContext()
+  const [sortOrder, setSortOrder] = useState("lowToHigh"); // Default sorting order
 
+  // Function to handle sorting order change
+  const handleSortOrderChange = (order) => {
+    setSortOrder(order);
+    // Sort the products based on the selected order
+    const sortedPosts = [...allPosts];
+    if (order === "lowToHigh") {
+      sortedPosts.sort((a, b) => a.price - b.price);
+    } else if (order === "highToLow") {
+      sortedPosts.sort((a, b) => b.price - a.price);
+    }
+    setAllPosts(sortedPosts);
+  };
 
 const modalStyle = {
   position: 'absolute',
@@ -165,6 +175,9 @@ const modalStyle = {
     <>
  {!admin &&activeUser ? (
     <>
+
+<img   className='wardrobeimg' src={require("../../Images/Capturewardrobepage.PNG")} alt="loader" />
+
    <div className="overview">
 
 <span className='gender_item' onClick={()=> filterCategory("all")}>All products</span>
@@ -181,6 +194,7 @@ height:{md:"20px",xs:"15px"},
 width:{md:"20px",xs:"15px"},
 marginBottom: {md:"-5px",xs:"-3px"},
 marginRight: "6px",
+color:"#fff"
 }}
 />
 <span className='spancolor'>
@@ -226,6 +240,17 @@ onClick={() =>  filterColor(color)}
 
 </Box>
 </Modal>
+
+<div className="select">
+          <select
+            id="sortOrder"
+            value={sortOrder}
+            onChange={(e) => handleSortOrderChange(e.target.value)}
+          >
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="highToLow">Price: High to Low</option>
+          </select>
+        </div>
 
 </div>
 
