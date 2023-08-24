@@ -14,6 +14,7 @@ import { OrderContextProvider } from './context/OrderContext';
 import { ProductCountProvider } from './context/ProductCountContext';
 import { AdminContextProvider } from './context/AdminContext';
 import { UserPostsContextProvider } from './context/UserPostsContext';
+import { FavContextProvider } from './context/FavContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,9 +29,11 @@ root.render(
             <ProductCountProvider>
               <OrderContextProvider>
             <BasketContextProvider>
+              <FavContextProvider>
               <Provider store={store}>
                <App />
               </Provider>
+              </FavContextProvider>
               </BasketContextProvider>
               </OrderContextProvider>
               </ProductCountProvider>
