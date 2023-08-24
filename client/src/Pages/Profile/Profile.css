@@ -31,12 +31,13 @@
    font-weight: 600;
 }
 .my-orders{
-  border-bottom: 0.1px solid rgb(109, 108, 108);
-   color: #f6ceba;
-   letter-spacing: 0.1rem;
+   color: #f3ece9;
+   letter-spacing: 0.3rem;
    font-weight: bold;
 
+
 }
+
 .profile_main_wrapper .right{
    flex: 1;
    display: flex;

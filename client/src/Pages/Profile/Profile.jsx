@@ -13,6 +13,8 @@ import PageLoader from "../PageLoader/PageLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { CURRENT_POST } from "../../store/postsSlice";
 import { useAdminContext } from "../../context/AdminContext";
+import GradingIcon from '@mui/icons-material/Grading';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const Profile = () => {
   const { id } = useParams();
@@ -21,7 +23,7 @@ const Profile = () => {
   const { activeUser } = useActiveUserContext();
   const [postAuthor, setPostAuthor] = useState();
   const [profileImage, setProfileImage] = useState();
-  const {admin}=useAdminContext()
+  const { admin } = useAdminContext();
 
   const posts = useSelector((state) => state.post.posts);
   const handleDelete = async (id) => {
@@ -33,7 +35,7 @@ const Profile = () => {
       if (res.status === 200) {
         console.log(res.data);
         dispatch({ type: "DELETE_POST", payload: res.data.post });
-        window.location.reload()
+        window.location.reload();
       } else {
         console.log("Post not deleted , Something wents wrong");
       }
@@ -73,16 +75,15 @@ const Profile = () => {
     postDispatch(CURRENT_POST(currentId));
   };
 
-
   useEffect(() => {
     function reloadIt() {
       if (window.location.href.substr(-2) !== "?r") {
         window.location = window.location.href + "?r";
       }
     }
-  
+
     setTimeout(reloadIt, 10);
-      const fetchPostUser = async () => {
+    const fetchPostUser = async () => {
       try {
         const res = await axios.get(`/api/auth/user/${id}`);
 
@@ -99,10 +100,9 @@ const Profile = () => {
     fetchPostUser();
   }, [id]);
 
-
   return (
     <>
-      { activeUser && postAuthor ?(
+      {activeUser && postAuthor ? (
         <div className="profile_user">
           <div className="profile_main_wrapper">
             <div className="top">
@@ -118,35 +118,38 @@ const Profile = () => {
                 <div className="joined_data font_wt_500">
                   <p>Joined On : {format(postAuthor?.createdAt)}</p>
                 </div>
-              {!admin ? (
-                <>
-                 <div className="total_blogs font_wt_500">
-                  <p>
-                    Total Products :{" "}
-                    {
-                      posts?.filter(
-                        (post) => post?.authorId === postAuthor?._id
-                      ).length
-                    }
-                  </p>
-                </div>
-                </>
-              ) :(null)}
-               
+                {!admin ? (
+                  <>
+                    <div className="total_blogs font_wt_500">
+                      <p>
+                        Total Products :{" "}
+                        {
+                          posts?.filter(
+                            (post) => post?.authorId === postAuthor?._id
+                          ).length
+                        }
+                      </p>
+                    </div>
+                  </>
+                ) : null}
 
-                {
-                  !admin && activeUser?._id === postAuthor?._id  ?(
-                    <>
-                     <div className="orders">
-                <Link to={`/orders`} className="my-orders" >
-
-                  My orders
-                  </Link>
-                </div>
-                    </>
-                  ) :(null)
-                }
-               
+                {!admin && activeUser?._id === postAuthor?._id ? (
+                  <>
+                    <div className="orders">
+                      <Link to={`/orders`} className="my-orders">
+                        My orders
+                        <GradingIcon style={{transform:"translateY(3px)"}}/>
+                      </Link>
+                    
+                    </div>
+                    <div className="wishlist">
+                    <Link to={`/wishlist`} className="my-orders">
+                        Wishlist
+                        <FavoriteBorderIcon style={{transform:"translateY(3px)"}}/>
+                      </Link>
+                    </div>
+                  </>
+                ) : null}
               </div>
 
               <div className="right">
@@ -159,7 +162,11 @@ const Profile = () => {
                 </div>
                 {activeUser?._id === postAuthor?._id ? (
                   <div className="change_image_wrapper">
-                    <form className="profileform" encType="multipart/form-data" onSubmit={handleSumbit}>
+                    <form
+                      className="profileform"
+                      encType="multipart/form-data"
+                      onSubmit={handleSumbit}
+                    >
                       <input
                         type="file"
                         onChange={(e) => setProfileImage(e.target.files[0])}
@@ -181,12 +188,11 @@ const Profile = () => {
             <div className="bottom">
               {!admin ? (
                 <>
-                 <div>
-                <h4>All Products</h4>
-              </div>
+                  <div>
+                    <h4>All Products</h4>
+                  </div>
                 </>
-              ):(null)}
-             
+              ) : null}
 
               <div className="blog_post_profile_wrapper">
                 {posts

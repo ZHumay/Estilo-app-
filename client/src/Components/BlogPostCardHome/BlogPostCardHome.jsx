@@ -24,8 +24,6 @@ const BlogPostCardHome = ({ post, color }) => {
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(activeUser?._id));
 
-
-  
   const handleSettingId = async (currentPost_Id) => {
     try {
       // handleSettingId function logic can be implemented here if needed
@@ -67,7 +65,6 @@ const BlogPostCardHome = ({ post, color }) => {
   };
 
   const handleClick = async (post) => {
-    
     try {
       const itemToAdd = {
         _id: post._id,
@@ -85,10 +82,10 @@ const BlogPostCardHome = ({ post, color }) => {
         createdAt: post.createdAt,
         updatedAt: post.updatedAt,
       };
-  
+
       // Sepete eklemek için kullanılan düğme
       const basketButton = document.getElementById(`basketButton-${post._id}`);
-      
+
       if (!basketItems.some((item) => item._id === post._id)) {
         // Eğer sepete ekli değilse, sepete ekle
         const res = await axios.post(
@@ -112,7 +109,7 @@ const BlogPostCardHome = ({ post, color }) => {
       console.error("Error adding/removing item to/from basket:", error);
     }
   };
-  
+
   const handleFav = async (post) => {
     try {
       const itemToAddFav = {
@@ -131,7 +128,7 @@ const BlogPostCardHome = ({ post, color }) => {
         createdAt: post.createdAt,
         updatedAt: post.updatedAt,
       };
-  
+
       if (!favItems.some((item) => item._id === post._id)) {
         // Eğer favorilerde değilse, favorilere ekle
         const res = await axios.post(
@@ -155,19 +152,16 @@ const BlogPostCardHome = ({ post, color }) => {
       console.error("Error adding/removing item to/from fav:", error);
     }
   };
-  
-
 
   return (
     <div className={`blog-post-card-home ${color ? `color-${color}` : ""}`}>
       <div className="blog-post-home-image_wrapper">
         <Link
-          className="view_post_home"
           to={`/post/${post?._id}`}
           onClick={() => handleSettingId(post?._id)}
         >
           <img src={post?.postImage} alt="post image" />
-        </Link>
+        </Link>{" "}
       </div>
 
       <div className="post_home_title">
@@ -189,8 +183,8 @@ const BlogPostCardHome = ({ post, color }) => {
                 style={{
                   width: "30px",
                   height: "20px",
-                  color: "#DC4944", 
-                  marginLeft:"-42px"
+                  color: "#DC4944",
+                  marginLeft: "-42px",
                 }}
               />
             ) : (
@@ -199,8 +193,7 @@ const BlogPostCardHome = ({ post, color }) => {
                   width: "30px",
                   height: "20px",
                   color: "#DC4944", // Kırmızı renk
-                  marginLeft:"-42px"
-
+                  marginLeft: "-42px",
                 }}
               />
             )}
@@ -251,7 +244,6 @@ const BlogPostCardHome = ({ post, color }) => {
               <Button
                 size="small"
                 id={`basketButton-${post._id}`}
-
                 variant="text"
                 className={
                   basketItems.some((item) => item._id === post._id)

@@ -10,13 +10,16 @@ import { BasketContext } from '../../context/BasketContext';
 import { Button } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { FavContext } from "../../context/FavContext";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const BlogPostCardHomeUser = ({ post,color }) => {
   const { activeUser } = useActiveUserContext();
   const { posts, dispatch } = usePostsContext();
   const { basketItems } = useContext(BasketContext);
   const { addToBasket, removeFromBasket,  } = useContext(BasketContext);
-
+  const { favItems, addToFav, removeFromFav } = useContext(FavContext);
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(activeUser?._id));
 
@@ -92,16 +95,96 @@ const BlogPostCardHomeUser = ({ post,color }) => {
     }
   };
   
+  const handleFav = async (post) => {
+    try {
+      const itemToAddFav = {
+        _id: post._id,
+        title: post.title,
+        description: post.description,
+        size: post.size,
+        price: post.price,
+        colorr: post.color,
+        category: post.category,
+        gender: post.gender,
+        authorId: post.authorId,
+        likes: post.likes,
+        postImage: post.postImage,
+        userType: post.userType,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+      };
   
+      if (!favItems.some((item) => item._id === post._id)) {
+        // Eğer favorilerde değilse, favorilere ekle
+        const res = await axios.post(
+          `/api/auth/user/${activeUser._id}/favItems`,
+          {
+            newItem: itemToAddFav,
+          }
+        );
+        addToFav(res.data);
+      } else {
+        // Eğer favorilerdeyse, favorilerden çıkar
+        const res = await axios.delete(
+          `/api/auth/user/${activeUser._id}/favItems`,
+          {
+            data: { itemToDelete: itemToAddFav },
+          }
+        );
+        removeFromFav(itemToAddFav);
+      }
+    } catch (error) {
+      console.error("Error adding/removing item to/from fav:", error);
+    }
+  };
 
   return (
     <div className={`blog-post-card-home ${color ? `color-${color}` : ''}`}>
       <div className="blog-post-home-image_wrapper">
-        <img src={post?.postImage} alt="post image" />
-      </div>
+      <Link
+          className="view_post_home"
+          to={`/post/${post?._id}`}
+          onClick={() => handleSettingId(post?._id)}
+        >
+          <img src={post?.postImage} alt="post image" />
+        </Link>      </div>
 
       <div className="post_home_title">
         <p>{post?.title}</p>
+        <span>
+          {" "}
+          <Button
+            size="small"
+            variant="text"
+            className={
+              favItems.some((item) => item._id === post._id)
+                ? "remove-btn-fav"
+                : "add-btn-fav"
+            }
+            onClick={() => handleFav(post)}
+          >
+            {favItems.some((item) => item._id === post._id) ? (
+              <FavoriteIcon
+                style={{
+                  width: "30px",
+                  height: "20px",
+                  color: "#DC4944", 
+                  marginLeft:"-42px"
+                }}
+              />
+            ) : (
+              <FavoriteBorderIcon
+                style={{
+                  width: "30px",
+                  height: "20px",
+                  color: "#DC4944", // Kırmızı renk
+                  marginLeft:"-42px"
+
+                }}
+              />
+            )}
+          </Button>
+        </span>
       </div>
 
       {activeUser && (
@@ -122,13 +205,7 @@ const BlogPostCardHomeUser = ({ post,color }) => {
                 <span className="like_count">{likeCount}</span>
               </p>
             </div>
-            <Link
-              className="view_post_home"
-              to={`/post/${post?._id}`}
-              onClick={() => handleSettingId(post?._id)}
-            >
-              More...
-            </Link>
+         
           </div>
 
           <div className="right">
@@ -145,7 +222,7 @@ const BlogPostCardHomeUser = ({ post,color }) => {
                     handleDelete(post?._id);
                   }}
                 >
-                  <Link to="/">
+                  <Link to="/wardrobe">
                     <DeleteIcon className="post_icon delete_post_icon_home" />
                   </Link>
                 </p>
