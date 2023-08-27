@@ -26,6 +26,7 @@ import CreatePostUser from "./Pages/CreatePostUser/CreatePostUser";
 import { ForgetPasswordPage } from "./Pages/ForgetPassword";
 import { ChangePasswordPage } from "./Pages/ChangePassowrd/ChangePassowrd";
 import Favourites from "./Pages/Favourites/Favourites";
+import ProductsPage from "./Components/Products/ProductsPage";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         <Route path="/shop" element={ <Shop />}></Route>
         <Route path="/wardrobe" element={<Wardrobe/>}></Route>
         <Route path="/wishlist" element={<Favourites/>}></Route>
+        <Route path="/userorders" element={<ProductsPage/>}></Route>
         <Route path="/basket" element={ <Basket/>}></Route>
         <Route path="/update-post/:id" element={<UpdatePost />}></Route>
         <Route path="/profile/:id" element={<Profile />}></Route>

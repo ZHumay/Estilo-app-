@@ -8,7 +8,7 @@ const PageNotFound = () =>{
         <>
             <div className="pageNotFound">
                <div className="page_not_found_wrapper">
-                   <h1 className='main_heading'>Page Not Found</h1>
+                   <h1 className='main_heading'> Sorry,Page Not Found</h1>
                    <Link to="/" className='back_to_home_btn'>Back to Home</Link>
                </div>
 

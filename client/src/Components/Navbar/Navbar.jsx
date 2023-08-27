@@ -270,6 +270,17 @@ console.log(admin);
         Create
       </Link>
 
+      <Link
+        style={{
+          color: "rgb(66,64,64)",
+          fontSize: "17px",
+          fontWeight: "700",
+        }}
+        to="/userorders"
+        className="ml"
+      >
+        Orders
+      </Link>
 
         </>
       )

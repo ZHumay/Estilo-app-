@@ -639,8 +639,120 @@ const changepassword = async (req, res) => {
   }
 };
 
-// Gerekli diğer işlevler ve exportlar
 
+
+const getAllOrderItems = async (req, res) => {
+  try {
+    // Tüm kullanıcıları bulun
+    const users = await userModel.find();
+
+    // Her kullanıcının siparişlerini alın
+    const orderItems = [];
+    users.forEach(user => {
+      orderItems.push(...user.orders);
+    });
+
+    return res.status(200).json({ orderItems });
+  } catch (error) {
+    // İşlem sırasında oluşan hataları yönetin
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+
+
+const postAllOrderItems = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { orderDetails } = req.body;
+
+    // Kullanıcıyı bulun
+    const user = await userModel.findById(userId);
+
+    // Kullanıcı yoksa hata döndürün
+    if (!user) {
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
+    }
+
+    // Siparişi kullanıcının siparişlerine ekleyin
+    user.orders.push(orderDetails);
+
+    // Kullanıcıyı kaydedin
+    await user.save();
+
+    return res.status(201).json({ message: "Sipariş başarıyla eklendi" });
+  } catch (error) {
+    return res.status(500).json({ message: "İç sunucu hatası" });
+  }
+};
+
+
+
+
+
+
+const deleteAllorderItems = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const orderId = req.params.orderId;
+
+    // Kullanıcıyı bulun
+    const user = await userModel.findById(userId);
+
+    // Kullanıcı yoksa hata döndürün
+    if (!user) {
+      return res.status(404).json({ message: "Kullanıcı bulunamadı" });
+    }
+
+    // Siparişi kullanıcının siparişlerinden çıkarın
+    const index = user.orders.findIndex(order => order.id === orderId);
+
+    if (index === -1) {
+      return res.status(404).json({ message: "Sipariş bulunamadı" });
+    }
+
+    user.orders.splice(index, 1);
+
+    // Kullanıcıyı kaydedin
+    await user.save();
+
+    return res.status(200).json({ message: "Sipariş başarıyla silindi" });
+  } catch (error) {
+    return res.status(500).json({ message: "İç sunucu hatası" });
+  }
+}
+
+
+
+const updateAllorderItems = async (req, res) => {
+  try {
+    // Get the user ID from the request parameters or wherever it's stored
+    const userId = req.params.id;
+
+    // Find the user by ID
+    const user = await userModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract the updated basket items from the request body
+    const { updatedOrders } = req.body;
+
+    // Update the basket items in the user's basketItem array
+    user.orders = updatedOrders;
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    return res.status(200).json(updatedUser.orders);
+  } catch (error) {
+    // Handle any errors that might occur during the process
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 
 
@@ -668,6 +780,9 @@ module.exports = {
   get_favItems,
   post_favItems,
   delete_favItems,
-  update_FavItems
+  update_FavItems,
+  getAllOrderItems,
+  postAllOrderItems,
+  deleteAllorderItems,
+  updateAllorderItems
 };
-
