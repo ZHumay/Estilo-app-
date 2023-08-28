@@ -29,13 +29,17 @@ const Favourites = () => {
   const { activeUser } = useActiveUserContext();
   const { admin } = useAdminContext();
 
+
   const customBreakpoints = {
-    xs: 321,
+    xs: 320,
     xs2: 383,
+    xs3:453,
     s: 490,
     s2: 530,
+    s3:608,
     md2: 703,
     md3: 885,
+    md4:703,
     md: 768,
     lg2: 915,
     lg3: 1013,
@@ -43,7 +47,7 @@ const Favourites = () => {
     lg5: 1245,
     lg: 1279,
     xl1: 1301,
-    xl: 1920, // Örnek bir büyük boyut
+    xl: 1920,  // Örnek bir büyük boyut
   };
 
   const theme = createTheme({
@@ -113,6 +117,7 @@ const Favourites = () => {
                         md: "678px",
                         lg: "1400px",
                         s2: "270px",
+                        s3:"410px",
                         md2: "479px",
                         lg2: "826px",
                         md3: "793px",
@@ -130,6 +135,7 @@ const Favourites = () => {
                       transform: {
                         xs: "translate(0px,-30px)",
                         xs2: "translate(28px,-30px)",
+                        xs3:"translate(55px,-30px)",
                         md: "translateX(14px)",
                         s: "translate(70px,-30px)",
                         s2: "translate(76px,-30px)",
@@ -138,18 +144,17 @@ const Favourites = () => {
                   >
                       <Link to={`/post/${post?._id}`}>
                     <CardMedia
-                      component="img"
-                      height="140"
-                      image={post.postImage}
-                      sx={{
-                        width: { xs: "299px", md: "190px", md2: "515px" },
-                        margin: "0px",
-                        height: { md: "200px", xs: "82px" },
-                        alignSelf: "flex-start", // Align the image to the top left corner
-                        objectFit: { xs: "contain" },
-                        transform: { xs: "translateX(-20px)" },
-                      }}
-                      alt={post.title}
+                       component="img"
+                       height="140"
+                       image={post.postImage}
+                       sx={{
+                         width: { xs: "299px", md: "190px", md2: "515px",md4:"366px" },
+                         margin: "0px",
+                         height: { md: "200px", xs: "82px" },
+                         alignSelf: "flex-start", // Align the image to the top left corner
+                         objectFit: { xs: "contain" },
+                         transform: { xs: "translateX(0px)" ,s3:"translateX(3px)"} ,md4:"translateX(-18px)" }}
+                       alt={post.title}
                     />
                     </Link>
                     <CardContent
@@ -163,11 +168,14 @@ const Favourites = () => {
                         padding: "5px",
                       }}
                     >
-                      <Typography
+                       <Typography
                         gutterBottom
                         variant="h4" // Set variant based on screen size
                         component="div"
                         className="title"
+                        style={{
+                          fontSize: window.innerWidth <= 320 ? "10px" : "inherit",
+                        }}
                       >
                         {post.title}
                       </Typography>

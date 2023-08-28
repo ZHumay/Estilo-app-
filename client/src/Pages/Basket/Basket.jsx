@@ -33,12 +33,15 @@ const Basket = () => {
   const { admin } = useAdminContext();
 
   const customBreakpoints = {
-    xs: 321,
+    xs: 320,
     xs2: 383,
+    xs3:453,
     s: 490,
     s2: 530,
+    s3:608,
     md2: 703,
     md3: 885,
+    md4:703,
     md: 768,
     lg2: 915,
     lg3: 1013,
@@ -154,6 +157,7 @@ const Basket = () => {
                         md: "678px",
                         lg: "1400px",
                         s2: "270px",
+                        s3:"410px",
                         md2: "479px",
                         lg2: "826px",
                         md3: "793px",
@@ -171,6 +175,7 @@ const Basket = () => {
                       transform: {
                         xs: "translate(0px,-30px)",
                         xs2: "translate(28px,-30px)",
+                        xs3:"translate(55px,-30px)",
                         md: "translateX(14px)",
                         s: "translate(70px,-30px)",
                         s2: "translate(76px,-30px)",
@@ -182,13 +187,12 @@ const Basket = () => {
                       height="140"
                       image={post.postImage}
                       sx={{
-                        width: { xs: "299px", md: "190px", md2: "515px" },
+                        width: { xs: "299px", md: "190px", md2: "515px",md4:"366px" },
                         margin: "0px",
                         height: { md: "200px", xs: "82px" },
                         alignSelf: "flex-start", // Align the image to the top left corner
                         objectFit: { xs: "contain" },
-                        transform: { xs: "translateX(-20px)" },
-                      }}
+                        transform: { xs: "translateX(-20px)" ,s3:"translateX(53px)"} ,md4:"translateX(-18px)" }}
                       alt={post.title}
                     />
                     <CardContent
@@ -207,6 +211,9 @@ const Basket = () => {
                         variant="h4" // Set variant based on screen size
                         component="div"
                         className="title"
+                        style={{
+                          fontSize: window.innerWidth <= 320 ? "10px" : "inherit",
+                        }}
                       >
                         {post.title}
                       </Typography>

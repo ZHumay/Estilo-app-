@@ -194,8 +194,8 @@
       border-radius: 10px;
       padding: 10px;
       margin-top: 40px;
-      background-color: rgb(234, 234, 234);
-  }
+      background-color:#ec985c;
+   }
 
   .profile_user_profile_image {
    width: 51px;
@@ -244,8 +244,7 @@
    font-weight: 600;
 }
 .my-orders{
-  border-bottom: 0.1px solid rgb(109, 108, 108);
-   color: #7d3998;
+   color: #f3ece9;
    letter-spacing: 0.1rem;
    font-weight: bold;
 
@@ -381,7 +380,7 @@
    font-size: 11px;
    cursor: pointer;
    letter-spacing: 1px;
-   background-color: rgb(0, 123, 164);
+   background-color: rgb(191, 94, 39);
    color: white;
    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.407);
 }
@@ -400,8 +399,8 @@
       border-radius: 10px;
       padding: 10px;
       margin-top: 40px;
-      background-color: rgb(234, 234, 234);
-  }
+      background-color:#ec985c;
+   }
   .blog_profile_post{
    width: 230px;
    height: 180px;
