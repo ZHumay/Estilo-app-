@@ -131,6 +131,27 @@ transform: translateY(-9px);
     }
   
 }
+
+@media screen and (min-width: 407px) and (max-width: 708px){
+
+    .header_name_comment {
+        width: 240px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 497px) and (max-width: 708px){
+
+    .header_name_comment {
+        width: 319px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
 @media screen and (min-width: 542px) and (max-width: 708px){
 
     .header_name_comment {
@@ -146,6 +167,17 @@ transform: translateY(-9px);
 
     .header_name_comment {
         width: 370px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
+@media screen and (min-width: 625px) and (max-width: 708px){
+
+    .header_name_comment {
+        width: 433px;
         display: flex;
         justify-content: space-between;
         overflow: hidden;
@@ -196,6 +228,16 @@ transform: translateY(-9px);
     }
     
 }
+@media screen and (min-width: 788px) and (max-width: 1278px){
+
+    .header_name_comment {
+        width: 578px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
 @media screen and (min-width: 846px) and (max-width: 1279px){
 
     .header_name_comment {
@@ -211,6 +253,16 @@ transform: translateY(-9px);
 
     .header_name_comment {
         width: 660px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+@media screen and (min-width: 954px) and (max-width: 1278px){
+
+    .header_name_comment {
+        width: 720px;
         display: flex;
         justify-content: space-between;
         overflow: hidden;
@@ -248,6 +300,18 @@ transform: translateY(-9px);
     }
     
 }
+
+@media screen and (min-width: 1245px) and (max-width: 1325px){
+
+    .header_name_comment {
+        width: 997px;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    
+}
+
 @media screen and (min-width: 1285px) and (max-width: 1325px){
 
     .header_name_comment {

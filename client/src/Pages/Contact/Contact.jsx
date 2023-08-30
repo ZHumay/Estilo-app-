@@ -96,6 +96,9 @@ export default Contact;
 const StyledContactForm = styled.div`
   width: 400px;
 
+  @media (min-width: 601px) and (max-width:605px) {
+    width: 341px; /* Set width to 601px for screens 601px or wider */
+  }
   form {
     display: flex;
     align-items: flex-start;

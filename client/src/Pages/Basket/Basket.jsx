@@ -36,6 +36,8 @@ const Basket = () => {
     xs: 320,
     xs2: 383,
     xs3:453,
+    xs4:424,
+    xs5:478,
     s: 490,
     s2: 530,
     s3:608,
@@ -149,14 +151,17 @@ const Basket = () => {
                       height: "200px",
                       margin: {
                         xs: "10px 30px",
-                        lg: "20px 30px 30px 62px",
+                        lg: "20px 30px 30px 49px",
                         md: "10px 30px 30px 30px",
                       },
                       width: {
                         xs: "260px",
+                        xs4:"312px",
+                        s2: "350px",
+                        xs3:"351px",
+                        s:"395px",
                         md: "678px",
                         lg: "1400px",
-                        s2: "270px",
                         s3:"410px",
                         md2: "479px",
                         lg2: "826px",
@@ -175,10 +180,10 @@ const Basket = () => {
                       transform: {
                         xs: "translate(0px,-30px)",
                         xs2: "translate(28px,-30px)",
-                        xs3:"translate(55px,-30px)",
+                        xs3:"translate(35px,-30px)",
                         md: "translateX(14px)",
-                        s: "translate(70px,-30px)",
-                        s2: "translate(76px,-30px)",
+                        s: "translate(34px,-30px)",
+                        s2: "translate(36px,-30px)",
                       },
                     }}
                   >
@@ -192,7 +197,7 @@ const Basket = () => {
                         height: { md: "200px", xs: "82px" },
                         alignSelf: "flex-start", // Align the image to the top left corner
                         objectFit: { xs: "contain" },
-                        transform: { xs: "translateX(-20px)" ,s3:"translateX(53px)"} ,md4:"translateX(-18px)" }}
+                        transform: { xs: "translateX(-20px)",lg:"translateX(-14px)",s: "translateX(25px)",xs5:"translateX(27px)",xs4:"translateX(7px)",s3:"translateX(53px)"} ,md4:"translateX(-18px)"}}
                       alt={post.title}
                     />
                     <CardContent
