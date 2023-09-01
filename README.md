@@ -32,28 +32,28 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Installation:
+# Installation:
 Clone the repository: git clone https://github.com/huseynovali/Estilo-app-
 
 
-Install the dependencies for the server:
+# Install the dependencies for the server:
 cd server
 
 npm install
 
-Install the dependencies for the client:
+# Install the dependencies for the client:
 cd client
 
 npm install
 
-Configuration:
+# Configuration:
 MONGO_URI="your-mongodb-uri"
 SECRET_KEY=" "
 CLOUDINARY_USER_NAME=" "
 CLOUDINARY_API_KEY=" "
 CLOUDINARY_API_SECRET=" "
 
-Running the Application:
+ # Running the Application:
 cd client
 
 npm start
