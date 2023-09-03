@@ -234,7 +234,6 @@ const UpdatePost = () => {
         </div>
       </form>
     </div>
-    <Footer/>
    </>
   );
 };
