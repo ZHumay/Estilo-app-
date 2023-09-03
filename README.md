@@ -5,7 +5,7 @@
 
 <img src="https://github.com/ZHumay/recipeApp/assets/114071477/2e43e311-7c6c-4a9e-a2dd-925640274acc">
 
-<img src="https://github.com/ZHumay/recipeApp/assets/114071477/3435eb4b-1d4d-44b6-b1d2-bb1369c1c7a9">
+<img src="https://github.com/ZHumay/recipeApp/assets/114071477/018160ed-b52a-41fe-aa46-ce3fcf4e5920">
 
 <img src="https://github.com/ZHumay/recipeApp/assets/114071477/e7308edf-b6b0-4bde-8ca0-01c30c2eef54">
 
