@@ -400,7 +400,7 @@ cursor: pointer;
   margin-left: 14px;
   padding-bottom: 7px;
   font-size: 12px;
-  width: 130px;
+  width: 150px;
 }
 h1{
   font-size: 20px;
@@ -459,7 +459,7 @@ h1{
   transform: translateX(15px)  }
   .filter{
     color: #fff;
-    font-size: 10px
+    font-size: 9px
   }
 
   .icon{

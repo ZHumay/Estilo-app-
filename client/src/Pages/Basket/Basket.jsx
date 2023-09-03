@@ -40,6 +40,7 @@ const Basket = () => {
     xs5:478,
     s: 490,
     s2: 530,
+    s4:561,
     s3:608,
     md2: 703,
     md3: 885,
@@ -163,6 +164,7 @@ const Basket = () => {
                         md: "678px",
                         lg: "1400px",
                         s3:"410px",
+                        s4:"431px",
                         md2: "479px",
                         lg2: "826px",
                         md3: "793px",
@@ -197,7 +199,7 @@ const Basket = () => {
                         height: { md: "200px", xs: "82px" },
                         alignSelf: "flex-start", // Align the image to the top left corner
                         objectFit: { xs: "contain" },
-                        transform: { xs: "translateX(-20px)",lg:"translateX(-14px)",s: "translateX(25px)",xs5:"translateX(27px)",xs4:"translateX(7px)",s3:"translateX(53px)"} ,md4:"translateX(-18px)"}}
+                        transform: { xs: "translateX(-20px)",lg:"translateX(-14px)",s: "translateX(25px)",xs5:"translateX(27px)",xs4:"translateX(7px)",s3:"translateX(53px)" ,s4:"translateX(63px)", md4:"translateX(-18px)",md2:"translateX(48px)"}}}
                       alt={post.title}
                     />
                     <CardContent

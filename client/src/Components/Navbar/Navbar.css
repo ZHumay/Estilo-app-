@@ -670,3 +670,11 @@
   }
 }
 
+@media screen and (min-width: 1236px) and (max-width: 1279px){
+  .navbar .left {
+    transform: translate(-123px, -12px);
+    width: 294px;
+}
+
+
+}

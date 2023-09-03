@@ -188,6 +188,34 @@ width: 100%;
 
 }
 
+
+@media screen and (min-width: 546px) and (max-width: 768px){
+  .PostPrice{
+    font-size: 13px;
+    transform: translate(17px,10px);
+    font-weight: bold;
+    color: #a1131f;
+    text-decoration: line-through;
+    padding-right: 16px;
+  
+  }
+  .newprice{
+    display: flex;
+    flex-direction: row;
+  
+  }
+  .newPostprice{
+    font-size: 13px;
+    transform: translate(15,10px);
+    font-weight: bold;
+    color: #359d2c;
+  }
+
+
+
+
+}
+
 @media screen and (min-width: 769px) and (max-width: 1279px){
 
 
@@ -322,10 +350,10 @@ width: 100%;
 
 }
 
-@media screen and (min-width: 765px) and (max-width: 1279px){
+@media screen and (min-width: 755px) and (max-width: 768px){
 
   .PostPrice{
-    font-size: 10px;
+    font-size: 13px;
     transform: translate(60px,10px);
     font-weight: bold;
     color: #a1131f;
@@ -334,8 +362,29 @@ width: 100%;
   
   }
   .newPostprice{
-    font-size: 10px;
+    font-size: 13px;
     transform: translate(55px,10px);
+    font-weight: bold;
+    color: #359d2c;
+  }
+
+}
+
+
+@media screen and (min-width: 765px) and (max-width: 1279px){
+
+  .PostPrice{
+    font-size: 15px;
+    transform: translate(73px,10px);
+    font-weight: bold;
+    color: #a1131f;
+    text-decoration: line-through;
+    padding-right: 16px;
+  
+  }
+  .newPostprice{
+    font-size: 15px;
+    transform: translate(65px,10px);
     font-weight: bold;
     color: #359d2c;
   }
@@ -347,7 +396,7 @@ width: 100%;
 @media screen and (min-width: 847px) and (max-width: 1279px){
 
   .PostPrice{
-    font-size: 10px;
+    font-size: 15px;
     transform: translate(80px,10px);
     font-weight: bold;
     color: #a1131f;
@@ -356,7 +405,7 @@ width: 100%;
   
   }
   .newPostprice{
-    font-size: 10px;
+    font-size: 15px;
     transform: translate(75px,10px);
     font-weight: bold;
     color: #359d2c;
@@ -370,8 +419,8 @@ width: 100%;
 @media screen and (min-width: 989px) and (max-width: 1279px){
 
   .PostPrice{
-    font-size: 10px;
-    transform: translate(110px,10px);
+    font-size: 15px;
+    transform: translate(160px,10px);
     font-weight: bold;
     color: #a1131f;
     text-decoration: line-through;
@@ -379,8 +428,54 @@ width: 100%;
   
   }
   .newPostprice{
-    font-size: 10px;
-    transform: translate(99px,10px);
+    font-size: 15px;
+    transform: translate(159px,10px);
+    font-weight: bold;
+    color: #359d2c;
+  }
+  .carousel_item_title_sale{
+    transform: translateY(30px);
+  }
+
+}
+
+@media screen and (min-width: 1068px) and (max-width: 1279px){
+
+  .PostPrice{
+    font-size: 15px;
+    transform: translate(122px,10px);
+    font-weight: bold;
+    color: #a1131f;
+    text-decoration: line-through;
+    padding-right: 16px;
+  
+  }
+  .newPostprice{
+    font-size: 15px;
+    transform: translate(129px,10px);
+    font-weight: bold;
+    color: #359d2c;
+  }
+  .carousel_item_title_sale{
+    transform: translateY(30px);
+  }
+
+}
+
+@media screen and (min-width: 1236px) and (max-width: 1279px){
+
+  .PostPrice{
+    font-size: 15px;
+    transform: translate(180px,10px);
+    font-weight: bold;
+    color: #a1131f;
+    text-decoration: line-through;
+    padding-right: 16px;
+  
+  }
+  .newPostprice{
+    font-size: 15px;
+    transform: translate(169px,10px);
     font-weight: bold;
     color: #359d2c;
   }
