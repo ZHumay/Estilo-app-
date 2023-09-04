@@ -13,6 +13,7 @@ import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { FavContext } from "../../context/FavContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useAdminContext } from "../../context/AdminContext";
 
 const BlogPostCardHome = ({ post, color }) => {
   const { activeUser } = useActiveUserContext();
@@ -20,7 +21,7 @@ const BlogPostCardHome = ({ post, color }) => {
   const { basketItems } = useContext(BasketContext);
   const { addToBasket, removeFromBasket } = useContext(BasketContext);
   const { favItems, addToFav, removeFromFav } = useContext(FavContext);
-
+  const { admin } = useAdminContext();
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(activeUser?._id));
 
@@ -168,6 +169,9 @@ const BlogPostCardHome = ({ post, color }) => {
         <p>{post?.title}</p>
         <span>
           {" "}
+          
+          {!admin? (
+          <>
           <Button
             size="small"
             variant="text"
@@ -198,6 +202,11 @@ const BlogPostCardHome = ({ post, color }) => {
               />
             )}
           </Button>
+          </>
+
+          ):(" ")
+          }
+          
         </span>
       </div>
 
