@@ -27,7 +27,6 @@ import Alert from "@mui/material/Alert";
 const SinglePost = () => {
   const { dispatch } = usePostsContext();
   const { users, dispatchUsers } = useUsersContext();
-  console.log(users);
   const { id } = useParams();
   const { activeUser, dispatchActiceUser } = useActiveUserContext();
   const [currentPost, setCurrentPost] = useState();
@@ -47,31 +46,28 @@ const SinglePost = () => {
     setReviewAlertOpen(false);
   };
 
-
   useEffect(() => {
     if (reviewAlertOpen) {
       const timer = setTimeout(() => {
         closeAlert();
-      }, 1000); 
-      return () => clearTimeout(timer); 
+      }, 1000);
+      return () => clearTimeout(timer);
     }
   }, [reviewAlertOpen]);
 
-
   const alertStyle = {
     position: "fixed",
-    top: "50%", 
+    top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)", 
-    width: "200px", 
-    height:"60px",
-    fontSize:"10px",
-    backgroundColor:"white",
-    color:"green",
-    fontWeight:"bold"
+    transform: "translate(-50%, -50%)",
+    width: "200px",
+    height: "60px",
+    fontSize: "10px",
+    backgroundColor: "white",
+    color: "green",
+    fontWeight: "bold",
   };
 
-  
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(`/api/posts/delete-post/${id}`);
@@ -98,25 +94,22 @@ const SinglePost = () => {
   //   getBooksReviews();
   // }, [id]);
 
-  const handleRating=async()=>{
-     const userId=activeUser._id;
-     try {
+  const handleRating = async () => {
+    const userId = activeUser._id;
+    try {
       await axios.post(`/api/review/${id}`, {
         rating,
-        post:currentPost._id,
+        post: currentPost._id,
         user: userId,
       });
       setReviewTrueAlertOpen(true);
       setRating(0);
       // getBooksReviews();
-      setReviewAlertOpen(true); 
+      setReviewAlertOpen(true);
       setHasRated(true);
-      localStorage.setItem(`hasRated-${id}`, 'true');
-     } catch (error) {
-      
-     }
-  }
-
+      localStorage.setItem(`hasRated-${id}`, "true");
+    } catch (error) {}
+  };
 
   const handleClick = async (post) => {
     try {
@@ -237,13 +230,13 @@ const SinglePost = () => {
 
         if (res.status === 200) {
           setCurrentPost(res.data.post);
-           // Check if the user has already rated the post
-           const userHasRated = localStorage.getItem(`hasRated-${id}`);
-           if (userHasRated === 'true') {
-             setHasRated(true);
-           } else {
-             setHasRated(false);
-           }
+          // Check if the user has already rated the post
+          const userHasRated = localStorage.getItem(`hasRated-${id}`);
+          if (userHasRated === "true") {
+            setHasRated(true);
+          } else {
+            setHasRated(false);
+          }
           users?.map((user) => {
             if (user?._id === currentPost.authorId) {
               setPostAuthor(user);
@@ -285,16 +278,16 @@ const SinglePost = () => {
 
   return (
     <>
-    {reviewAlertOpen && (
-  <Alert
-  variant="filled" 
-    severity="success" // Bildirimin rengini belirleyin
-    onClose={() => setReviewAlertOpen(false)} // Kapatma işlemi için
-    style={alertStyle} 
-  >
-    Thanks for reviewing the product!
-  </Alert>
-)}
+      {reviewAlertOpen && (
+        <Alert
+          variant="filled"
+          severity="success" // Bildirimin rengini belirleyin
+          onClose={() => setReviewAlertOpen(false)} // Kapatma işlemi için
+          style={alertStyle}
+        >
+          Thanks for reviewing the product!
+        </Alert>
+      )}
       {currentPost && activeUser ? (
         <div className="single_blog_post_wrapper">
           <div className="single_blog_post">
@@ -363,7 +356,8 @@ const SinglePost = () => {
 
             {!admin ? (
               <>
-                <Button style={{marginLeft:"-20px"}}
+                <Button
+                  style={{ marginLeft: "-20px" }}
                   size="small"
                   variant="text"
                   className={
@@ -398,8 +392,8 @@ const SinglePost = () => {
 
             {!(activeUser._id === currentPost?.authorId) ? (
               <>
-                <Button 
-                 style={{marginLeft:'-25px'}}
+                <Button
+                  style={{ marginLeft: "-25px" }}
                   size="small"
                   id={`basketButton-${currentPost._id}`}
                   variant="text"
@@ -431,7 +425,7 @@ const SinglePost = () => {
                           paddingLeft: 10,
                           width: "50px",
                           height: "25px",
-                         
+
                           color: "orange",
                           transform: "translateY(2.6px)",
                         }}
@@ -487,37 +481,51 @@ const SinglePost = () => {
               </div>
               {/* <p>{currentPost ? currentPost.color : ""}</p> */}
             </div>
-            {!admin && !hasRated &&currentPost?.userType == "admin" && (
-  <div className="rating">
-    <Rating
-      name="book-rating"
-      precision={0.5}
-      value={rating}
-      icon={
-        <StarRoundedIcon
-          style={{ color: "#F6DA2C", transform: "translateY(3px)", width: "18px" }}
-          className="stars"
-        />
-      }
-      emptyIcon={
-        <StarRoundedIcon
-          style={{ color: "#bab6b6", transform: "translateY(3px)", width: "18px" }}
-          className="stars"
-        />
-      }
-      onChange={(event, newValue) => {
-        setRating(newValue);
-      }}
-    />
-    <Button
-      style={{ textTransform: 'none', height: "25px", color: "white", fontSize: "14px", marginTop: "10px", backgroundColor: "rgb(178, 122, 25)" }}
-      onClick={handleRating}
-    >
-      Add rating
-    </Button>
-  </div>
-)}
-
+            {!admin && !hasRated && currentPost?.userType == "admin" && (
+              <div className="rating">
+                <Rating
+                  name="book-rating"
+                  precision={0.5}
+                  value={rating}
+                  icon={
+                    <StarRoundedIcon
+                      style={{
+                        color: "#F6DA2C",
+                        transform: "translateY(3px)",
+                        width: "18px",
+                      }}
+                      className="stars"
+                    />
+                  }
+                  emptyIcon={
+                    <StarRoundedIcon
+                      style={{
+                        color: "#bab6b6",
+                        transform: "translateY(3px)",
+                        width: "18px",
+                      }}
+                      className="stars"
+                    />
+                  }
+                  onChange={(event, newValue) => {
+                    setRating(newValue);
+                  }}
+                />
+                <Button
+                  style={{
+                    textTransform: "none",
+                    height: "25px",
+                    color: "white",
+                    fontSize: "14px",
+                    marginTop: "10px",
+                    backgroundColor: "rgb(178, 122, 25)",
+                  }}
+                  onClick={handleRating}
+                >
+                  Add rating
+                </Button>
+              </div>
+            )}
 
             <Comments post={currentPost} />
           </div>
