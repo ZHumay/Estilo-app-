@@ -153,6 +153,8 @@ const BlogPostCardHomeUser = ({ post,color }) => {
         <p>{post?.title}</p>
         <span>
           {" "}
+          {!(activeUser._id === post?.authorId) ?(
+          <>
           <Button
             size="small"
             variant="text"
@@ -184,7 +186,11 @@ const BlogPostCardHomeUser = ({ post,color }) => {
               />
             )}
           </Button>
+          </>
+          ) :("")
+          }
         </span>
+              
       </div>
 
       {activeUser && (
