@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useActiveUserContext } from "../../hooks/useActiveUserContext";
@@ -14,6 +14,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { FavContext } from "../../context/FavContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAdminContext } from "../../context/AdminContext";
+import Rating from "@mui/material/Rating";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const BlogPostCardHome = ({ post, color }) => {
   const { activeUser } = useActiveUserContext();
@@ -24,10 +26,10 @@ const BlogPostCardHome = ({ post, color }) => {
   const { admin } = useAdminContext();
   const [likeCount, setLikeCount] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(activeUser?._id));
-
   const handleSettingId = async (currentPost_Id) => {
     try {
       // handleSettingId function logic can be implemented here if needed
+    
     } catch (error) {
       console.log(error.message);
     }
@@ -169,65 +171,71 @@ const BlogPostCardHome = ({ post, color }) => {
         <p>{post?.title}</p>
         <span>
           {" "}
-          
-          {!admin? (
-          <>
-          <Button
-            size="small"
-            variant="text"
-            className={
-              favItems.some((item) => item._id === post._id)
-                ? "remove-btn-fav"
-                : "add-btn-fav"
-            }
-            onClick={() => handleFav(post)}
-          >
-            {favItems.some((item) => item._id === post._id) ? (
-              <FavoriteIcon
-                style={{
-                  width: "30px",
-                  height: "20px",
-                  color: "#DC4944",
-                  marginLeft: "-42px",
-                }}
-              />
-            ) : (
-              <FavoriteBorderIcon
-                style={{
-                  width: "30px",
-                  height: "20px",
-                  color: "#DC4944", // Kırmızı renk
-                  marginLeft: "-42px",
-                }}
-              />
-            )}
-          </Button>
-          </>
-
-          ):(" ")
-          }
-          
+          {!admin && activeUser? (
+            <>
+              <Button
+                size="small"
+                variant="text"
+                className={
+                  favItems.some((item) => item._id === post._id)
+                    ? "remove-btn-fav"
+                    : "add-btn-fav"
+                }
+                onClick={() => handleFav(post)}
+              >
+                {favItems.some((item) => item._id === post._id) ? (
+                  <FavoriteIcon
+                    style={{
+                      width: "30px",
+                      height: "20px",
+                      color: "#DC4944",
+                      marginLeft: "-42px",
+                    }}
+                  />
+                ) : (
+                  <FavoriteBorderIcon
+                    style={{
+                      width: "30px",
+                      height: "20px",
+                      color: "#DC4944", // Kırmızı renk
+                      marginLeft: "-42px",
+                    }}
+                  />
+                )}
+              </Button>
+            </>
+          ) : (
+            " "
+          )}
         </span>
       </div>
 
       {activeUser && (
         <div className="post_home_bottom_wrapper">
           <div className="left">
-            <div className="like">
-              <p
-                className="like_actual_icon"
-                onClick={() => {
-                  handleLikeDislike(post?._id);
-                }}
-              >
-                <i
-                  className={`${
-                    isLiked ? "fa-solid fa-star liked" : "fa-regular fa-star"
-                  }`}
-                ></i>
-                <span className="like_count">{likeCount}</span>
-              </p>
-            </div>
+            <Rating
+              name="book-rating"
+              precision={0.5}
+              value={post.averageRating}
+              sx={{ marginLeft: "-2px" }}
+              icon={
+                <StarRoundedIcon
+                  style={{
+                    color: "#F6DA2C ",
+                    fontSize: "20px",
+                  }}
+                />
+              }
+              emptyIcon={
+                <StarRoundedIcon
+                  style={{
+                    color: "#bab6b6",
+                    fontSize: "20px",
+                  }}
+                />
+              }
+              readOnly
+            />
           </div>
 
           <div className="right">

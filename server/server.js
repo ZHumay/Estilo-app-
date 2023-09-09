@@ -27,8 +27,7 @@ app.use(fileUpload({
 app.use("/api/auth/", require("./routes/authRoutes"));
 app.use("/api/posts/", require("./routes/postRoutes"));
 app.use("/api/comments/", require("./routes/commentRoutes"));
-
-
+app.use("/api/review", require("./routes/ratingRoutes"));
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
 })

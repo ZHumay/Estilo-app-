@@ -1,7 +1,7 @@
 const cloudinary = require("cloudinary").v2;
 const postModel = require("../models/postModel");
 const userModel = require("../models/userModel");
-
+const Rating = require("../models/ratingModel");
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_USER_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -233,16 +233,39 @@ const all_posts = async (req, res) => {
 
 const all_posts_fromAdmin = async (req, res) => {
   try {
-    const posts = await postModel.find({ userType: "admin" }); // Filter posts created by admins
+    const posts = await postModel.find({ userType: "admin" }).populate("ratings");
 
     if (posts) {
-      res.status(200).json({ msg: "Data fetched successfully", posts: posts });
+      const postsWithAverageRating = posts.map((post) => {
+        // Check if the 'ratings' property exists and is an array
+        if (post.ratings && Array.isArray(post.ratings) && post.ratings.length > 0) {
+          const totalRating = post.ratings.reduce((sum, rating) => sum + rating.rating, 0);
+          const averageRating = totalRating / post.ratings.length;
+
+          return {
+            ...post._doc,
+            averageRating,
+          };
+        } else {
+          // If 'ratings' is undefined, an empty array, or has no items, set averageRating to 0
+          return {
+            ...post._doc,
+            averageRating: 0,
+          };
+        }
+      });
+
+      res.status(200).json({
+        msg: "Data fetched successfully",
+        posts: postsWithAverageRating,
+      });
     }
   } catch (error) {
     console.log(error.message);
     res.json({ msg: "Data can't fetch" });
   }
 };
+
 
 
 const update_post = async (req, res) => {
@@ -435,6 +458,8 @@ const like_dislike = async (req, res) =>{
   }
 }
 
+
+
 module.exports = {
   create_post,
   get_post,
@@ -450,5 +475,6 @@ module.exports = {
   get_post_admin,
   all_posts_fromAdmin,
   update_post_admin,
-  delete_post_admin
+  delete_post_admin,
+
 };

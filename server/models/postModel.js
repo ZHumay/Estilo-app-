@@ -38,9 +38,16 @@ const postSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+
+    ratings: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Rating",
+        },
+      ],
     
     likes : [String],
-
+    
     postImage : {
         type : String,
         default : "https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_960_720.jpg"

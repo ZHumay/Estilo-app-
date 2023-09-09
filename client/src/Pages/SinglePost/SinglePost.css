@@ -121,6 +121,12 @@ table, th, td {
     background-color: brown;
 }
 
+.rating{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 90px;
+}
 
 .__title{
     font-weight: 700;
