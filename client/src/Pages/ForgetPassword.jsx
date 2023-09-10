@@ -37,7 +37,7 @@ import {
         <Paper elevation={20} style={paperStyle}>
           <Grid textAlign="center" marginBottom={2}>
             <Typography variant="h5" fontWeight="bold">
-            Forget Password
+            Forgot Password
             </Typography>
             <Typography variant="caption">
               Please fill this from to create an account!
