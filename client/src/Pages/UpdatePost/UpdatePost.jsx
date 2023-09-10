@@ -49,7 +49,7 @@ const UpdatePost = () => {
           Swal.fire("Greate", res.data.msg, "success");
           dispatch({type : "UPDATE_POST", payload : res.data.post})
 
-          navigate("/", { replace: true });
+          navigate("/wardrobe", { replace: true });
         } else {
           console.log("Something wents wrong");
           Swal.fire("Oops", res.data.msg, "info");
