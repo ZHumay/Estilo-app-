@@ -130,11 +130,13 @@ const Order = () => {
           total: total(),
           count: orderedBasketItems.length,
           address: values.address,
+          id: activeUser._id,
           items: orderedBasketItems.map((item) => ({
             postImage: item.postImage,
             title: item.title,
             price: item.price,
             productcountinbasket: item.productcountinbasket,
+            postid: item._id
           })),
         };
 
