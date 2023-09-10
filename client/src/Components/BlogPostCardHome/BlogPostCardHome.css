@@ -248,6 +248,26 @@ i:hover{
 
 
 }
+@media screen and (min-width: 459px) and (max-width: 768px){
+
+    .blog-post-card-home {
+        width: 152px;
+        min-height: 212px;
+        max-height: 217px;
+        margin: -9px;
+        margin-bottom: 40px;
+        margin-top: 20px;
+        margin-left: 5px;
+        background-color: white;
+        box-shadow: 1px 1px 23px rgb(231, 207, 190);
+        border-radius: 2px;
+        padding: 10px 6px;
+        overflow: hidden;
+        color: rgb(119, 118, 118);
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 @media screen and (min-width: 483px) and (max-width: 768px){
     .home_wrapper .leftHome {
