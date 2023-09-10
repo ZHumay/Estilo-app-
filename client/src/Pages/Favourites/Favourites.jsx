@@ -148,7 +148,7 @@ const Favourites = () => {
                        height="140"
                        image={post.postImage}
                        sx={{
-                         width: { xs: "299px", md: "190px", md2: "515px",md4:"366px" },
+                         width: { xs: "299px", md: "190px", md2: "515px",md4:"366px",lg:"157px" },
                          margin: "0px",
                          height: { md: "200px", xs: "82px" },
                          alignSelf: "flex-start", // Align the image to the top left corner
